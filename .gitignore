@@ -1,0 +1,9 @@
+node_modules
+node_modules/
+assets/pridukimage
+assets/pridukimage/
+assets/katagoriproduk
+assets/katagoriproduk/
+assets/bank-investor
+assets/bank-investor/
+package-lock.json

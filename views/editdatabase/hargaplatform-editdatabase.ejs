@@ -1,0 +1,114 @@
+<%- include('layout/header') %>
+<% var rn=Math.random(); %>
+<link rel="stylesheet" href="/css/abasic.css?v=<%-rn%>">
+<link rel="stylesheet" href="/css/sidebar.css?v=<%-rn%>">
+<link rel="stylesheet" href="/css/finance.css?v=<%=rn %>">
+
+    </head>
+
+    <body>
+    
+        <%- include('layout/navbar/navbar-atas-pc') %>
+        <%- include('layout/sidebar-universal') %>
+        
+        <!-- % if (roles=='supervisor') { %>
+            %- include('layout/sidebar-supervisor') %>
+        % } else { %>
+            %- include('layout/sidebar-admin') %>
+        
+        % } %> -->
+
+        <main class="main-content" id="main-pages">
+            <div class="container-fluid">
+                <input class="form-control form-control-s skeleton skeleton-fullheig" id="loadingskeleton" disabled>
+               
+                <div id="showmainpage" style="display: none;">
+                    <%- include('main-header',{hiddensearch:'d-none',addnew:'platform'}) %>
+                                        
+                    <div id="datatidakditemukan" style="display: none;">
+                        <p style="text-align: center;">Data tidak ditemukan</p>
+                    </div>
+                    <div class="tableNoFixHead">
+                        <table class="table table-striped table-hover" style="width:100%;text-align: center;font-size: 16px;" id="alldattab">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col" style="text-align: center;vertical-align: middle;">No</th>  -->
+                                    
+                                    <th scope="col" style="text-align: left;vertical-align: middle;">Product</th> 
+
+                                    <th scope="col" style="text-align: left;vertical-align: middle;">Platform</th> 
+
+                                    <th scope="col" style="text-align: left;vertical-align: middle;">Harga</th> 
+
+                                    <th scope="col" style="text-align: center;vertical-align: middle;">Delete</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="divhpsdata">
+                                
+                                <tr>
+                                    
+                                    <td style="text-align: left;">
+                                        AETHER
+                                    </td>
+                                    <td style="text-align: left;" id="platformseleks-1">
+                                        TOKOPEDIA
+                                    </td>
+                                    <td style="text-align: left;">
+                                        Rp 1.000.000
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span class="badge text-bg-secondary" style="cursor: pointer;">Edit</span>
+
+                                        <span class="badge text-bg-danger" style="cursor: pointer;">Delete</span>
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                            </tbody>
+            
+                        </table>
+                    </div>
+                    
+                    <div style="text-align: center;display: none;" id="load-more-btn">
+                        <i class="bi bi-caret-down-fill" id="load-more-btn-icon" style="cursor: pointer;" onclick="loadMoreData()"></i>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+    
+    </div>
+   
+    
+    <%- include('layout/nav-loading') %>
+
+        <span id="itemalls" style="display: none;" data-json=""></span>
+        <%- include('editdatabase/modaladdnew-hargaplatform') %>
+        <%- include('editdatabase/modalsuksessaveadd-database') %>
+        
+        <%- include('layout/modalunderbuild') %>
+        <%- include('modalviewfotovideo') %>
+        
+        <%- include('layout/footerscript') %>
+        <script src="/js/editdatabase/editdatabase-hargaplatform-saveadd.js<%=versionall%>"></script>
+        <script>
+            function toggleSidebar() {
+                
+                if (document.getElementById('klikhidebar').className=='bi bi-caret-left-fill toggle-btn') {
+                    document.getElementById('klikhidebar').className='bi bi-caret-right-fill toggle-btn';
+                } else {
+                    document.getElementById('klikhidebar').className='bi bi-caret-left-fill toggle-btn';
+                }
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('collapsed');
+            }
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        </script>
+    </body>
+
+    </html>

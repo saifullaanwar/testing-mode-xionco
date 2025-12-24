@@ -1,0 +1,71 @@
+<div class="card items mb-3" id="${arraysx.id_transaksi}">
+    <span id="databaseeachitem-${arraysx.id_transaksi}" class="d-none" data-json='${JSON.stringify(arraysx)}'></span>
+    <div class="card-body">
+        <!-- Header -->
+        <div class="row mb-3 align-items-center">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <span class="rownama">
+                    <span id="status-${arraysx.id_transaksi}">${arraysx.status.replaceAll('amp;','')}</span> /
+                    <span id="notransaksi-${arraysx.id_transaksi}">${arraysx.no_transaksi}</span> /
+                    <i class="bi bi-person"></i>
+                    <span id="buyername-${arraysx.id_transaksi}">${arraysx.buyername}</span> /
+                    Rp <span id="finalprice-${arraysx.id_transaksi}">${formatMoney(arraysx.finalprice)}</span>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 text-lg-end text-md-end text-sm-start mt-2 mt-lg-0">
+                <span
+                    class="badge text-bg-primary me-3 ${localdata.clicked_new.includes(arraysx.id_transaksi)?'d-none':''}"
+                    name="new-mark" id="new-mark-${arraysx.id_transaksi}">NEW</span>
+                ${datatrasnmasalah!=undefined?'<span class="badge text-bg-danger me-2">PB</span>':''}
+                ${arraysx.websiteornot!=''?'<span class="badge text-bg-dark me-2">W</span>':''}
+                <span class="rownama"><i class="bi bi-truck"></i> <span
+                        id="orderdate-${arraysx.id_transaksi}">${arraysx.delivered_date}</span></span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="row g-3">
+            <!-- Kiri: Gambar & Info Produk -->
+            <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="card h-100 d-flex align-items-center">
+                    <div class="card-body pb-2 pt-2 w-100 d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3">
+                            <img id="imgcards" src="${arraysx.gambar}" alt="" class="img-fluid rounded"
+                                style="max-width:80px;">
+                        </div>
+                        <div class="flex-grow-1">
+                            <p class="fw-bold mb-1" id="item-${arraysx.id_transaksi}">${arraysx.item}</p>
+                            <span id="colorvarian-${arraysx.id_transaksi}">${arraysx.colorvariant}</span>
+                            <p class="text-end mt-3 mb-0" id="qty-${arraysx.id_transaksi}">${arraysx.qty} X UNIT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kanan: Note & Tombol -->
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="card h-100 d-flex align-items-center">
+                    <div class="card-body pt-3 pb-3 w-100 d-flex align-items-center">
+                        <div class="flex-grow-1 me-3">
+                            <p class="fw-bold mb-2">NOTE</p>
+                            <textarea id="notes-${arraysx.id_transaksi}" class="form-control" rows="3"
+                                style="min-height: 125px;"
+                                disabled>${platformshoppe==''?'':`[${platformshoppe}]\n`}${extrachargeinfo==''?'':`${extrachargeinfo}`}${arraysx.notes}</textarea>
+                        </div>
+                        <div class="flex-shrink-0 d-flex flex-column" style="width:auto">
+                            <button type="button" class="btn btn-light mb-2 w-100 border font-small"
+                                id="detailklik-${arraysx.id_transaksi}" onclick="klikdetail(this)">Detail
+                                Transaksi</button>
+                            <button type="button" class="btn ${bgcolors_reject} mb-2 w-100 border font-small"
+                                id="quickedit-${arraysx.id_transaksi}"
+                                onclick="klikreject(this)">${textklik_reject}</button>
+                            <button type="button" class="btn ${bgcolors} w-100 border font-small"
+                                id="forcestatus-${arraysx.id_transaksi}"
+                                onclick="klikprintpodo(this)">${textklik}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

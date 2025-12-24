@@ -1,0 +1,73 @@
+<!--  
+    {
+        id:'',
+        icon:'',
+        text:'',
+        activemenudasar:'',
+        listsubmenu:[
+            {
+                text:'',
+                activesubmenu:'',
+                link:'/url',
+                onclick:'',
+                namebadgenumber:''
+            }
+        ]
+    }
+
+-->
+<%
+    // Cari apakah ada submenu yang aktif
+    const hasActiveSubmenu = listsubmenu.some(item => item.activesubmenu === 'active');
+
+%>
+
+
+<a id="menu-<%=id%>" onclick="menuarrowklik('<%=id%>')" class="sidebar-link text-decoration-none px-3 <%-activemenudasar%>">
+    <i class="bi <%-icon%> me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="<%-text%>"></i>
+    <span class="hide-on-collapse"><%-text%></span>
+    <i id="<%=id%>" class="bi bi-caret-<%-hasActiveSubmenu?'up':'down'%>-fill hide-on-collapse" style="float: right;"></i>
+</a>
+<div class="hide-on-collapse-detailmenu col" id="<%=id%>-extend" <%-hasActiveSubmenu?'':'style="display: none;"'%>>
+
+    <% for( let i = 0; i < listsubmenu.length; i++ ) { %>
+        <% var element=listsubmenu[i]; 
+            const hasLink = element.link && element.link !== '';
+            const hasOnclick = element.onclick && element.onclick !== '';
+            const hasNameBadge = Boolean(element.namebadgenumber && element.namebadgenumber.trim() !== '');
+
+        %>
+        <!-- <div class="div-detailmenu i==0?'mb-3':''%> element.activesubmenu%>">
+            <a hasLink?`href="${element.link}"`:''%> class="a-detailmenu" hasOnclick?`onclick="${element.onclick}"`:''%>>element.text%></a>  
+            
+        </div> -->
+        <% if (hasNameBadge==false) { %>
+            <%-include('buttonsubmenu',{
+                i, //index button
+                lastindex:listsubmenu.length-1,
+                activesubmenu:element.activesubmenu,
+                hasLink,
+                link:hasLink?element.link:'',
+                hasOnclick,
+                onclick:hasOnclick?element.onclick:'', 
+                text:element.text
+                })  
+            %>
+        <% } else { %>
+            <%-include('buttonsubmenu-badge',{
+                    i, //index button
+                    lastindex:listsubmenu.length-1,
+                    activesubmenu:element.activesubmenu,
+                    hasLink,
+                    link:hasLink?element.link:'',
+                    hasOnclick,
+                    onclick:hasOnclick?element.onclick:'', 
+                    text:element.text,
+                    namebadgenumber:element.namebadgenumber
+                })  
+            %>
+        <% } %>
+        
+    <% } %>
+    <br>
+</div>

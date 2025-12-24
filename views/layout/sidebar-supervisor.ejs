@@ -1,0 +1,434 @@
+<%
+  var homeopen = "";
+  var adminopen = "";
+  var podo = "";
+  var upstock = "";
+  var forcestatusrequest = "";
+  var stockopen = "";
+  var stockproduk = "";
+  var stockprodukup = "";
+  var bank = "";
+  var banklimbo = "";
+  var editdatabase = "";
+  var pemantauan = "";
+  var riwayat = "";
+  var daftarrequest = "";
+  var requsetbeli = "";
+  var statistik = "";
+  var bankinvestor = "";
+  var approvalkasbon = "";
+  var draftplan='';
+  var daftarpembelian_item = "";
+  var pendingpayment = "";
+  var daftarpembelian = "";
+  var daftarpembelian_bahan = "";
+  var bill_due = "";
+  var daftarinvoice = "";
+  var daftarinvoice_vendor = "";
+  var terlambat = "";
+  var bankgayahidup = "";
+  var adminweb = "";
+%>
+
+<% if (navatasactive == "home") { %>
+  <% homeopen = "active"; %>
+
+<% } else if (navatasactive == "supervisor-semuapesanan") { %>
+  <% adminopen = "active"; %>
+
+<% } else if (navatasactive == "podo") { %>
+  <% podo = "active"; %>
+
+<% } else if (navatasactive == "supervisor-stock") { %>
+  <% upstock = "active"; %>
+
+<% } else if (navatasactive == "supervisor-forcestatus") { %>
+  <% forcestatusrequest = "active"; %>
+
+<% } else if (navatasactive == "supervisor-approvalkasbon") { %>
+  <% approvalkasbon = "active"; %>
+
+<% } else if (navatasactive.includes("stock")) { %>
+  <% stockopen = "active"; %>
+  <% if (navatasactive == "stock-produk") { %>
+    <% stockproduk = "active"; %>
+  <% } else if (navatasactive == "stock-produk-up") { %>
+    <% stockprodukup = "active"; %>
+  <% } %>
+
+<% } else if (navatasactive.includes("bank")) { %>
+  <% bank = "active"; %>
+  <% if (navatasactive == "finance-banklimbo") { %>
+    <% banklimbo = "active"; %>
+  <% } else if (navatasactive == "finance-bankinvestor") { %>
+    <% bankinvestor = "active"; %>
+  <% } else if (navatasactive.includes("finance-bankgayahidup")) { %>
+    <% bankgayahidup = "active"; %>
+  <% } %>
+
+<% } else if (navatasactive == "editdatabase") { %>
+  <% editdatabase = "active"; %>
+  
+
+<% } else if (navatasactive == "supervisor-statuspesanan") { %>
+  <% pemantauan = "active"; %>
+
+<% } else if (navatasactive == "supervisor-riwayat") { %>
+  <% riwayat = "active"; %>
+
+<% } else if (navatasactive.includes("procurement") && !navatasactive.includes("daftarpembelian")) { %>
+  <% daftarrequest = "active"; %>
+  <% if (navatasactive.includes("daftarrequest")) { %>
+    <% requsetbeli = "active"; %>
+  <% } %>
+
+<% } else if (navatasactive.includes("statistik")) { %>
+  <% statistik = "active"; %>
+
+<% } else if (navatasactive.includes("daftarpembelian_bahan")) { %>
+  <% daftarpembelian_bahan = "active"; %>
+
+<% } else if (navatasactive.includes("daftarpembelian_item")) { %>
+  <% daftarpembelian_item = "active"; %>
+  
+<% } else if (navatasactive.includes("pendingpayment")) { %>
+  <% pendingpayment = "active"; %>
+
+<% } else if (navatasactive.includes("draftplan")) { %>
+        <% draftplan = "active"; %>
+
+<% } else if (navatasactive.includes("bill_due")) { %>
+  <% bill_due = "active"; %>
+
+<% } else if (navatasactive.includes("daftarinvoice")) { %>
+  <% daftarinvoice = "active"; %>
+  <% if (navatasactive.includes("daftarinvoice-vendor")) { %>
+    <% daftarinvoice_vendor = "active"; %>
+  <% } %>
+
+<% } else if (navatasactive.includes("terlambat")) { %>
+  <% terlambat = "active"; %>
+
+<% } else if (navatasactive.includes("adminweb")) { %>
+  <% adminweb = "active"; %>
+<% } %>
+
+<div class="d-flex" >
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed" id="sidabarutamashow">
+        <!--<button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-left"></i>
+        </button>-->
+        <div class="px-4 pt-4">
+            <h4 class="logo-text mb-0"><i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i> <span class="logo-text-hide"  onclick="toggleSidebar()"> Sembunyikan Menu</span></h4>
+            <hr style="color: grey;">
+        </div>
+
+        <div class="" id="scrolled" style="height: calc(100vh - 175px);">
+            <div class="col" style="display: flex;flex-direction: column;padding-bottom: 4em;">
+                <a class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Admin"></i>
+                    <span class="hide-on-collapse">Supervisor</span>
+                </a>
+                <div class="hide-on-collapse-detailmenu px-3">
+                    <hr style="color: grey;">
+                        <div class="row d-none">
+                            <div class="col-8">
+                                <span>Tugas Mendatang</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span id="tugasmendatang">0</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <span>Tugas Saya</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span name="totaltugassayaall">0</span>
+                            </div>
+                        </div>
+                    <hr style="color: grey;margin-bottom: 0;">
+                </div>
+                <br>
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-house-fill',
+                    text: 'Home',
+                    activemenudasar: homeopen,
+                    link: '/supervisor/produksipesanan'
+                }) %>
+
+                  <%- include('./buttonsidebar/menuarrow',
+                    {id:'transaksimenuarrow',
+                    text:'Tugas Saya',
+                     icon:"bi-box-seam-fill",
+                    activemenudasar:`${adminopen}${upstock}${forcestatusrequest}${approvalkasbon}`,
+                    listsubmenu:[
+                            {
+                                text:'Approval Produk',
+                                activesubmenu:adminopen,
+                                link:'/supervisor/produksipesanan',
+                                namebadgenumber:'totaltugassayapesanan'
+                            },
+                            {
+                                text:'Approval Stock',
+                                activesubmenu:upstock,
+                                link:'/supervisor/produksistock',
+                                namebadgenumber:'totaltugassayapesananstock'
+                            },
+                            {
+                                text:'Approval Forcestatus',
+                                activesubmenu:forcestatusrequest,
+                                link:'/supervisor/approvalforcestatus',
+                                namebadgenumber:'totaltugassayaforcestatus'
+                            },
+                            {
+                                text:'Approval Kasbon',
+                                activesubmenu:approvalkasbon,
+                                link:'/supervisor/approvalkasbon',
+                                namebadgenumber:'totaltugassayaapprovalkasbon'
+                            },
+                        ]
+                    }
+                )%>
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'stockmenuarrow',
+                    text:'Stock',
+                     icon:"bi-box-seam-fill",
+                    activemenudasar:`${stockopen}`,
+                    listsubmenu:[
+                            {
+                                text:'Stock Upholstery',
+                                activesubmenu:stockprodukup,
+                                link:'/stock/produkupholstery',
+                            },
+                            {
+                                text:'Stock C5',
+                                activesubmenu:stockproduk,
+                                link:'/stock/produkc5',
+                            },
+                        ]
+                    }
+                )%>
+
+               
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'daftarpembelianmenuarrow',
+                    text:'Daftar Pembelian',
+                     icon:"bi-ui-checks",
+                    activemenudasar:`${draftplan}${daftarpembelian_item}${daftarpembelian_bahan}${bill_due}`,
+                    listsubmenu:[
+                            {
+                                text:'Draft Plan',
+                                activesubmenu:draftplan,
+                                link:'/procurement/daftarpembelian/input',
+                            },
+                            {
+                                text:'Approval Item',
+                                activesubmenu:daftarpembelian_item,
+                                link:'/procurement/daftarpembelian',
+                            },
+                            {
+                                text:'Pending Payment',
+                                activesubmenu:pendingpayment,
+                                link:'/procurement/pendingpayment',
+                            },
+                            {
+                                text:'Pembelian Bahan',
+                                activesubmenu:daftarpembelian_bahan,
+                                link:'/procurement/daftarpembelian/pembelianbahan',
+                            },
+                             {
+                                text:'Bill Due',
+                                activesubmenu:bill_due,
+                                link:'/procurement/bill/due',
+                            }
+                        ]
+                    }
+                )%>
+
+               
+                  <%- include('./buttonsidebar/menuarrow',
+                    {id:'daftarinvoicemenuarrow',
+                    text:'Daftar Invoice',
+                     icon:"bi bi-person-lines-fill",
+                    activemenudasar:`${daftarinvoice}`,
+                    listsubmenu:[
+                            {
+                                text:'Invoice Vendor',
+                                activesubmenu:daftarinvoice_vendor,
+                                link:'/finance/invoicevendor',
+                            },
+                        ]
+                    }
+                )%>
+
+                <%- include('./buttonsidebar/buttonmenu',
+                    {
+                        icon:'bi-eye-fill',
+                        text:'Pemantauan',
+                        activemenudasar:pemantauan,
+                        link:'/supervisor/statuspesanan',
+    
+                    }
+                )%>
+               
+                <%- include('./buttonsidebar/buttonmenu',
+                    {
+                        icon:'bi-stopwatch-fill',
+                        text:'Terlambat',
+                        activemenudasar:terlambat,
+                        link:'/supervisor/dataterlambat',
+    
+                    }
+                )%> 
+
+                  <%- include('./buttonsidebar/buttonmenu',
+                    {
+                        icon:'bi-clock-history',
+                        text:'Riwayat',
+                        activemenudasar:riwayat,
+                        link:'/supervisor/riwayat',
+    
+                    }
+                )%> 
+              
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'bankingmenuarrow',
+                    text:'Banking',
+                     icon:"bi-bank2",
+                    activemenudasar:`${bank}`,
+                    listsubmenu:[
+                            {
+                                text:'Bank Limbo',
+                                activesubmenu:banklimbo,
+                                link:'/finance/banklimbo',
+                            },
+                            {
+                                text:'Investor',
+                                activesubmenu:bankinvestor,
+                                link:'/finance/investor',
+                            },
+                            {
+                                text:'Gaya Hidup',
+                                activesubmenu:bankgayahidup,
+                                link:'/finance/gayahidup',
+                            },
+                        ]
+                    }
+                )%>
+               <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-database-fill-add',
+                    text: 'Database',
+                    activemenudasar: editdatabase,
+                    link: '/editdatabase/higproduk'
+                }) %>
+                
+                <%- include('./buttonsidebar/menuarrow', {
+                    id: 'adminwebmenuarrow',
+                    text: 'Admin Web',
+                    icon: 'bi-display',
+                    activemenudasar: `${adminweb}`,
+                    listsubmenu: [
+                        {
+                            text: 'Homepage',
+                            activesubmenu: navatasactive.includes('adminweb-homepage') ? adminweb : '',
+                            link: '/adminlist/adminweb'
+                        },
+                        {
+                            text: 'Category',
+                            activesubmenu: navatasactive.includes('adminweb-kategori') ? adminweb : '',
+                            link: '/adminlist/adminweb/kategori'
+                        },
+                        {
+                            text: 'Product',
+                            activesubmenu: navatasactive.includes('adminweb-product') ? adminweb : '',
+                            link: '/adminlist/adminweb/product'
+                        },
+                        {
+                            text: 'Promotion',
+                            activesubmenu: navatasactive.includes('adminweb-promotion') ? adminweb : '',
+                            link: '/adminlist/adminweb/promotion'
+                        },
+                        {
+                            text: 'Account',
+                            activesubmenu: navatasactive.includes('adminweb-account') ? adminweb : '',
+                            link: '/adminlist/adminweb/account'
+                        },
+                        {
+                            text: 'Transaction',
+                            activesubmenu: navatasactive.includes('adminweb-transaction') ? adminweb : '',
+                            link: '/adminlist/adminweb/transaction'
+                        },
+                        {
+                            text: 'Additional Charge',
+                            activesubmenu: navatasactive.includes('adminweb-additionalcharge') ? adminweb : '',
+                            link: '/adminlist/adminweb/additionalcharge'
+                        },
+                        {
+                            text: 'Reward',
+                            activesubmenu: navatasactive.includes('adminweb-reward') ? adminweb : '',
+                            link: '/adminlist/adminweb/reward'
+                        },
+                        {
+                            text: 'UTM',
+                            activesubmenu: navatasactive.includes('adminweb-utm') ? adminweb : '',
+                            link: '/adminlist/adminweb/utm'
+                        }
+                    ]
+                }) %>
+
+                
+                <%- include('./buttonsidebar/menuarrow', {
+                    id: 'formmenuarrow',
+                    text: 'Form',
+                    icon: 'bi-ui-checks',
+                    activemenudasar: `${daftarrequest}`,
+                    listsubmenu: [
+                        {
+                            text: 'Request Pembelian',
+                            activesubmenu: requsetbeli,
+                            link: '/procurement/daftarrequest'
+                        }
+                    ]
+                }) %>
+
+
+               <%- include('./buttonsidebar/buttonmenu',
+                    {
+                        icon:'bi-graph-up-arrow',
+                        text:'Statistik',
+                        activemenudasar:statistik,
+                        link:'/statistik/platform',
+    
+                    }
+                )%>          
+                
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-speedometer2',
+                    text: 'Performa Saya (KPI)',
+                    activemenudasar: '',  
+                    link: '',  
+                    onclick: 'warningunderbuild()' 
+                }) %>
+
+                 <%- include('./buttonsidebar/menuarrow',
+                    {id:'settingmenuarrow',
+                    icon:'bi-gear-fill',
+                    text:'Settings',
+                    activemenudasar:'',
+                    listsubmenu:[
+                            {
+                                text:'Logout',
+                                activesubmenu:'',
+                                onclick:'logout()'
+                            },
+                        ]
+                    }
+                )%>
+            </div>
+        </div>
+       
+        <%- include('versiondiv') %>
+       
+    </nav>
+

@@ -1,0 +1,92 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaladdnewitem" tabindex="-1" aria-labelledby="modaladdnewitemlabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modaladdnewitemlabel" style="font-weight: bold; vertical-align: middle">
+          Add New Vendor
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="d-none" id="iduniversals"></span>
+        <div id="itemsContainer" class="row mt-2">
+          <div id="item-1" class="partitems">
+            <div class="col">
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text"
+                  style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                  <span class="text-danger">*&nbsp;</span> Nama Vendor
+                </span>
+                <input type="text" list="listvendoradd-1" class="form-control" id="vendor-1" name="vendor" placeholder="Vendor"
+                  style="font-size: 12px" oninput="oninputdata()" />
+                   <datalist id="listvendoradd-1">
+                    </datalist>
+              </div>
+              
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" style="background-color: rgb(226, 221, 221); font-size: 12px; ">
+                  <span class="text-danger"></span> Tipe Bayar
+                </span>
+                 <input type="text" list="listtipeadd-1" class="form-control" id="tipebayar-1" name="tipebayar" placeholder="Tipe Bayar"
+                  style="font-size: 12px" oninput="oninputdata()" />
+                   <datalist id="listtipeadd-1">
+                    </datalist>
+              </div>
+              
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" style="background-color: rgb(226, 221, 221); font-size: 12px; ">
+                  <span class="text-danger"></span> Atas Nama
+                </span>
+                 <input type="text" class="form-control" id="atasnama-1" name="atasnama" placeholder="Atas Nama"
+                  style="font-size: 12px" oninput="oninputdata()" />
+              </div>
+              
+              <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" style="background-color: rgb(226, 221, 221); font-size: 12px; ">
+                  <span class="text-danger"></span> Rekening
+                </span>
+                 <input type="text" class="form-control" id="rekening-1" name="rekening" placeholder="Rekening"
+                  style="font-size: 12px" oninput="oninputdata()" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-end d-none">
+              <button type="button" class="removeItem btn btn-danger btn-sm" id="removeItem-1"
+                onclick="removeItem(this)">
+                <i class="bi bi-trash3-fill" style="color: white"></i>&nbsp;Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="d-flex align-items-center justify-content-between w-100" id="addnewitemtombolfooters">
+          <div>
+            <button type="button" class="btn btn-secondary" id="addmore" onclick="additems()">
+              Add More
+            </button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsave()">
+              Save
+            </button>
+
+            <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">
+              Batal
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-end w-100 d-none" id="edititemtombolfooters">
+          <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsaveedit()">
+            Save
+          </button>
+
+          <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">
+            Batal
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

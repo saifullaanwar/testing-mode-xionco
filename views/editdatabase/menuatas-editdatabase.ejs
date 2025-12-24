@@ -1,0 +1,58 @@
+<div class="mb-4">
+    <ul class="nav nav-tabs">
+        <!-- PRODUK -->
+        <li class="nav-item me-5">
+            <a style="cursor: pointer;" class="nav-link <%- menuatas=='variantproduk'?'active':'' %>"
+                href="/editdatabase/higproduk">
+                Produk HIG
+            </a>
+        </li>
+
+        <!-- INVESTOR -->
+        <li class="nav-item me-5">
+            <a style="cursor: pointer;" class="nav-link <%- menuatas=='investor'?'active':'' %>"
+                href="/editdatabase/investor">
+                Investor
+            </a>
+        </li>
+
+        <!-- PLATFORM -->
+        <li class="nav-item me-5">
+            <a style="cursor: pointer;" class="nav-link <%- menuatas=='platform'?'active':'' %>"
+                href="/editdatabase/platform">
+                Platform
+            </a>
+        </li>
+
+        <!-- HARGA PLATFORM -->
+        <li class="nav-item me-5">
+            <a style="cursor: pointer;" class="nav-link <%- menuatas=='hargaplatform'?'active':'' %>"
+                href="/editdatabase/hargaplatform">
+                Harga Platform
+            </a>
+        </li>
+
+        <!-- MORE DROPDOWN -->
+        <li class="nav-item dropdown me-5">
+            <a class="nav-link dropdown-toggle <%- 
+          ['deliveryunit','colorvariant','itemprocurement','vendor','office','coa']
+          .includes(menuatas) ? 'active' : '' %>" data-bs-toggle="dropdown" href="#" role="button"
+                aria-expanded="false">
+                More
+            </a>
+            <ul class="dropdown-menu"  >
+                <li><a class="dropdown-item <%- menuatas=='deliveryunit'?'active':'' %>"
+                        href="/editdatabase/deliveryunit">Delivery Unit</a></li>
+                <li><a class="dropdown-item <%- menuatas=='colorvariant'?'active':'' %>"
+                        href="/editdatabase/colorvariant">Color Variant</a></li>
+                <li><a class="dropdown-item <%- menuatas=='itemprocurement'?'active':'' %>"
+                        href="/editdatabase/itemprocurement">Item Procurement</a></li>
+                <li><a class="dropdown-item <%- menuatas=='vendor'?'active':'' %>" href="/editdatabase/vendor">Vendor
+                        Procurement</a></li>
+                <li><a class="dropdown-item <%- menuatas=='office'?'active':'' %>"
+                        href="/editdatabase/office">Office</a></li>
+                <li><a class="dropdown-item <%- menuatas=='coa'?'active':'' %>" href="/editdatabase/coa">COA</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

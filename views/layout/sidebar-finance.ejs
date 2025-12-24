@@ -1,0 +1,214 @@
+<% var homeopen="" ; var adminopen='' ;var podo='' ;var bank='' ; var banklimbo='' ;var statistik='' ;var
+bankinvestor='' ;var daftarinvoice='' ;var daftarinvoice_vendor='' ;%>
+<% if (navatasactive=='home' ) { %>
+<% homeopen='active' ; %>
+<% } else if (navatasactive=='finance-daftartransaksi' ) { %>
+
+<% adminopen='active' ; %>
+
+<% } else if (navatasactive=='podo' ) { %>
+<% podo='active' ; %>
+<% } else if (navatasactive.includes('bank')) { %>
+<% bank='active' ; %>
+<% if (navatasactive=='finance-banklimbo' ) { %>
+<% banklimbo='active' ; %>
+<% } else if (navatasactive=='finance-bankinvestor' ) { %>
+<% bankinvestor='active' ; %>
+<% } %>
+<% } else if (navatasactive.includes('statistik')) { %>
+<% statistik='active' ; %>
+<% } else if (navatasactive.includes('daftarinvoice')) {
+%>
+<% daftarinvoice='active' ; %>
+<% if
+(navatasactive.includes('daftarinvoice-vendor'))
+{ %>
+<% daftarinvoice_vendor='active' ; %>
+<% } %>
+<% }%>
+<div class="d-flex">
+<nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed"
+id="sidabarutamashow">
+<!--<button class="toggle-btn" onclick="toggleSidebar()"><i class="fas fa-chevron-left"></i></button>-->
+<div class="px-4 pt-4">
+    <h4
+        class="logo-text mb-0">
+        <i id="klikhidebar"
+            class="bi bi-caret-left-fill toggle-btn"
+            onclick="toggleSidebar()"></i>
+        <span
+            class="logo-text-hide"
+            onclick="toggleSidebar()">
+            Sembunyikan
+            Menu</span>
+    </h4>
+    <hr
+        style="color: grey;">
+</div>
+
+<div class=""
+    id="scrolled" style="height: calc(100vh - 175px);">
+    <div class="col"
+        style="display: flex;flex-direction: column;padding-bottom: 4em;">
+        <!-- display: flex;flex-direction: column; nav flex-column -->
+        <a
+            class="sidebar-link text-decoration-none px-3">
+            <i class="bi bi-coin me-3"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Admin"></i>
+            <span
+                class="hide-on-collapse">Finance</span>
+        </a>
+        <div
+            class="hide-on-collapse-detailmenu px-3">
+            <hr
+                style="color: grey;">
+            <div
+                class="row d-none">
+                <div
+                    class="col-8">
+                    <span>Tugas
+                        Mendatang</span>
+                </div>
+                <div class="col-3"
+                    style="text-align: right;">
+                    <span
+                        id="tugasmendatang">0</span>
+                </div>
+            </div>
+            <div
+                class="row">
+                <div
+                    class="col-8">
+                    <span>Tugas
+                        Saya</span>
+                </div>
+                <div class="col-3"
+                    style="text-align: right;">
+                    <span
+                        name="totaltugassayaall">0</span>
+                </div>
+            </div>
+            <hr
+                style="color: grey;margin-bottom: 0;">
+        </div>
+        <br>
+        <%- include('./buttonsidebar/buttonmenu', {
+            icon: 'bi-house-fill',
+            text: 'Home',
+            activemenudasar: homeopen,
+            link: '/home/finance'
+        }) %>
+
+        <a
+            class="sidebar-link text-decoration-none px-3 <%-adminopen%>">
+            <i class="bi bi-box-seam-fill me-3"
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Transaksi"></i>
+            <span
+                class="hide-on-collapse">Daftar
+                Transaksi</span>
+            <i id="transaksimenuarrow"
+                class="bi bi-caret-down-fill hide-on-collapse"
+                style="float: right;"></i>
+        </a>
+
+        <%- include('./buttonsidebar/menuarrow', {
+            id: 'bankmenuarrow',
+            text: 'Banking',
+            icon: 'bi-bank2',
+            activemenudasar: bank,
+            listsubmenu: [
+                {
+                    text: 'Bank Limbo',
+                    activesubmenu: banklimbo,
+                    link: '/finance/banklimbo'
+                },
+                {
+                    text: 'Investor',
+                    activesubmenu: bankinvestor,
+                    link: '/finance/investor'
+                }
+            ]
+        }) %>
+        <%- include('./buttonsidebar/menuarrow', {
+            id: 'daftarinvoicemenuarrow',
+            text: 'Daftar Invoice',
+            icon: 'bi-person-lines-fill',
+            activemenudasar: daftarinvoice,
+            listsubmenu: [
+                {
+                    text: 'Invoice Vendor',
+                    activesubmenu: daftarinvoice_vendor,
+                    link: '/finance/invoicevendor'
+                }
+            ]
+        }) %>
+
+
+            <!-- <div class="div-detailmenu mb-3">
+<a href="/finance/investor" class="a-detailmenu">Investor</a>  
+
+</div> -->
+
+
+        <!-- <div class="hide-on-collapse-detailmenu col" id="transaksimenuarrow-extend" style="display: none;">
+
+<a href="/upholstery" class="a-detailmenu">Semua Pesanan</a>  
+<br>
+
+<br> 
+</div> -->
+
+        <!-- <a onclick="menuarrowklik('operatingmenuarrow')" class="sidebar-link text-decoration-none px-3">
+<i class="bi bi-patch-check-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Operational p2.5"></i>
+<span class="hide-on-collapse" >Operational p2.5</span>
+<i id="operatingmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;" ></i>
+</a>
+<div class="hide-on-collapse-detailmenu col" id="operatingmenuarrow-extend" style="display: none;">
+
+<a href="#" class="a-detailmenu">Drafting</a>  
+<br>
+<a href="#" class="a-detailmenu">Daftar Route</a>  
+<br>
+<br>
+</div> -->
+
+       <%- include('./buttonsidebar/buttonmenu', {
+            icon: 'bi-graph-up-arrow',
+            text: 'Statistik',
+            activemenudasar: statistik,
+            link: '/statistik'
+        }) %>
+
+        <%- include('./buttonsidebar/buttonmenu', {
+            icon: 'bi-speedometer2',
+            text: 'Performa Saya (KPI)',
+            activemenudasar: '',
+            link: '#',
+            onclick: 'warningunderbuild()'
+        }) %>
+
+        <%- include('./buttonsidebar/menuarrow', {
+            id: 'settingmenuarrow',
+            text: 'Settings',
+            icon: 'bi-gear-fill',
+            activemenudasar: '',
+            listsubmenu: [
+                {
+                    text: 'Logout',
+                    activesubmenu: '',
+                    onclick: 'logout()'
+                }
+            ]
+        }) %>
+    </div>
+</div>
+
+        <%- include('versiondiv') %>
+       
+
+
+</nav>

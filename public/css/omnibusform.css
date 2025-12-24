@@ -1,0 +1,36 @@
+body {
+    font-family: 'Poppins';
+    /*    margin: 25px; */
+    overflow: hidden;
+}
+
+#basepage {
+    padding-left: 30px;
+    padding-right: 30px;
+
+}
+
+#nav-atas {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 10px;
+    background-color: black !important;
+    color: white !important;
+}
+
+#nav-atas .navbar-brand {
+    color: white;
+    font-weight: bold;
+}
+
+#nav-atas .nav-link {
+    color: white;
+}
+
+#nav-atas .nav-link.active {
+    color: black;
+}
+
+#nav-atas .nav-link.disable {
+    color: rgb(143, 143, 143);
+}

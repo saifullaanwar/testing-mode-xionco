@@ -1,0 +1,167 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaladdnewitem" tabindex="-1"aria-labelledby="modaladdnewitemlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h1 class="modal-title fs-5" id="modaladdnewitemlabel" style="font-weight: bold;vertical-align: middle;">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="itemsContainer" class="row mt-2">
+                    <div id="item-1" class="partitems">
+                        <b><p id="judulitem-1" class="d-none">Produk 1</p></b>
+                        
+                        <div class="row">
+                            <div class="col">
+                                
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Product Name</span>
+                                    <input type="text" class="form-control" id="productname-1" name="productname" placeholder="Product Name" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);width: 120px;"><span class="text-danger">*&nbsp;</span> Code</span> 
+
+                                    <select class="form-select" id="code2-1" name="code2" onchange="oninputdata()" style="font-size: 12px;">
+                                        <option selected disabled value="Code">Code item</option>
+                                        <option>FMCG</option>
+                                        <option>NON</option>
+                                        <option>UP</option>
+                                        <option value="">Lainnya</option>
+                                    </select>
+                                </div>
+
+                                <!-- <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);width: 120px;"><span class="text-danger">*&nbsp;</span> Item C5</span> 
+
+                                    <select class="form-select" id="stockprodukcode-1" name="stockprodukcode" onchange="oninputdata()" style="font-size: 12px;">
+                                        <option selected disabled value="">Pilih</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div> -->
+
+                                <div class="form-check mb-3" title="Centang jika produk untuk C5">
+                                    <input class="form-check-input" type="checkbox" value="" id="stockprodukcode-1" name="stockprodukcode" onchange="oninputdata()">
+                                    <label class="form-check-label" for="stockprodukcode-1">
+                                        Product C5
+                                    </label>
+                                </div>
+
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Price</span>
+                                    <input type="number" class="form-control" id="price1-1" name="price1" placeholder="0" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                                
+                                
+                            </div>
+
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Fabric Size</span>
+                                    <input type="text" class="form-control" id="fabricsize-1" name="fabricsize" placeholder="Angka contoh 0 atau 4.2" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">No Fabric Size</span>
+                                    <input type="text" class="form-control" id="nofabricsize-1" name="nofabricsize" placeholder="Angka contoh 0 atau 4.2" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                                
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Price Fabric</span>
+                                    <input type="number" class="form-control" id="pricefabric-1" name="pricefabric" placeholder="0" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Price Leather</span>
+                                    <input type="number" class="form-control" id="priceleather-1" name="priceleather" placeholder="0" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">SKU</span>
+                                    <input type="text" class="form-control" id="sku-1" name="sku" placeholder="SKU" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Image Link</span>
+                                    <input type="text" class="form-control" id="imaglink-1" name="imaglink" placeholder="Link image tokopedia" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        <div class="input-group input-group-sm mb-3 d-none">
+                            <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Product On Web</span>
+                            <input class="form-control" list="produkweblist-1" placeholder="Pilih product" style="font-size: 12px;"  id="produkwebname-1" name="produkwebname" oninput="cekkatagoriproduk(this)">
+                            <datalist id="produkweblist-1">
+                            
+                            </datalist>
+                        </div>
+                        
+                        <hr>
+                        <p>Isi bagian ini jika product adalah berjenis investor</p>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);width: 120px;">Investor</span> 
+
+                                    <select class="form-select" id="investor-1" name="investor" onchange="oninputdata()" style="font-size: 12px;">
+                                        <option selected value="">Pilih</option>
+                                        <option value="true">Yes</option>
+                                        <option value="">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);width: 120px;">Tipe (optional)</span> 
+
+                                    <select class="form-select" id="investormj-1" name="investormj" onchange="oninputdata()" style="font-size: 12px;">
+                                        <option selected value="">Pilih</option>
+                                        <option>Marco</option>
+                                        <option>Jansen</option>
+                                        <option>XIONCO</option>
+                                        <option>EACH</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-flex justify-content-end d-none">
+                                <button type="button" class="removeItem btn btn-danger btn-sm" id="removeItem-1" onclick="removeItem(this)"><i class="bi bi-trash3-fill" style="color: white;"></i>&nbsp;Hapus item</button>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-center justify-content-between w-100"  id="addnewitemtombolfooters">
+                    <div>
+                        <button type="button" class="btn btn-secondary " id="addmore" onclick="additems()">Add More</button> 
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsave()">Save</button> 
+
+                        <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+                
+
+                <div class=" d-flex align-items-center justify-content-end w-100 d-none"  id="edititemtombolfooters">
+                    <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsaveedit()">Save</button> 
+
+                    <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                </div>
+                
+               
+            </div>
+        </div>
+    </div>
+</div>

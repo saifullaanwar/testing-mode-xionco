@@ -1,0 +1,72 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaladdnewitem" tabindex="-1"aria-labelledby="modaladdnewitemlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h1 class="modal-title fs-5" id="modaladdnewitemlabel" style="font-weight: bold;vertical-align: middle;">Add New Color Variant</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="itemsContainer" class="row mt-2">
+                    <div id="item-1" class="partitems">
+                        <b><p id="judulitem-1" class="d-none">Color 1</p></b>
+                        <div class="row">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Color Variant</span>
+                                <input type="text" class="form-control" id="colorvariant-1" name="colorvariant" placeholder="Isi Nama Color Variant" style="font-size: 12px;"  oninput="oninputdata()">
+                            </div>
+                            
+
+                        </div>
+                        <hr>
+                        <span>Dibawah ini diisi jika variant adalah Fabric & CHEROKEE</span>
+                        <div class="input-group input-group-sm mb-3" title="Diisi untuk khusus Fabric & CHEROKEE">
+                            <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Kode Kain</span>
+                            <!-- <select class="form-select" id="kodekain-1" name="kodekain">
+                                <option value="" selected>Pilih Kode Kain</option>
+                                <option >FB-S</option>
+                                <option >FB-E</option>
+                                <option >FX-S</option>
+                                <option >FX-E</option>
+                            </select> -->
+                            <input type="text" class="form-control" id="kodekain-1" name="kodekain" placeholder="Isi Buat Kode Kain (khusus Fabric & CHEROKEE)" style="font-size: 12px;" oninput="oninputdata()">
+                        </div>
+                        <!-- <div class="input-group input-group-sm mb-3" title="Diisi hanya untuk Variant Kain">
+                            <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Warna Kain</span>
+                            <input type="text" class="form-control" id="warnakain-1" name="warnakain" placeholder="Warna kain" style="font-size: 12px;"  oninput="oninputdata()">
+                        </div> -->
+                        
+                        <div class="d-flex justify-content-end d-none">
+                            <button type="button" class="removeItem btn btn-danger btn-sm" id="removeItem-1" onclick="removeItem(this)"><i class="bi bi-trash3-fill" style="color: white;"></i>&nbsp;Hapus</button>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-center justify-content-between w-100"  id="addnewitemtombolfooters">
+                    <div>
+                        <button type="button" class="btn btn-secondary " id="addmore" onclick="additems()">Add More</button> 
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsave()">Save</button> 
+
+                        <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+                
+
+                <div class=" d-flex align-items-center justify-content-end w-100 d-none"  id="edititemtombolfooters">
+                    <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsaveedit()">Save</button> 
+
+                    <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                </div>
+                
+            
+            </div>
+        </div>
+    </div>
+</div>

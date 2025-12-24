@@ -1,0 +1,111 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaldownloadexcel" tabindex="-1"aria-labelledby="modaldownloadexcellabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <!-- Judul di kiri -->
+                <h1 class="modal-title fs-5 mb-0" id="modaldownloadexcellabel" style="font-weight: bold;">Request Pembelian</h1>
+
+                <!-- Radio button di kanan -->
+                <div class="d-flex gap-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tipeitembeli" id="tipeitembeli1" checked>
+                        <label class="form-check-label" for="tipeitembeli1">Regular</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tipeitembeli" id="tipeitembeli2"  onclick="klikradioregularornewitem('newitem')">
+                        <label class="form-check-label" for="tipeitembeli2">New Item</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="itemsContainer-modaldownloadexcel" class="row mt-2">
+                    <div class="row w-50">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Nama Pemesan</span>
+                            <input type="text" class="form-control" id="namalengkap-modaldownloadexcel-1" name="namalengkap-modaldownloadexcel" placeholder="Nama Pemesan" style="font-size: 12px;" oninput="oninputdata_modaldownloadexcel()" disabled>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="item-modaldownloadexcel-1" class="partitems">
+                        <b><p id="judulitem-modaldownloadexcel-1" class="d-none">Item 1</p></b>
+                        
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);width: 120px;"><span class="text-danger">*&nbsp;</span> Nama Barang</span> 
+
+                                    <select class="form-select" id="namabarang-modaldownloadexcel-1" name="namabarang-modaldownloadexcel" onchange="selekprocitemreq(this)" style="font-size: 12px;">
+                                        <!-- <option selected disabled value="">Pilih item</option> -->
+                                        
+                                    </select>
+                                    <input class="d-none" name="dummynameitem-modaldownloadexcel" id="dummynameitem-modaldownloadexcel-1">
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="input-group input-group-sm mb-3">
+                                            <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Qty</span>
+                                            <input type="number" class="form-control" id="qty-modaldownloadexcel-1" name="qty-modaldownloadexcel" placeholder="0" style="font-size: 12px;"  oninput="oninputdata_modaldownloadexcel()" min="0">
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="input-group input-group-sm mb-3">
+                                            <span class="input-group-text" style="background-color: rgb(226, 221, 221);width: 120px;"><span class="text-danger">*&nbsp;</span> Divisi</span> 
+
+                                            <select class="form-select" id="divisi-modaldownloadexcel-1" name="divisi-modaldownloadexcel" onchange="oninputdata_modaldownloadexcel()" style="font-size: 12px;">
+                                                <!-- <option selected disabled value="">Pilih item</option> -->
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mt-3">
+                            <textarea class="form-control" placeholder="" id="note-modaldownloadexcel-1" name="note-modaldownloadexcel"></textarea>
+                            <label for="note-modaldownloadexcel-1">Note</label>
+                        </div>
+                        <hr>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center" style="flex: 1;">
+                                <img src="/assets/lainnya/item-default.png" alt="" style="width: 50px; height: auto;" class="me-2" id="img-modaldownloadexcel-1" name="img-modaldownloadexcel">
+                                <b id="namaitemwithimg-modaldownloadexcel-1" name="namaitemwithimg-modaldownloadexcel">Nama Item</b>
+                            </div>
+                            <div class="text-end">
+                                <span><span id="qtyshow-modaldownloadexcel-1" name="qtyshow-modaldownloadexcel">0</span>&nbsp;<span id="unitshow-modaldownloadexcel-1" name="unitshow-modaldownloadexcel">UNIT</span></span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end d-none">
+                            <button type="button" class="removeItem-modaldownloadexcel btn btn-danger btn-sm" id="removeItem-modaldownloadexcel-1" onclick="removeItem_modaldownloadexcel(1)"><i class="bi bi-trash3-fill" style="color: white;"></i>&nbsp;Hapus</button>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-center justify-content-between w-100"  id="addnewitemtombolfooters-modaldownloadexcel">
+                    <div>
+                        <span><b>Total Item &nbsp;&nbsp;&nbsp;&nbsp;</b><span id="totalitem-modaldownloadexcel">1 ITEM</span></span>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-sm btn-light border-secondary-subtle me-3" id="addmore-modaldownloadexcel" onclick="additems_modaldownloadexcel()">Add More</button> 
+
+                        <button type="button" class="btn btn-sm btn-secondary me-3" id="submitsave-modaldownloadexcel" onclick="submitsave_modaldownloadexcel()">Save</button> 
+
+                        <!-- <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button> -->
+                    </div>
+                </div>
+                
+                
+            
+            </div>
+        </div>
+    </div>
+</div>

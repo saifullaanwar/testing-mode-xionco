@@ -1,0 +1,114 @@
+<%
+  var homeopen = "";
+  
+  var daftarpembelian_item = "";
+  var daftarpembelian = "";
+  var daftarpembelian_bahan = "";
+  var bill_due = "";
+  var daftarrequest = "";
+  var requsetbeli = "";
+%>
+
+<% if (navatasactive == "home") { %>
+    <% homeopen = "active"; %>
+
+
+<% } else if (navatasactive.includes("procurement") && !navatasactive.includes("daftarpembelian")) { %>
+        <% daftarrequest = "active"; %>
+    <% if (navatasactive.includes("daftarrequest")) { %>
+        <% requsetbeli = "active"; %>
+    <% } %>
+
+<% } %>
+
+<div class="d-flex" >
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed" id="sidabarutamashow">
+        <!--<button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-left"></i>
+        </button>-->
+        <div class="px-4 pt-4">
+            <h4 class="logo-text mb-0"><i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i> <span class="logo-text-hide"  onclick="toggleSidebar()"> Sembunyikan Menu</span></h4>
+            <hr style="color: grey;">
+        </div>
+
+        <div class="" id="scrolled" style="height: calc(100vh - 175px);">
+            <div class="col" style="display: flex;flex-direction: column;padding-bottom: 4em;">
+                <a class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Admin"></i>
+                    <span class="hide-on-collapse">Board</span>
+                </a>
+                <div class="hide-on-collapse-detailmenu px-3 d-none">
+                    <hr style="color: grey;">
+                        <div class="row d-none">
+                            <div class="col-8">
+                                <span>Tugas Mendatang</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span id="tugasmendatang">0</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <span>Tugas Saya</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span name="totaltugassayaall">0</span>
+                            </div>
+                        </div>
+                    <hr style="color: grey;margin-bottom: 0;">
+                </div>
+                <br>
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-house-fill',
+                    text: 'Home',
+                    activemenudasar: homeopen,
+                    link: '/supervisor/produksipesanan'
+                }) %>
+
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'daftarpembelianmenuarrow',
+                    text:'Daftar Pembelian',
+                    icon:"bi-ui-checks",
+                    activemenudasar:`${daftarpembelian_item}${daftarpembelian_bahan}${bill_due}`,
+                    listsubmenu:[
+                            {
+                                text:'Pembelian Item',
+                                activesubmenu:daftarpembelian_item,
+                                link:'/procurement/daftarpembelian',
+                            },
+                            {
+                                text:'Pembelian Bahan',
+                                activesubmenu:daftarpembelian_bahan,
+                                link:'/procurement/daftarpembelian/pembelianbahan',
+                            },
+                            {
+                                text:'Bill Due',
+                                activesubmenu:bill_due,
+                                link:'/procurement/bill/due',
+                            }
+                        ]
+                    }
+                )%>
+
+
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'settingmenuarrow',
+                    icon:'bi-gear-fill',
+                    text:'Settings',
+                    activemenudasar:'',
+                    listsubmenu:[
+                            {
+                                text:'Logout',
+                                activesubmenu:'',
+                                onclick:'logout()'
+                            },
+                        ]
+                    }
+                )%>
+            </div>
+        </div>
+       
+        <%- include('versiondiv') %>
+       
+    </nav>
+

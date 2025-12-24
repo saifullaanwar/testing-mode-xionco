@@ -1,0 +1,19 @@
+<!--  
+    {
+        icon:'',
+        text:'',
+        activemenudasar:'',
+        link:'/url',
+        onclick:'' //jika tidak ada tidak perlu dipakai
+    }
+
+-->
+<%
+    var idx = text.replace(/\s+/g, "");
+    const hasLink = typeof link !== 'undefined' && link !== '';
+    const hasOnclick = typeof onclick !== 'undefined' && onclick !== '';
+%>
+<a <%- hasLink?`href="${link}?sc=menu-${idx}"`:'' %> class="sidebar-link text-decoration-none px-3 <%-activemenudasar%>" <%-hasOnclick?`onclick="${onclick}"`:''%> id="menu-<%-idx%>">
+    <i class="bi <%-icon%> me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="<%-text%>" ></i>
+    <span class="hide-on-collapse"><%-text%></span>
+</a>

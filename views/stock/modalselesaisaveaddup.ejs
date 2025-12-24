@@ -1,0 +1,62 @@
+<!-- Modal modal-lg -->
+<div class="modal fade" id="modalpopupsuksessaveit" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modalpopupsuksessaveitlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+               
+                <h1 class="modal-title fs-5" id="modalpopupsuksessaveitlabel" style="font-weight: bold;vertical-align: middle;">New Stock</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> -->
+            <div class="modal-body">
+               
+                <table id="alldattabstatus">
+                    <thead>
+                        <tr>
+                            <th scope="col">No Stock</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Color Var.</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="finalstatussaved">
+                        <tr>
+                            <td>
+                                AS001a
+                            </td>
+                            <td class="text-truncate">
+                                ASHER
+                            </td>
+                            <td class="text-truncate">
+                                Hitam | Putih
+                            </td>
+                            <td>
+                                <span><i class="bi bi-check-circle-fill" style="color: green;"></i> saved</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px;">
+                                AS001b
+                            </td>
+                            <td class="text-truncate"  style="max-width: 80px;">
+                                ASRAL 34 ererererer erer
+                            </td>
+                            <td class="text-truncate"  style="max-width: 80px;">
+                                Hitam | Putih erererere rerererer erfffffffffffffffffffffffffffffffffffffffffffffffffff
+                            </td>
+                            <td>
+                                <span><i class="bi bi-x-circle-fill" style="color: red;"></i> duplikat no stock</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p style="font-size: xx-small;">Note : jika status duplikat atau gagal, maka perbaiki dan input ulang stock tsb</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="daftarstockclick" style="display: none;" onclick="window.open('/stock/produkupholstery','_self')">Daftar Stock</button> 
+                <button type="button" class="btn btn-light"  style="border-color: grey;"  data-bs-dismiss="modal" id="kembalilagis">Kembali</button>
+               
+            </div>
+        </div>
+    </div>
+</div>

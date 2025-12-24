@@ -1,0 +1,71 @@
+<!-- Modal modal-lg -->
+<div class="modal fade" id="modalklikaddstockup" tabindex="-1" aria-labelledby="modalklikaddstockuplabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h1 class="modal-title fs-5" id="modalklikaddstockuplabel" style="font-weight: bold;vertical-align: middle;">New Stock</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="loadpopupaddstock">
+                    <input class="form-control form-control-s skeleton skeleton-popupload" disabled>
+                </div>
+                <div id="finishloadxx" style="display: none;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);">No. Transaksi</span>
+                                <input type="text" class="form-control" aria-label="notransaksi-addstockup" aria-describedby="notransaksi-addstockup" id="notransaksi-addstockup" >
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="orderdate-addstockup" style="background-color: rgb(226, 221, 221);">Order Date</span>
+                                <input type="date" class="form-control" aria-label="orderdate-addstockup" aria-describedby="orderdate-addstockup" placeholder="dd-mm-yyyy" min="1997-01-01" max="9999-12-31">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="itemlabeladd" style="background-color: rgb(226, 221, 221);">Item</span>
+                                <select id="selectitemadd" class="form-select form-select-sm"  aria-label="item produk">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="colorvariantaddlabel" style="background-color: rgb(226, 221, 221);">Color Var.</span>
+                                
+                                <input class="form-control form-select-sm" list="listcolorvariantadd" id="colorvariantadd" placeholder="Pilih Item">
+                                <datalist id="listcolorvariantadd">
+                                    <!-- <option value=""> -->
+                                    <% var datacolorvarian=datas.colorvariantdata; %>
+                                    <% for( let i = 0; i < datacolorvarian.length; i++ ) { %>
+                                        <option value="<%-datacolorvarian[i].colorvariant%>">
+                                        
+                                    <% } %>
+                                    
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="qty-addstockup" style="background-color: rgb(226, 221, 221);">Qty</span>
+                                <input type="number" class="form-control" aria-label="qty-addstockup" aria-describedby="qty-addstockup" min="0" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="savetomboladdstock" style="display: none;">Add</button><!-- 
+                <button type="button" class="btn btn-light"  style="border-color: grey;"  data-bs-dismiss="modal">Batal</button> -->
+               
+            </div>
+        </div>
+    </div>
+</div>

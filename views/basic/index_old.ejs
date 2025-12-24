@@ -1,0 +1,82 @@
+<%- include('layout/header') %>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center vh-100" id="loadingceksudahlogshow">
+
+                <div class="col">
+                    <div class="row">
+                        <div class="col" style="margin-right: 1px;">
+                            <img src="/assets/page-loading.gif" alt="" id="img-gifload">
+                            <span style="color: white;">Loading Cek Login ... </span>
+                            
+                        </div>
+                      
+                    </div>
+                    <div id="progressbarload" class="row">
+                        <div class="col ">
+                            <div class="progress" style="width: 100%;">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row d-flex align-items-center justify-content-center  vh-100" id="formshow"
+                style="display: none!important;">
+                <div class="col-lg-6 col-mb-12 col-sm-12" id="img-log-pc">
+                    <img src="/assets/lainnya/gmbr-atas-log.webp" class="img-fluid" alt=""
+                        style="border-top-right-radius: 25%;border-bottom-left-radius: 25%;">
+                </div>
+                <div class="col-lg-6 col-mb-12 col-sm-12">
+                    <form>
+                        <div style="text-align: center;">
+                            <img src="/assets/favicon.ico" alt="" width="25%">
+                        </div>
+                        <br>
+                        <!-- Email input -->
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping"><i
+                                    class="bi bi-person-circle"></i></span>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                aria-describedby="addon-wrapping" id="username">
+                        </div>
+                        <br>
+                        <!-- Password input -->
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping"><i class="bi bi-lock-fill"></i></span>
+                            <input type="password" class="form-control" placeholder="Password" aria-label="Password"
+                                aria-describedby="addon-wrapping" id="password">
+                        </div>
+                        <br>
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4" style="text-align: center;">
+
+                            <div class="col" >
+                                <!-- Simple link -->
+                                <a href="#!" data-bs-toggle="modal" data-bs-target="#modallupapassword" style="color: white!important;">Lupa
+                                    password?</a>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div style="text-align: center;">
+                            <button type="button" class="btn btn-block kliktombolcss" id="logintombol">Login</button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        
+<%- include('layout/footerscript') %>
+    </body>
+
+    </html>

@@ -1,0 +1,179 @@
+body {
+    font-family: 'Poppins';
+    /*    margin: 25px; */
+    overflow: hidden;
+}
+
+#basepage {
+    padding-left: 30px;
+    padding-right: 30px;
+
+}
+
+#nav-atas {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    /* background-color: black !important;
+    color: white !important; */
+}
+.main-content{
+    width: 100%!important;
+}
+#pencarianinput{
+
+}
+.nav-link.menubawahbutton,.nav-link.menubawahbutton span{
+    font-size: small!important;
+    color: #9FA6B2!important;
+}
+.nav-link.menubawahbutton.aktif,.nav-link.menubawahbutton.aktif span{
+    font-size: small!important;
+    color: #332D2D!important;
+}
+.nav-link.menubawahbutton i{
+    color: #9FA6B2!important;
+}
+.nav-link.menubawahbutton.aktif i{
+    color: #332D2D!important;
+}
+
+/* menu lainnya */
+.menulainnyas{
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    border-radius: 10px;
+}
+.menulainnyas a,.menulainnyas i{
+    
+    font-size: small!important;
+    color: #332D2D!important;
+}
+.menulainnyas:hover{
+    background-color:#332D2D!important;
+}
+.menulainnyas:hover a,.menulainnyas:hover i{
+    
+    font-size: small!important;
+    color: white!important;
+}
+
+/* menu lainnya */
+
+/* #nav-atas .navbar-brand {
+    color: white;
+    font-weight: bold;
+} */
+/* 
+#nav-atas .nav-link {
+    color: white;
+}
+
+#nav-atas .nav-link.active {
+    color: black;
+}
+
+#nav-atas .nav-link.disable {
+    color: rgb(143, 143, 143);
+}
+ */
+ .nav-link {
+    color: black;
+}
+/* table */
+.tableFixHead {
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* min-height: 50vh; */
+    /* max-height: 80vh; */
+}
+
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+}
+
+.tableFixHead thead th {
+
+    background-color: #DCDCDC;
+    /* rgba(128, 128, 128, 0.342); */
+    color: #3C3C3C;
+    font-weight: bold;
+}
+
+/* Just common table stuff. Really. */
+table {
+    border-collapse: collapse;
+
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px 16px;
+}
+
+th {
+    background: white;
+}
+
+.table-hover>tbody>tr:hover>td,
+.table-hover>tbody>tr:hover>th {
+    background-color: #04209a34 !important;
+    color: black !important;
+}
+
+/*  */
+
+.namabarang-elepsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.note-elepsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.trall {
+    /* height: 5vh; */
+    vertical-align: middle;
+
+}
+
+.trstyleaccordion,.tdstylis {
+
+    background-color: #d3d3d3d7!important;
+}
+
+.trstyleaccordion-hide {
+    display: none;
+}
+
+/*  */
+.progress {
+    margin: 5px;
+    height: 6px;
+}
+
+/*  */
+@media only screen and (max-width: 768px) {
+   
+   /*  .tableFixHead thead th,
+    tr {
+        font-size: 12px !important;
+    } */
+
+   /*  #pencariantombol, */
+    /* #pencarianinput {
+        font-size: 12px !important;
+    } */
+}

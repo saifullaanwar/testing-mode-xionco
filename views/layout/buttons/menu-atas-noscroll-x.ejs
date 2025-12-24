@@ -1,0 +1,20 @@
+<!-- 
+    json tombol
+    buttons:[{
+        href:'/',
+        active:'active', ///kosongkan '' jika tidak aktif
+        buttontext:'Tugas Saya'
+    }]
+-->
+
+<div class="mb-4">
+    <ul class="nav nav-tabs">
+        
+        <% buttons.forEach(element => { %>
+            <li class="nav-item me-5">
+                <a style="cursor: pointer;" class="nav-link <%=element.active %>" aria-current="page" href="<%=element.href %>" ><%=element.buttontext %></a>
+            </li>
+        <% }) %>
+        
+    </ul>
+</div>

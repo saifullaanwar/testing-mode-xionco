@@ -1,0 +1,62 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaladdnewitem" tabindex="-1"aria-labelledby="modaladdnewitemlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h1 class="modal-title fs-5" id="modaladdnewitemlabel" style="font-weight: bold;vertical-align: middle;">Add New Platform</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="itemsContainer" class="row mt-2">
+                    <div id="item-1" class="partitems">
+                        <b><p id="judulitem-1" class="d-none">Platform 1</p></b>
+                        <div class="row">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Platform Name</span>
+                                <input type="text" class="form-control" id="platformname-1" name="platformname" placeholder="Platform Name" style="font-size: 12px;"  oninput="oninputdata()">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" id="instore-1" name="instorecek"  onchange="oninputdata()">
+                                </span>
+                                <input type="text" class="form-control" placeholder="Centang jika termasuk In-Store" disabled>
+                            </div>
+                            
+
+                        </div>
+                        
+                        <div class="d-flex justify-content-end d-none">
+                            <button type="button" class="removeItem btn btn-danger btn-sm" id="removeItem-1" onclick="removeItem(this)"><i class="bi bi-trash3-fill" style="color: white;"></i>&nbsp;Hapus</button>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-center justify-content-between w-100"  id="addnewitemtombolfooters">
+                    <div>
+                        <button type="button" class="btn btn-secondary " id="addmore" onclick="additems()">Add More</button> 
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsave()">Save</button> 
+
+                        <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+                
+
+                <div class=" d-flex align-items-center justify-content-end w-100 d-none"  id="edititemtombolfooters">
+                    <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsaveedit()">Save</button> 
+
+                    <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                </div>
+                
+            
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<!-- data-bs-toggle="modal" data-bs-target="#exampleModal" -->
+<div class="d-flex align-items-center justify-content-start">
+    
+    <div class="input-group mb-3 input-group-sm" title="Download">
+        <span class="input-group-text" onclick="downloadexcel_adminlist()" style="cursor: pointer;"><i class="bi bi-download"></i></span>
+        <input class="form-control form-control-sm" type="text" id="tanggal-download" placeholder="dd-mm-yyyy" >
+        
+    </div>
+</div>
+<!-- untuk tanggal drag rentang gunakan script di bawah -->
+<!--  
+<script>
+    const picker = new Litepicker({
+    element: document.getElementById('tanggal-download'),
+    singleMode: false,
+    format: 'DD-MM-YYYY',
+    setup: (picker) => {
+        picker.on('selected', (startDate, endDate) => {
+            startMillis = startDate.getTime();
+            endMillis = endDate.getTime();
+            startMillis_format=startDate.format("YYYY-MM-DD");
+            endMillis_format=endDate.format("YYYY-MM-DD");
+            checktglinput('tanggal-download');
+            console.log("Tanggal Mulai:", startDate.format("DD-MM-YYYY"), "-", startMillis);
+            console.log("Tanggal Akhir:", endDate.format("DD-MM-YYYY"), "-", endMillis);
+        });
+    }
+    });
+</script>
+
+
+-->

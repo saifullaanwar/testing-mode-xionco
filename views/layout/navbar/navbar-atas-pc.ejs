@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom border-2" style="background-color: white!important;" id="nav-atas">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="/assets/logo-halim.png" alt="Logo" width="30" class="d-inline-block align-text-top"> <b id="companyname">PT HALIM INTI GAHARA</b></a>
+
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="dropdown" id="notifWrapper">
+                
+                <span class="position-relative d-inline-block me-3 font-xlarge" style="cursor: pointer;" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-bell" onclick="openLonceng()"></i>
+                    <span  id="notifBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notif-badge d-none" style="font-size: 11px!important;">0<span class="visually-hidden">unread notifications</span>
+                    </span>
+                </span>
+                
+                <ul id="notifDropdown" class="dropdown-menu dropdown-menu-end font-small" style="max-height: 600px; overflow-y: auto;">
+                    <li><a class="dropdown-item" href="#">Tidak ada notifikasi</a></li>
+                </ul>
+            </div>
+        
+            <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                <a id="akunatas-klik"><i class="bi bi-person-circle"></i><span style="font-size: larger;" id="namalengkap"></span></a>
+            </span>
+        </div>
+        
+        
+    </div>
+</nav>
+<!-- notifikasi -->
+<!--  
+simpand di indexDB
+key 'notif'
+value array
+[
+    {
+        id:1,
+        notif:''
+    }
+]
+-->

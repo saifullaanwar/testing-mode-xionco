@@ -1,0 +1,243 @@
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+
+<script>
+    // Konfigurasi Firebase
+    var firebaseConfig = {
+        
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    // Minta izin notifikasi + ambil token
+    async function requestPermissionAndGetToken() {
+        console.log('start tokenss===+_++++++');
+        try {
+            const tokennow = await messaging.getToken();
+            if (!tokennow) {
+            console.log("❌ Token tidak valid, perlu minta ulang");
+            // trigger request ulang izin + simpan token baru
+            }else{
+                console.log('new tokenss===+_++++++',tokennow);
+            }
+
+            const permission = Notification.permission;
+            console.log("Current permission:", permission);
+
+            if (permission === "granted") {
+                let currentToken = await dbs.get("fcm_token");
+
+                if (!currentToken) {
+                    currentToken = await messaging.getToken();
+                    console.log("New FCM Token 1:", currentToken);
+
+                    if (currentToken) {
+                        await dbs.save("fcm_token", currentToken);
+
+                        const usercek = await dbs.isLoggedIn();
+                        if (usercek) {
+                            await fetch("/fcm/save-fcm-token", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json",'Authorization': xi },
+                                body: JSON.stringify({ username: usercek, fcm_token: currentToken })
+                            });
+                            let datauser = JSON.parse(await dbs.get('datauser'));
+
+                            datauser.fcm_token=currentToken;
+                            
+                            await dbs.save("datauser", JSON.stringify(datauser));
+                        }
+                    }
+                } else {
+                    if (tokennow!=currentToken) {
+                        await dbs.save("fcm_token", tokennow);
+
+                        const usercek = await dbs.isLoggedIn();
+                        if (usercek) {
+                            await fetch("/fcm/save-fcm-token", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json",'Authorization': xi },
+                                body: JSON.stringify({ username: usercek, fcm_token: tokennow })
+                            });
+
+                            let datauser = JSON.parse(await dbs.get('datauser'));
+
+                            datauser.fcm_token=tokennow;
+                            
+                            await dbs.save("datauser", JSON.stringify(datauser));
+                        }
+                    }
+                    console.log("Using existing FCM Token 2:", tokennow);
+                }
+            } else if (permission === "default") {
+                await Notification.requestPermission();
+                if (Notification.permission === "granted") {
+                    return requestPermissionAndGetToken();
+                }
+            } else {
+                console.warn("Notifications are denied by user.");
+            }
+        } catch (err) {
+            console.error("Error getting FCM token:", err);
+        }
+    }
+
+    // Registrasi service worker dengan auto update
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(async function (registration) {
+            console.log("Service Worker registered:", registration);
+
+            // Cek update SW
+            if (registration.update) {
+                await registration.update();
+                console.log("Service Worker update check done.");
+            }
+
+            // Hubungkan messaging ke SW
+            messaging.useServiceWorker(registration);
+
+            // Setelah SW siap → baru jalankan request token
+            requestPermissionAndGetToken();
+        })
+        .catch(function (err) {
+            console.error("Service Worker registration failed:", err);
+        });
+
+        navigator.serviceWorker.addEventListener('message', event => {
+            // Data dari Service Worker akan berada di event.data
+            const receivedData = event.data;
+            console.log('Received data from Service Worker:', receivedData);
+
+            if (receivedData.type === 'NEW_NOTIFICATION') {
+                console.log('Isi Notifikasi:', receivedData.body);
+                console.log('Role Pengguna:', receivedData.role);
+                // Lakukan pembaruan UI di sini
+            }
+        });
+        // navigator.serviceWorker.addEventListener('message',async (event) => {
+        //     if (event.data?.type === "NEW_NOTIFICATION") {
+        //         const notifBody = event.data.body;
+                
+        //         const usercek = await dbs.isLoggedIn();
+
+        //         console.log("Pesan dari SW:", notifBody);
+
+        //         if (usercek && event.data && event.data.role) {
+        //             const roles = event.data.role;//JSON.parse(payload.data.role);
+        //             let datauser = JSON.parse(await dbs.get('datauser'));
+        //             const clientRole = datauser.tipeuser;
+
+        //             if (roles.toLowerCase().includes(clientRole.toLowerCase())) {
+        //                 console.log("Role cocok, tampilkan notifikasi:", event.data);
+        //                 updatedataNotif(notifBody);
+        //                 setTimeout(function () {
+        //                     getceknotif();
+        //                     //calladdnotif('datas', notifBody);
+        //                 }, 1000);
+        //             } else {
+        //                 console.log("Role tidak cocok, notifikasi diabaikan");
+        //             }
+        //         }
+
+            
+        //     }
+        // });
+    }
+
+    // Listener kalau token berubah
+    messaging.onTokenRefresh(() => {
+        messaging.getToken().then(async (newToken) => {
+            console.log("New FCM Token:", newToken);
+            const usercek = await dbs.isLoggedIn();
+            if (usercek) {
+                await fetch("/fcm/save-fcm-token", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json",'Authorization': xi },
+                    body: JSON.stringify({ username: usercek, fcm_token: newToken })
+                });
+            }
+        });
+    });
+
+    // Listener pesan masuk
+    messaging.onMessage(async (payload) => {
+        console.log("Message received: ", payload);
+        const usercek = await dbs.isLoggedIn();
+        if (usercek && payload.data && payload.data.role) {
+            const roles = payload.data.role;//JSON.parse(payload.data.role);
+            let datauser = JSON.parse(await dbs.get('datauser'));
+            const clientRole = datauser.tipeuser;
+
+            if (roles.toLowerCase().includes(clientRole.toLowerCase())) {
+                console.log("Role cocok, tampilkan notifikasi:", payload.notification);
+                //updatedataNotif(payload.notification.body);
+                setTimeout(function () {
+                    //getceknotif();
+                    calladdnotif('datas', payload.notification.body);
+                }, 1000);
+            } else {
+                console.log("Role tidak cocok, notifikasi diabaikan");
+            }
+        }
+    });
+
+    ///////////////////////////// BroadcastChannel ///////////////////////////////
+    // if ('BroadcastChannel' in window) {
+    //     const bc = new BroadcastChannel('fcm-channel');
+        
+    //     bc.onmessage = (event) => {
+    //         // Data yang dikirim dari Service Worker
+    //         const receivedData = event.data;
+    //         console.log('Received data from Service Worker:', receivedData);
+
+    //         // Contoh penggunaan data yang sudah benar:
+    //         console.log('Tipe Notifikasi:', receivedData.type);
+    //         console.log('Isi Notifikasi:', receivedData.body);
+    //         console.log('Role Pengguna:', receivedData.role);
+
+    //         // Lakukan sesuatu dengan data yang diterima,
+    //         // misalnya, perbarui UI atau tampilkan pesan.
+    //         // Contoh:
+    //         // document.getElementById('message-area').textContent = receivedData.role;
+            
+    //         // Cek apakah tab aktif
+    //         if (document.visibilityState === 'visible') {
+    //             console.log('Tab is in foreground. Do something here.');
+    //             // Tab sedang aktif
+    //         } else {
+    //             console.log('Tab is in background. The user might not see this update.');
+    //             // Tab di latar belakang
+    //             // if (event.data?.type === "NEW_NOTIFICATION") {
+    //             //     const notifBody = event.data.body;
+                    
+    //             //     const usercek = await dbs.isLoggedIn();
+
+    //             //     console.log("Pesan dari SW:", notifBody);
+
+    //             //     if (usercek && event.data && event.data.role) {
+    //             //         const roles = event.data.role;//JSON.parse(payload.data.role);
+    //             //         let datauser = JSON.parse(await dbs.get('datauser'));
+    //             //         const clientRole = datauser.tipeuser;
+
+    //             //         if (roles.toLowerCase().includes(clientRole.toLowerCase())) {
+    //             //             console.log("Role cocok, tampilkan notifikasi:", event.data);
+    //             //             updatedataNotif(notifBody);
+    //             //             setTimeout(function () {
+    //             //                 getceknotif();
+    //             //                 //calladdnotif('datas', notifBody);
+    //             //             }, 1000);
+    //             //         } else {
+    //             //             console.log("Role tidak cocok, notifikasi diabaikan");
+    //             //         }
+    //             //     }
+
+                
+    //             // }
+    //         }
+    //     };
+    // } else {
+    //     console.warn('Broadcast Channel API not supported in this browser.');
+    // }
+</script>

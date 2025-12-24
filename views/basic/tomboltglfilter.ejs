@@ -1,0 +1,59 @@
+<div class="d-flex align-items-center justify-content-start">
+    <input class="form-control form-control-sm d-none" type="text" id="tanggal-filters" placeholder="dd-mm-yyyy" >
+    <span class="input-group-text" id="pencariantombol-tanggal" style="background-color: white;cursor: pointer;"><i class="bi bi-calendar-week" style="color: grey;"></i></span>
+
+</div>
+
+<!-- tambahkan di JS filter -->
+<!-- 
+// Tambahkan filter untuk tanggal
+let dateMatch = true;
+// Pastikan orderdate_mili_start memiliki nilai sebelum membandingkan
+if (orderdate_mili_start) {
+    dateMatch = trx.orderdate_mili >= orderdate_mili_start;
+}
+// Pastikan orderdate_mili_end memiliki nilai sebelum membandingkan
+if (orderdate_mili_end) {
+    dateMatch = dateMatch && trx.orderdate_mili <= orderdate_mili_end;
+}
+
+
+-->
+<!-- tambahkan di bawah ini ke EJS -->
+<!--  
+<script>
+    var orderdate_mili_start_filter=0;
+    var orderdate_mili_end_filter=0;
+
+    const picker_filters = new Litepicker({
+    element: document.getElementById('tanggal-filters'),
+    singleMode: false,
+    format: 'DD-MM-YYYY',
+    setup: (picker) => {
+        picker.on('selected', (startDate, endDate) => {
+            orderdate_mili_start_filter = startDate.getTime();
+            orderdate_mili_end_filter = endDate.getTime();
+            
+            checktglinput('tanggal-filters');
+            klikfilter();
+            console.log("Tanggal Mulai:", startDate.format("DD-MM-YYYY"), "-", startMillis);
+            console.log("Tanggal Akhir:", endDate.format("DD-MM-YYYY"), "-", endMillis);
+        });
+    }
+    });
+    // Tambahkan event listener untuk tombol pencariantombol-tanggal
+    document.getElementById('pencariantombol-tanggal').addEventListener('click', function() {
+        
+        // Memicu klik pada input tanggal-filters untuk membuka Litepicker
+        var  tmbol=document.getElementById('tanggal-filters');
+        tmbol.classList.remove('d-none');
+        tmbol.click();
+        tmbol.classList.add('d-none');
+    });
+    function clearTanggal() {
+        picker.clearSelection();
+    }
+</script>
+
+
+-->

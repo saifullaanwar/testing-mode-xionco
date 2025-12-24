@@ -1,0 +1,125 @@
+<% var homeopen="";var kategoriopen='';var productopen='';var accountopen=''; var promotionopen=''; var additionalchargeopen=''; var rewardopen='';var utmopen=''; var transactionpageopen='';%>
+<% if (navatasactive=='adminweb-homepage') { %>
+    <% homeopen='active'; %>
+<% } else if (navatasactive=='adminweb-kategori') { %>
+  <% kategoriopen='active'; %>
+<% } else if (navatasactive=='adminweb-product'||navatasactive.includes('editdatabase')) { %>
+  <% productopen='active'; %>
+<% } else if (navatasactive=='adminweb-account'||navatasactive.includes('editdatabase')) { %>
+  <% accountopen='active'; %> 
+<% } else if (navatasactive.includes('adminweb-promotion')||navatasactive.includes('editdatabase')) { %>
+    <% promotionopen='active'; %> 
+<% } else if (navatasactive.includes('adminweb-additionalcharge')||navatasactive.includes('editdatabase')) { %>
+    <% additionalchargeopen='active'; %> 
+<% } else if (navatasactive.includes('adminweb-reward')||navatasactive.includes('editdatabase')) { %>
+    <% rewardopen='active'; %> 
+<% } else if (navatasactive.includes('adminweb-transaction')||navatasactive.includes('editdatabase')) { %>
+    <% transactionpageopen='active'; %> 
+<% } else if (navatasactive.includes('adminweb-utm')||navatasactive.includes('editdatabase')) { %>
+    <% utmopen='active'; %> 
+<% }%>
+<div class="d-flex" >
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
+        <!--<button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-left"></i>
+        </button>-->
+        <div class="px-4 pt-4">
+            <h4 class="logo-text mb-0"><i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i> <span class="logo-text-hide"  onclick="toggleSidebar()"> Sembunyikan Menu</span></h4>
+            <hr style="color: grey;">
+        </div>
+
+        <div class="" id="scrolled" style="height: calc(100vh - 175px);">
+            <div class="col" style="display: flex;flex-direction: column;padding-bottom: 4em;"><!-- display: flex;flex-direction: column; nav flex-column -->
+                <a class="sidebar-link text-decoration-none px-3 d-flex align-items-center">
+                    <div style="font-size: 35px; color: gray;">
+                        <i class="bi bi-display" style="font-size: 40px;"></i>
+                    </div>
+                    <div class="ms-3" style="line-height: 1;">
+                        <div style="font-weight: bold; color: gray; font-size: 14px;">WEBSITE</div>
+                        <div style="font-size: 13px; color: gray;margin-top: 10px;" <%-roles=='website admin'?'class=d-none':'' %> onclick="loginadminwebs('adminlist')">Login Admin List</div>
+                    </div>
+                </a>
+                
+                <!-- <a onclick="menuarrowklik('transaksimenuarrow')" class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-box-seam-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Transaksi"></i>
+                    <span class="hide-on-collapse">Transaksi</span>
+                    <i id="transaksimenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;"></i>
+                </a>
+                <div class="hide-on-collapse-detailmenu col" id="transaksimenuarrow-extend" style="display: none;">
+                    <div class="div-detailmenu mb-3">
+                        <a href="/viewers" class="a-detailmenu">Semua Pesanan</a>  
+                        
+                    </div>
+                    
+                    <br>
+                </div> -->
+                <div class="hide-on-collapse-detailmenu px-3">
+                    <hr style="color: grey;">
+                </div>
+                <a href="/adminlist/adminweb" class="sidebar-link text-decoration-none px-3 <%-homeopen%>">
+                    <i class="bi bi-house-door-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Homepage" ></i>
+                    <span class="hide-on-collapse">Homepage</span>
+                </a>
+
+                <a href="/adminlist/adminweb/kategori" class="sidebar-link text-decoration-none px-3 <%-kategoriopen%>">
+                    <i class="bi bi-microsoft me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Category Page" ></i>
+                    <span class="hide-on-collapse">Category Page</span>
+                </a>
+
+                <a href="/adminlist/adminweb/product" class="sidebar-link text-decoration-none px-3 <%-productopen%>">
+                    <i class="bi bi-box-seam-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Product" ></i>
+                    <span class="hide-on-collapse">Product</span>
+                </a>
+
+                <a href="/adminlist/adminweb/promotion" class="sidebar-link text-decoration-none px-3 <%-promotionopen%>">
+                    <i class="bi bi-ticket-perforated-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Promotion" ></i>
+                    <span class="hide-on-collapse">Promotion</span>
+                </a>
+
+                <a href="/adminlist/adminweb/account" class="sidebar-link text-decoration-none px-3 <%-accountopen%>">
+                    <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Account" ></i>
+                    <span class="hide-on-collapse">Account</span>
+                </a>
+
+                <a href="/adminlist/adminweb/transaction" class="sidebar-link text-decoration-none px-3 <%-transactionpageopen%>">
+                    <i class="bi bi-cash me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Transaction" ></i>
+                    <span class="hide-on-collapse">Transaction</span>
+                </a>
+
+                <a href="/adminlist/adminweb/additionalcharge" class="sidebar-link text-decoration-none px-3 <%-additionalchargeopen%>">
+                    <i class="bi bi-plus-circle-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Account" ></i>
+                    <span class="hide-on-collapse">Additional Charge</span>
+                </a>
+
+                <a href="/adminlist/adminweb/reward" class="sidebar-link text-decoration-none px-3 <%-rewardopen%>">
+                    <i class="bi bi-gift-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Reward" ></i>
+                    <span class="hide-on-collapse">Reward</span>
+                </a>
+
+                <a href="/adminlist/adminweb/utm" class="sidebar-link text-decoration-none px-3 <%-utmopen%>">
+                    <i class="bi bi--link-45deg me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="UTM" ></i>
+                    <span class="hide-on-collapse">UTM</span>
+                </a>
+
+                <a onclick="menuarrowklik('settingmenuarrow')"  class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-gear-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Settings"></i>
+                    <span class="hide-on-collapse">Settings</span>
+                    <i id="settingmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;" ></i>
+                </a>
+
+                <div class="hide-on-collapse-detailmenu col" id="settingmenuarrow-extend" style="display: none;">
+                    <div class="div-detailmenu">
+                        <a onclick="logout()" class="a-detailmenu">Logout</a>  
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <%- include('versiondiv') %>
+       
+
+       
+    </nav>
+

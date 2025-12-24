@@ -1,0 +1,224 @@
+<%- include('layout/header') %>
+<% var rn=Math.random(); %>
+<link rel="stylesheet" href="/css/abasic.css?v=<%-rn%>">
+<link rel="stylesheet" href="/css/sidebar.css?v=<%-rn%>">
+    </head>
+
+    <body>
+      
+        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom border-2" style="background-color: white!important;" id="nav-atas">
+            <div class="container-fluid">
+                <a class="navbar-brand"><img src="/assets/logo-halim.png" alt="Logo" width="30" class="d-inline-block align-text-top"> <b id="companyname">PT HALIM INTI GAHARA</b></a>
+                
+                <a id="akunatas-klik"><i class="bi bi-person-circle"></i><span style="font-size: larger;" id="namalengkap" ></span></a>
+            </div>
+        </nav>
+        
+        <%- include('layout/sidebar-viewers') %>
+
+        <main class="main-content" id="main-pages">
+            <div class="container-fluid">
+                <input class="form-control form-control-s skeleton skeleton-fullheig" id="loadingskeleton" disabled>
+               
+                <div id="showmainpage" style="display: none;">
+                    <div class="row">
+                        <div class="col">
+                            <span class="fw-bold fs-4">Daftar Pesanan</span>
+                        </div>
+                        <div class="col mb-4">
+                            <div class="float-end d-flex gap-2 ">
+                                <!-- <button type="button" class="btn btn-light" style="border-color: black!important;float: right;" onclick="window.open('/adminlist/additem','_self')">Add New</button> -->
+                                <%- include('basic/tombolreload') %>
+                            </div>
+                        </div>
+                        <div class="mb-4 d-none">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item me-5">
+                                  <a style="cursor: pointer;" class="nav-link active" aria-current="page" id="semuapesanantombol" href="/viewers">Semua Pesanan</a><!-- onclick="klikmenuadminlist(this)"  -->
+                                </li>
+                                
+                                <li class="nav-item  me-5">
+                                  <a style="cursor: pointer;" class="nav-link"  id="pesananharinitombol">Pesanan Bermasalah</a>
+                                </li>
+
+                                <!-- <li class="nav-item  me-5">
+                                  <a style="cursor: pointer;" class="nav-link" id="pesananbermasalahtombol" onclick="warningunderbuild()">Pesanan Bermasalah</a>
+                                </li> -->
+                              </ul>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-2 d-none">
+                                <select class="form-select form-select-sm" aria-label="filter status" id="filterstatus-select" onchange="klikfilter(this)">
+                                    <option value="" selected disabled>Filter Status</option>
+                                    <option value="">Semua Status</option>
+                                    <option>Print PO-DO</option>
+                                    <option>Pengiriman Bahan</option>
+                                    <option>Proses produksi</option>
+                                    <option>Selesai Produksi</option>
+                                    <option>Proses QC dan Packing</option>
+                                    <option>Standby Pengiriman</option>
+                                    <option>Dalam Pengiriman</option>
+                                    <option>Selesai</option>
+                                    <option>Pending</option>
+                                    <option>Reschedule</option>
+                                    <option>Dibatalkan</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="form-select form-select-sm" aria-label="filter produk" id="filterproduk-select" onchange="klikfilter(this)">
+                                    <option value="" selected disabled>Filter Produk</option>
+                                    <option  value="" >Semua Item</option>
+                                   
+                                    
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="form-select form-select-sm" aria-label="filter platform" id="filterplatform-select" onchange="klikfilter(this)">
+                                    <option value="" selected disabled>Filter Platform</option>
+                                    <option  value="" >Semua Platform</option>
+                                  
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="pencariantombol" style="background-color: white;cursor: pointer;"><i class="bi bi-search" style="color: grey;"></i></span>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ketik Nama Produk, Nama Pembeli, Phone Number, Nomor Transaksi" aria-label="Pencarian" aria-describedby="pencariantombol" id="pencarianinput" oninput="cekempety(this)">
+                                 
+                              
+                                </div>
+                            </div>
+                        </div>
+                        <!-- total data -->
+                        <!-- <div class="d-flex align-items-center justify-content-start mb-2" style="font-size: large;" id="totalfilterstatus-show">
+                            <span class="badge text-bg-secondary" id="totalfilterstatus">Total : 100</span>
+                        </div> -->
+                        <!-- tutup total data -->
+                        <!-- Start Container Button -->
+                        <div class="container d-flex gap-2 p-3 rounded">
+                            <div class="d-flex align-items-center">
+                                <button type="button" class="btn btn-sm btn-outline-secondary active" id="tombol_semua" onclick="kliktombolstatus('', this)">Semua (0)</button>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_printpodo" onclick="kliktombolstatus('Print PO-DO', this)">Print PO-DO(0)</button>
+
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_kirimbahan" onclick="kliktombolstatus('Pengiriman Bahan', this)">Kirim Bahan (0)</button>
+                                
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_selesaiproduksi" onclick="kliktombolstatus('Selesai Produksi', this)">Selesai Produksi (0)</button>
+
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_prosesqc" onclick="kliktombolstatus('Proses QC dan Packing', this)">Proses QC dan Packing (0)</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_standby" onclick="kliktombolstatus('Standby Pengiriman', this)">Standby Pengiriman (0)</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_dalam_pengiriman" onclick="kliktombolstatus('Dalam Pengiriman', this)">Dalam Pengiriman (0)</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_di_batalkan" onclick="kliktombolstatus('Dibatalkan', this)">Dibatalkan (0)</button>
+                            </div>
+                            <!-- <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_dalam_pengiriman" onclick="kliktombolstatus('Dalam Pengiriman', this)">Selesai Produksi (0)</button>
+                            </div> -->
+                        </div>
+                        <!-- End Container Button -->
+                        <div id="datatidakditemukan" style="display: none;">
+                            <p style="text-align: center;">Data tidak ditemukan</p>
+                        </div>
+                        <div id="alldattab">
+                            <div id="divhpsdata">
+                                <!--  
+                                <div class="card items">
+                                    <div class="card-body">
+                                        <div class="row mb-3" id="header-card-item">
+                                            <div class="col">
+                                                <span>Standby Pengiriman / A205 / <i class="bi bi-person"></i> Budi Ari /Rp 3.000.000</span>
+                                            </div>
+                                            <div class="col">
+                                                <div style="float: right;"><span><i class="bi bi-clock"></i> 24 Feb 2025</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                                <div class="card items">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-12 col-sm-12" >
+                                                                <img id="imgcards" src="/assets/lainnya/contohitem.png" alt="" class="img-fluid">
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-12 col-sm-12" >
+                                                                <p style="font-weight: bold;">Capra Signature 2 Seater</p>
+                                                                <span>FB 04. FABRIC MIDGREY</span>
+                                                                <div class="row mt-4">
+                                                                    <p style="text-align: right;">1 X UNIT</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-7  col-md-12 col-sm-12">
+                                                <div class="card items">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-8 col-md-12 col-sm-12">
+                                                                <p style="font-weight: bold;">NOTE</p>
+                                                                <textarea id="isinote" style="width: 100%;height: 5em;" disabled >WAJIB KIRIM HARI JUMAT INI cccccccccccccccccccccccccccccccccccccccccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textarea>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                                                <button type="button" class="btn btn-light mb-2" style="width: 100%;border-color: grey;">Detail Transaksi</a>
+                                                                
+                                                                <button type="button" class="btn btn-light mb-2" style="width: 100%;border-color: grey;">Quick Edit</button>
+                                                            
+                                                                <button type="button" class="btn btn-light" style="width: 100%;border-color: grey;">Force Status</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                  -->
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;display: none;" id="load-more-btn">
+                            <i class="bi bi-caret-down-fill" id="load-more-btn-icon" style="cursor: pointer;" onclick="loadMoreData()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+    
+    </div>
+    
+    
+    <%- include('layout/nav-loading') %>
+
+        <!-- <span id="itemalls" style="display: none;" data-json=""></span> -->
+        <%- include('admin/modaldetailitem') %>
+        <%- include('admin/modaleditfull') %>
+        <%- include('admin/modalforcestatus') %>
+        <%- include('masalah/modalbermasalah01') %>
+        <%- include('admin/modalsuksessaveadd') %>
+        <%- include('layout/modalunderbuild') %>
+        <%- include('layout/footerscript') %>
+        
+        <!-- <script src="/js/viewers/viewers.js<%=versionall%>"></script> -->
+        <!-- <script src="/js/adminlist-bermasalah.js<%=versionall%>"></script> -->
+        <script>
+            function toggleSidebar() {
+                
+                if (document.getElementById('klikhidebar').className=='bi bi-caret-left-fill toggle-btn') {
+                    document.getElementById('klikhidebar').className='bi bi-caret-right-fill toggle-btn';
+                } else {
+                    document.getElementById('klikhidebar').className='bi bi-caret-left-fill toggle-btn';
+                }
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('collapsed');
+            }
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        </script>
+    </body>
+
+    </html>

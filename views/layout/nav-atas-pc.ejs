@@ -1,0 +1,47 @@
+<% var homeopen=""; var adminopen=''; var procurementopen='';var financeopen=''; var omnibusformopen=""; var upholsteryopen=""%>
+<% if (navatasactive=='home') { %>
+    <% homeopen='active'; %>
+<% } else if (navatasactive=='adminlist') { %>
+ 
+    <% adminopen='active'; %>
+<% } else if (navatasactive=='procurement') { %>
+    <% procurementopen='active'; %>
+
+<% } else if (navatasactive=='omnibusform') { %>
+    <% omnibusformopen='active'; %>
+
+<% } else if (navatasactive=='upholstery') { %>
+  <% upholsteryopen='active'; %>
+<% } %>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" id="nav-atas">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">XIONCO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+           
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link <%- homeopen %>" aria-current="page" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <%- adminopen %>" href="/adminlist">Admin</a>
+                </li>
+                <li class="nav-item <%- procurementopen %>">
+                  <a class="nav-link" href="#">Procurement</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <%- omnibusformopen %>" href="/omnibusform">Form</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <%- upholsteryopen %>" href="/upholstery">upholstery</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="/packde">PackDe</a>
+                </li>
+              </ul>
+        </div>
+    </div>
+</nav><!-- aria-disabled="true" -->

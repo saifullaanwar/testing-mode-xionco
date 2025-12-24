@@ -1,0 +1,146 @@
+<% var homeopen=""; var adminopen='';var aktivmenu="";var aktivchildmenu="";var aktivchildmenuqc="";var pesananbermasalah;%>
+<% if (navatasactive=='home') { %>
+    <% homeopen='active'; %>
+<% } else if (navatasactive.includes('driver')) { %>
+ 
+    <% aktivmenu='active'; %>
+    <% if (navatasactive=='driver') { %>
+        <% aktivchildmenu='active'; %>
+    <% } else if (navatasactive=='driver-masalah-semua') { %>
+        <% pesananbermasalah='active'; %>
+    <% } else { %>
+        <% aktivchildmenuqc='active'; %>
+    <% } %>
+
+<% }%>
+<div class="d-flex" >
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
+        <!--<button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="fas fa-chevron-left"></i>
+        </button>-->
+        <div class="px-4 pt-4"> 
+            <h4 class="logo-text mb-0"><i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i> <span class="logo-text-hide"  onclick="toggleSidebar()"> Sembunyikan Menu</span></h4>
+           <hr style="color: grey;">
+        </div>
+
+        <div class="" id="scrolled" style="height: calc(100vh - 175px);">
+            <div class="col" style="display: flex;flex-direction: column;padding-bottom: 4em;"><!-- display: flex;flex-direction: column; nav flex-column -->
+                <a class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Admin"></i>
+                    <span class="hide-on-collapse">Driver</span>
+                </a>
+                <div class="hide-on-collapse-detailmenu px-3">
+                    <hr style="color: grey;">
+                        <div class="row d-none">
+                            <div class="col-8">
+                                <span>Tugas Mendatang</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span id="tugasmendatang">0</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <span>Tugas Saya</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span name="totaltugassayapesanan">0</span>
+                            </div>
+                        </div>
+                    <hr style="color: grey;margin-bottom: 0;">
+                </div> 
+                <br>
+               
+<%- include('./buttonsidebar/buttonmenu', {
+    icon: 'bi-house-fill',
+    text: 'Home',
+    activemenudasar: homeopen,
+    link: '/home/driver'
+}) %>
+
+                    <%- include('./buttonsidebar/menuarrow',
+                    {
+                        id:'transaksimenuarrow',
+                        text:'Transaksi',
+                        activemenudasar: aktivmenu,
+                        icon:"bi-box-seam-fill",
+                        listsubmenu: [
+                                {
+                                    text:'Semua Pesanan',
+                                    activesubmenu: aktivchildmenu,
+                                    link:'/driver'
+                                },
+                                {
+                                    text:'Pesanan Bermasalah',
+                                    activesubmenu: pesananbermasalah,
+                                    link:'/pesananbermasalah/berlangsung'
+                                }
+                            ]
+                    }
+                        )%>
+
+
+                <!-- <a onclick="menuarrowklik('transaksimenuarrow')" class="sidebar-link text-decoration-none px-3 <%-aktivmenu%>">
+                    <i class="bi bi-box-seam-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Transaksi"></i>
+                    <span class="hide-on-collapse">Transaksi</span>
+                    <i id="transaksimenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;"></i>
+                </a>
+                <div class="hide-on-collapse-detailmenu col" id="transaksimenuarrow-extend" style="display: none;">
+                    <div class="div-detailmenu mb-3 <%-aktivchildmenu%>">
+                        <a href="/driver" class="a-detailmenu">Semua Pesanan</a>
+                    </div>
+                    <div class="div-detailmenu <%-pesananbermasalah%>">
+                        <a href="/pesananbermasalah/berlangsung" class="a-detailmenu">Pesanan Bermasalah</a>  
+                    </div>
+                    <br>
+                    <div class="div-detailmenu <%-aktivchildmenuqc%>">
+                        <a href="/packde" class="a-detailmenu">QC & Packing</a>
+                    </div>
+                    
+                  <a href="#" class="a-detailmenu">Extra Charge</a>  
+                    <br> 
+                    <br> 
+                </div> -->
+
+                <!-- <a onclick="menuarrowklik('operatingmenuarrow')" class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-patch-check-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Operational p2.5"></i>
+                    <span class="hide-on-collapse" >Operational p2.5</span>
+                    <i id="operatingmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;" ></i>
+                </a> -->
+                <div class="hide-on-collapse-detailmenu col" id="operatingmenuarrow-extend" style="display: none;">
+                    <a href="#" class="a-detailmenu">Drafting</a>  
+                    <br>
+                    <a href="#" class="a-detailmenu">Daftar Route</a>  
+                    <br>
+                    <br>
+                </div> 
+                
+                <%- include('./buttonsidebar/buttonmenu',
+                    {
+                        icon:'bi-speedometer2',
+                        text:'Performa Saya (KPI)',
+                        activemenudasar:'',
+                        onclick:"warningunderbuild()"
+    
+                    }
+                )%>
+                
+                <a onclick="menuarrowklik('settingmenuarrow')"  class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-gear-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Settings"></i>
+                    <span class="hide-on-collapse">Settings</span>
+                    <i id="settingmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;" ></i>
+                </a>
+                <div class="hide-on-collapse-detailmenu col" id="settingmenuarrow-extend" style="display: none;">
+                    <a onclick="logout()" class="a-detailmenu">Logout</a>  
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+       
+        <%- include('versiondiv') %>
+       
+
+       
+    </nav>
+

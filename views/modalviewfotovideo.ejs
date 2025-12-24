@@ -1,0 +1,177 @@
+<!-- 
+  cara pakai view image or video pop up
+  #mediaModal
+  - set data-bs-toggle, data-bs-target, data-url di button atau link yang untuk view
+  contoh:
+  <button class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#mediaModal" 
+          data-url="https://example.com/media/file.jpg">
+    View
+  </button> 
+  - letakkan showfotvidmodal(); di dom
+
+  ------------------------------------
+    untuk menampilkan view image/video menimpa modal sebelumnya
+  ------------------------------------
+  #mediaModal2
+
+  contoh html di tombol :
+  <button class="btn btn-primary btn-sm" 
+        onclick="openMediaModal(this)"
+        data-url="https://example.com/media/file.jpg">
+  Lihat Media
+  </button>
+
+  #modal3
+  untuk view foto/video dan keterangan 
+  button class="btn btn-primary" onclick="openMediaModal3(this)" data-url="https://example.com/media/file.jpg" data-title="Selesai Produksi" data-desc="Produk sudah selesai diproduksi. Menunggu pengambilan produk.">Buka Media Modal</button>
+-->
+
+<div class="modal fade" id="mediaModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="width: auto;">
+    <div class="modal-content bg-transparent border-0 shadow-none">
+      <div class="modal-body d-flex justify-content-center p-0">
+        <div id="mediaContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mediaModal2" tabindex="-1" aria-hidden="true" data-bs-backdrop="false">
+  <!-- <div class="custom-backdrop"></div>  --><!-- Tambahan backdrop manual -->
+  <div class="modal-dialog modal-dialog-centered" style="width: auto;">
+    <div class="modal-content bg-transparent border-0 shadow-none">
+      <div class="modal-body d-flex justify-content-center p-0">
+        <div id="mediaContainer2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mediaModal3" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
+  <!-- <div class="custom-backdrop"></div>  --><!-- Tambahan backdrop manual -->
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen" style="width: auto;">
+    <div class="modal-content bg-black bg-opacity-75 border-0 shadow-none" data-bs-dismiss="modal">
+      <div class="modal-body d-flex align-items-center justify-content-center p-0">
+        <div id="mediaContainer3" ></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showfotvidmodal(){
+    const mediaModal = document.getElementById('mediaModal');
+    mediaModal.addEventListener('show.bs.modal', event => {
+      const button = event.relatedTarget;
+      const url = button.getAttribute('data-url');
+      const container = document.getElementById('mediaContainer');
+      container.innerHTML = '';
+
+      if (url.match(/\.(jpeg|jpg|png|gif)$/i)) {
+        const img = document.createElement('img');
+        img.src = url;
+        img.classList.add('img-fluid');
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        container.appendChild(img);
+      } else if (url.match(/\.(mp4|webm)$/i)) {
+        const video = document.createElement('video');
+        video.controls = true;
+        video.src = url;
+        video.style.maxWidth = '100%';
+        video.style.height = 'auto';
+        container.appendChild(video);
+      } else {
+        container.innerHTML = `<p class="text-muted">Format tidak didukung.</p>`;
+      }
+    });
+  }
+  function openMediaModal(button) {
+    const url = button.getAttribute('data-url');
+    const container = document.getElementById('mediaContainer2');
+    container.innerHTML = ''; // Kosongkan dulu
+
+    if (url.match(/\.(jpeg|jpg|png|gif|webp)$/i)) { // Menambahkan webp
+      const img = document.createElement('img');
+      img.src = url;
+      img.classList.add('img-fluid');
+      // Style tambahan di sini tidak terlalu diperlukan jika sudah ada img-fluid
+      // img.style.maxWidth = '100%';
+      // img.style.height = 'auto';
+      container.appendChild(img);
+    } else if (url.match(/\.(mp4|webm)$/i)) {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.src = url;
+      video.classList.add('img-fluid'); // Gunakan img-fluid untuk responsif
+      // video.style.maxWidth = '100%';
+      // video.style.height = 'auto';
+      container.appendChild(video);
+    } else {
+      container.innerHTML = `<p class="text-muted">Format tidak didukung.</p>`;
+    }
+
+    // Inisialisasi modal Bootstrap
+    const mediaModal = new bootstrap.Modal(document.getElementById('mediaModal2'), {
+      backdrop: true, // Gunakan backdrop bawaan Bootstrap agar bisa ditutup dengan klik luar
+      focus: true
+    });
+    mediaModal.show();
+  }
+
+  function openMediaModal3(button) {
+    const url = button.getAttribute('data-url');
+    const title = button.getAttribute('data-title') || "";
+    const desc = button.getAttribute('data-desc') || "";
+
+    const container = document.getElementById('mediaContainer3');
+    container.innerHTML = ''; // kosongkan dulu
+
+    let mediaEl;
+    const imageDiv = document.createElement('div');
+    imageDiv.classList.add('d-flex', 'justify-content-center');
+    if (url.match(/\.(jpeg|jpg|png|gif|webp)$/i)) {
+      mediaEl = document.createElement('img');
+      mediaEl.src = url;
+      mediaEl.setAttribute('style','width:50%!important;');
+      //mediaEl.classList.add('img-fluid');
+    } else if (url.match(/\.(mp4|webm)$/i)) {
+      mediaEl = document.createElement('video');
+      mediaEl.controls = true;
+      mediaEl.src = url;
+      mediaEl.classList.add('img-fluid');
+    } else {
+      container.innerHTML = `<p class="text-muted">Format tidak didukung.</p>`;
+    }
+
+    if (mediaEl) {
+      
+
+      // Tambah teks di bawah media
+       const br = document.createElement('br');
+      const captionDiv = document.createElement('div');
+      captionDiv.classList.add('mt-3', 'text-white', 'text-left','d-flex', 'justify-content-center');
+
+      captionDiv.innerHTML = `
+        <div class="card w-50">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">${title}</h5>
+           
+            <p class="card-text">${desc}</p>
+          </div>
+        </div>
+      `;
+      
+      imageDiv.appendChild(mediaEl);
+      container.appendChild(imageDiv);
+      container.appendChild(br);
+      container.appendChild(captionDiv);
+
+    }
+
+    let mediaModal = new bootstrap.Modal(document.getElementById("mediaModal3"));
+    mediaModal.show();
+  }
+</script>

@@ -1,0 +1,154 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaladdnewitem" tabindex="-1"aria-labelledby="modaladdnewitemlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h1 class="modal-title fs-5" id="modaladdnewitemlabel" style="font-weight: bold;vertical-align: middle;">Add New Produk</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="itemsContainer" class="row mt-2">
+                    <div id="item-1" class="partitems">
+                        <b><p id="judulitem-1" class="d-none">Produk 1</p></b>
+                        <div class="row">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Nama Produk</span>
+                                <input type="text" class="form-control" id="produkmainname-1" name="produkmainname" placeholder="namaproduk Name" style="font-size: 12px;"  oninput="oninputdata()">
+                            </div>
+
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Variant</span>
+                                <input type="text" class="form-control" id="listvariantname-1" name="listvariantname" placeholder="Pilih variant" style="font-size: 12px;" oninput="oninputdata()" disabled>
+
+                                <div class="btn-group btn-group-sm input-group-text">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="true"></button>
+                                    <ul class="dropdown-menu" style="overflow-y: auto!important;overflow-x: hidden!important;max-height: 200px;" id="dropdownvariant-1">
+                                        <input type="text" class="form-control form-control-sm" id="searchvariant-1" name="searchvariant" placeholder="Cari variant" style="font-size: 12px;" oninput="searchvariant(this)">
+                                        <div id="divulhapus-1" name="divulhapus">
+                                            <li title="produka">
+                                                <div class="dropdown-item">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="varianproduct-1-1" onchange="checklistvariant(this)">
+                                                        <label class="form-check-label" for="varianproduct-1-1">
+                                                            variant1
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        
+                                       
+                                    </ul>
+                                </div>
+                                
+                            </div>
+
+                            <hr>
+                            <div class="d-flex align-items-center justify-content-start mb-3">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Main Price</span>
+                                    <select class="form-select" id="selectmainprice-1" name="selectmainprice" onchange="selectmainpriceklik(this)">
+                                        <option selected value="">Pilih produk</option>
+                                    </select>
+                                </div>
+                                <input type="text" class="form-control w-50 ms-2" id="mainpriceshow-1" name="mainpriceshow" placeholder="0" style="font-size: 12px;text-align: right;" oninput="oninputdata()" disabled>
+                                <input type="number" class="form-control d-none" id="mainpricesave-1" name="mainpricesave" min="0" oninput="oninputdata()" disabled>
+                                <input type="number" class="form-control d-none" id="idmainpricesave-1" name="idmainpricesave" min="0" oninput="oninputdata()" disabled>
+                            </div>
+                            
+                            <hr>
+                            <span class="rownamanobold mb-2" style="font-size: small;">Upload foto produk</span>
+                            <div class="d-flex align-items-center justify-content-start">
+                                <!-- start 1-->
+                                <div class="border rounded-2 d-flex align-items-center justify-content-center me-3" style="width: 50px;height: 50px;">
+                                    <img src="" alt="" style="width: 50px;height: 50px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow1-1" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                    <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg1-1" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                    <i class="bi bi-card-image" id="iconupload1-1" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                </div>
+                                <!-- end 1-->
+                                <!-- start 2-->
+                                <div class="border rounded-2 d-flex align-items-center justify-content-center me-3" style="width: 50px;height: 50px;">
+                                    <img src="" alt="" style="width: 50px;height: 50px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow2-1" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                    <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg2-1" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                    <i class="bi bi-card-image" id="iconupload2-1" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                </div>
+                                <!-- end 2-->
+                                <!-- start 3-->
+                                <div class="border rounded-2 d-flex align-items-center justify-content-center me-3" style="width: 50px;height: 50px;">
+                                    <img src="" alt="" style="width: 50px;height: 50px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow3-1" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                    <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg3-1" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                    <i class="bi bi-card-image" id="iconupload3-1" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                </div>
+                                <!-- end 3-->
+                                <!-- start 4-->
+                                <div class="border rounded-2 d-flex align-items-center justify-content-center me-3" style="width: 50px;height: 50px;">
+                                    <img src="" alt="" style="width: 50px;height: 50px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow4-1" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                    <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg4-1" name="uploadimg" accept="image/*" onclick="this.value=null;">
+
+                                    <i class="bi bi-card-image" id="iconupload4-1" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                </div>
+                                <!-- end 4-->
+                                <!-- start 5-->
+                                <div class="border rounded-2 d-flex align-items-center justify-content-center me-3" style="width: 50px;height: 50px;">
+                                    <img src="" alt="" style="width: 50px;height: 50px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow5-1" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                    <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg5-1" name="uploadimg" accept="image/*" onclick="this.value=null;">
+
+                                    <i class="bi bi-card-image" id="iconupload5-1" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                </div>
+                                <!-- end 5-->
+                            </div>
+                            <!-- <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Image Link</span>
+                                <input type="text" class="form-control" id="imgkatagori-1" name="imgkatagoriname" placeholder="Image Link" style="font-size: 12px;"  oninput="oninputdata()">
+                            </div> -->
+
+                        </div>
+
+                        <hr>
+                        <span class="rownamanobold mb-2" style="font-size: small;">Diskripsi Produk</span>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Diskripsi produk" id="diskripsiproduk-1" name="diskripsiproduk" style="height: 100px" oninput="oninputdata()"></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end d-none">
+                            <button type="button" class="removeItem btn btn-danger btn-sm" id="removeItem-1" onclick="removeItem(this)"><i class="bi bi-trash3-fill" style="color: white;"></i>&nbsp;Hapus</button>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-center justify-content-end w-100"  id="addnewitemtombolfooters">
+                    <div class="d-none">
+                        <button type="button" class="btn btn-secondary " id="addmore" onclick="additems()">Add More</button> 
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsave()">Save</button> 
+
+                        <button type="button" class="btn btn-light border-secondary-subtle rownama"  data-bs-dismiss="modal">Batal</button><!-- data-bs-dismiss="modal" -->
+                    </div>
+                </div>
+                
+
+                <div class=" d-flex align-items-center justify-content-end w-100 d-none"  id="edititemtombolfooters">
+                    <button type="button" class="btn btn-secondary me-3" id="submitsave">Save</button> <!-- submitsaveedit -->
+
+                    <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">Batal</button>
+                </div>
+                
+            
+            </div>
+        </div>
+    </div>
+</div>

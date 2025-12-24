@@ -1,0 +1,51 @@
+<!-- Modal modal-lg -->
+<div class="modal fade" id="modalpopupsuksessaveit" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modalpopupsuksessaveitlabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            
+            <div class="modal-body">
+               
+                <table id="alldattabstatus-save">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama item</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="finalstatussaved">
+                        <tr>
+                            <td class="text-truncate">
+                                AHER
+                            </td>
+                            <td>
+                                <span><i class="bi bi-check-circle-fill" style="color: green;"></i> saved</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px;">
+                                AS001b
+                            </td>
+                            <td>
+                                <span><i class="bi bi-x-circle-fill" style="color: red;"></i> duplikat no stock</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p style="font-size: xx-small;">Note : </p>
+                <ul style="font-size: xx-small;">
+                    <li>
+                        <span>
+                            jika status gagal, maka perbaiki dan input ulang item tersebut.
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-light"  style="border-color: grey;"  data-bs-dismiss="modal" id="kembalilagis" onclick="location.reload();">Kembali</button>
+               
+            </div>
+        </div>
+    </div>
+</div>

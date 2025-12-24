@@ -1,0 +1,154 @@
+<%- include('layout/header') %>
+<% var rn=Math.random(); %>
+<link rel="stylesheet" href="/css/abasic.css?v=<%-rn%>">
+<link rel="stylesheet" href="/css/sidebar.css?v=<%-rn%>">
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom border-2" style="background-color: white!important;" id="nav-atas">
+        <div class="container-fluid">
+            <a class="navbar-brand"><img src="/assets/logo-halim.png" alt="Logo" width="30" class="d-inline-block align-text-top"> <b id="companyname">PT HALIM INTI GAHARA</b></a>
+            
+            <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                <a id="akunatas-klik"><i class="bi bi-person-circle"></i><span style="font-size: larger;" id="namalengkap"></span></a>
+            </span>
+        </div>
+    </nav>
+    
+    <% if (roles=='adminc10') { %>
+        <%- include('layout/sidebar-admin') %>
+    <% } else if(roles=='adminc5') { %>
+        <%- include('layout/sidebar-adminc5') %>
+    <% } else if(roles=='supervisor') { %>
+        <%- include('layout/sidebar-supervisor') %>
+    <% } %>
+    
+
+    <main class="main-content" id="main-pages">
+        <div class="container-fluid mb-5">
+            <input class="form-control form-control-s skeleton skeleton-fullheig" id="loadingskeleton" disabled>
+            
+            <div id="showmainpage" style="display: none;">
+                <div class="row mb-5">
+                    <div class="col">
+                        <span class="fw-bold fs-4">Add Stock Upholstery</span>
+                    </div>                    
+                </div>
+
+                <span class="d-none" id="idstockuniv"><%=datas.newId%></span>
+                
+                <div id="itemsContainer">
+                    <div id="item-1" class="partitems">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);">No. Transaksi</span>
+                                    <input type="text" class="form-control" aria-label="notransaksi-addstockup" aria-describedby="notransaksi-addstockup" id="notransaksi-addstockup-1" name="noTransaksi" value="<%=datas.newId.split('-')[0]%>" onfocusout="oneditnotransaksi(this)">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);">Order Date</span>
+                                    <input type="date" class="form-control" id="orderdate-addstockup-1" name="orderdate" aria-describedby="orderdate-addstockup" placeholder="dd-mm-yyyy" min="1997-01-01" max="9999-12-31"  onchange="oninputdata()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);">Item</span>
+                                    <select id="selectitemadd-1" name="selectitemadd" class="form-select"  aria-label="item produk"  onchange="oninputdata()">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);">Color Var.</span>
+                                    
+                                    <input class="form-control" list="listcolorvariantadd-1" id="colorvariantadd-1" name="colorvariantadd" placeholder="Pilih Item"  oninput="oninputdata()">
+                                    <datalist id="listcolorvariantadd-1">
+                                        <!-- <option value=""> -->
+                                        
+                                        
+                                    </datalist>
+                                </div>
+                            </div>
+                            
+                            <div class="col-2">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);">Qty</span>
+                                    <input type="number" class="form-control" id="qty-addstockup-1"  name="qty" aria-describedby="qty-addstockup" min="0" placeholder="0"  oninput="oninputdata()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-start">
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="radio" name="radiocreatein" id="pembuatanstock" onclick="oninputdata()">
+                                <label class="form-check-label" for="pembuatanstock">
+                                    Pembuatan
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radiocreatein" id="instocked" onclick="oninputdata()">
+                                <label class="form-check-label" for="instocked">
+                                    In
+                                </label>
+                            </div>
+                            <input type="text" class="d-none" id="fixcreatein" name="fixcreatein">
+                        </div>
+
+                        <div class="d-flex justify-content-end d-none">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeItem(1)"><i class="bi bi-trash-fill" style="color:white;"></i> Delete</button>
+                        </div>
+    
+                        
+                    </div>
+                    <!-- Item rows akan muncul di sini -->
+                </div>
+
+                <button type="button" class="btn btn-light border d-none" onclick="addItem()"><i class="bi bi-plus-circle-fill"></i> Add More</button>
+                <hr>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="button" class="btn btn-secondary" onclick="kliksaveaddstock()"><i class="bi bi-floppy2-fill"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+<div id="progressbarload" class="row" style="display: none;">
+    <div class="col ">
+        <div class="progress" style="width: 100%;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                aria-valuemax="100" style="width: 0%;"></div>
+        </div>
+    </div>
+
+</div>
+
+    <span id="itemalls" style="display: none;" data-json="<%=JSON.stringify(datas)%>"><%=JSON.stringify(datas)%></span>
+    
+    <%- include('stock/modalselesaisaveaddup') %>
+    <%- include('layout/footerscript') %>
+    <script>
+        function toggleSidebar() {
+            
+            if (document.getElementById('klikhidebar').className=='bi bi-caret-left-fill toggle-btn') {
+                document.getElementById('klikhidebar').className='bi bi-caret-right-fill toggle-btn';
+            } else {
+                document.getElementById('klikhidebar').className='bi bi-caret-left-fill toggle-btn';
+            }
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+</body>
+
+</html>

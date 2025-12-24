@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <meta http-equiv="Content-Security-Policy" content="img-src 'self' data: https://images.unsplash.com;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="d-flex align-items-center justify-content-center"
+        style="width: 100%; height: 100vh; background: linear-gradient(135deg, #1e1e2f, #3a3a55);">
+        <div class="container align-items-center"
+            style="width: 50%; border-radius: 10px; padding: 30px; text-align: center; color: black; background: white;">
+    
+            <!-- EMOJI BESAR DAN BERUBAH -->
+
+            <span id="emojiDisplay" style="font-size: 80px; transition: all 0.3s ease;">😶‍🌫️</span>
+    
+            <h1 class="fs-1 fw-bold mb-4">404 — Halaman Tidak Ditemukan</h1>
+            <p class="fs-4 fw-semibold mb-4 text-muted">Mungkin halaman ini hilang... atau memang tidak pernah ada.</p>
+    
+            <div class="container d-flex text-center align-items-center justify-content-center mb-4">
+                <p class="fw-normal text-secondary" style="max-width: 520px; margin: 0 auto; font-size: 16px;">
+                    Tapi tidak masalah, karena pada akhirnya...
+                    <br>
+                    <strong>apa pun yang terjadi, tim IT akan tetap diminta bertanggung jawab.</strong>
+                    <br>
+                    Apakah itu bug, listrik padam, atau bahkan kopi tumpah di keyboard.
+                </p>
+            </div>
+    
+            <!-- Countdown Kocak Tapi Kalem -->
+            <p id="countdownText" class="fw-medium text-danger mb-3" style="font-size: 15px;"></p>
+    
+            <a class="btn btn-outline-dark px-4 py-2" href="/">Kembali ke Beranda</a>
+
+        </div>
+    </div>
+    
+    <script>
+        const emojis = ["😶‍🌫️", "🫥", "😐", "🙃", "😶"];
+
+        let emojiIndex = 0;
+        setInterval(() => {
+            document.getElementById("emojiDisplay").innerText = emojis[emojiIndex];
+            emojiIndex = (emojiIndex + 1) % emojis.length;
+
+        }, 1200);
+
+        const calmCountdown = [
+            "Redirect dalam 15 detik... (selama tidak ada yang menyalahkan kabel LAN)",
+            "Masih memuat... Mohon bersabar, tim kami sedang menyalahkan diri sendiri.",
+            "Kalau kamu tanya kenapa error, ya... karena IT juga manusia.",
+            "Sedang tracing masalah... tapi yang dicurigai tetap tim IT.",
+            "Redirecting... semoga halaman yang kamu cari lebih setia dari sistem ini."
+
+        ];
+
+        let cdIndex = 0;
+        const countdownText = document.getElementById("countdownText");
+
+        const interval = setInterval(() => {
+
+            countdownText.innerText = calmCountdown[cdIndex];
+            cdIndex++;
+            if (cdIndex === calmCountdown.length) {
+                clearInterval(interval);
+                window.location.href = "/";
+            }
+        }, 3000);
+    </script>
+
+
+
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

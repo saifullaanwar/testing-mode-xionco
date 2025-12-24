@@ -1,0 +1,71 @@
+.a4 {
+    background: white;
+    width: 210mm;
+    height: 297mm;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.printPages {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+.card{
+    border-radius: 0!important;
+    margin: 0!important;
+    border-color: rgba(122, 122, 122, 0.411)!important;
+    color: #3d3d3d!important;
+}
+/* .border-start{
+    border-left: 1px dashed!important;
+    border-color: rgb(156, 156, 156)!important;
+} */
+/* Agar Select2 tampak lebih rapi dengan Bootstrap */
+/* .select2-container .select2-selection--single {
+    height: 38px !important; 
+    padding: 6px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    text-align: right;
+} */
+/* Agar tetap sesuai saat dicetak */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .a4, .a4 * {
+        visibility: visible;
+    }
+    .a4 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding-left: 4mm;
+        padding-right: 4mm;
+        padding-top: 4mm;
+        padding-bottom: 0mm;
+        box-shadow: none;
+    }
+    .bg-dark, .grand-total-section { /* Added grand-total-section for explicit targeting */
+        background-color: #343a40 !important; /* Bootstrap's bg-dark */
+        color: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .page-break {
+        page-break-after: always;
+      }
+}

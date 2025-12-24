@@ -1,0 +1,49 @@
+.a4 {
+    background: white;
+    width: 210mm;
+    height: 297mm;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    border-radius: 0 !important;
+    margin: 0 !important;
+    border-color: rgba(122, 122, 122, 0.411) !important;
+    color: #777777 !important;
+}
+
+/* Agar tetap sesuai saat dicetak */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .a4,
+    .a4 * {
+        visibility: visible;
+    }
+    .a4 {
+        position: absolute;
+        background: white;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 210mm;
+        height: 297mm;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        color: #777777 !important;
+    }
+
+    .card {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        border-color: rgba(122, 122, 122, 0.411) !important;
+        color: #777777 !important;
+    }
+
+}

@@ -1,0 +1,196 @@
+<!-- Modal modal-lg  data-bs-backdrop="static" data-bs-keyboard="false" -->
+<div class="modal fade" id="modaladdnewitem" tabindex="-1" aria-labelledby="modaladdnewitemlabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modaladdnewitemlabel" style="font-weight: bold; vertical-align: middle">
+          Add New Item Procurement
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="d-none" id="iduniversals"></span>
+        <div id="itemsContainer" class="row mt-2">
+          <div id="item-1" class="partitems">
+            <div class="col">
+              <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                  <!-- Item -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Item
+                    </span>
+                    <input type="text" class="form-control" id="item-1" name="item" placeholder="Item"
+                      style="font-size: 12px" oninput="oninputdata()" />
+                  </div>
+
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Category
+                    </span>
+                    <input class="form-control " list="listkategoriadd-1" id="katagori-1" name="katagori"
+                      placeholder="Pilih Kategori" style="font-size: 12px" oninput="oninputdata()">
+                    <datalist id="listkategoriadd-1">
+                    </datalist>
+                  </div>
+
+
+                  <!-- Material -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Coa
+                    </span>
+                    <input class="form-control " list="listcoaadd-1" id="coa-1" name="coa" placeholder="Pilih Coa"
+                      style="font-size: 12px" oninput="oninputdata()">
+                    <datalist id="listcoaadd-1">
+                    </datalist>
+                  </div>
+
+                  <!-- Coa -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Material
+                    </span>
+                    <input type="text" class="form-control" id="material-1" name="material" placeholder="material"
+                      style="font-size: 12px" readonly disabled />
+                  </div>
+
+
+                  <!-- Vendor -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Vendor
+                    </span>
+                    <input class="form-control " list="listvendoradd-1" id="vendor-1" name="vendor"
+                      placeholder="Pilih Vendor" style="font-size: 12px" oninput="oninputdata()">
+                    <datalist id="listvendoradd-1">
+                      <!-- <option value=""> -->
+                      <!-- < var datacolorvarian=datas.colorvariantdata; >
+                                    < for( let i = 0; i < datacolorvarian.length; i++ ) { >
+                                        <option value="<-datacolorvarian[i].colorvariant>">
+                                    < } > -->
+                    </datalist>
+                  </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                  <!-- Quantity -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Quantity
+                    </span>
+                    <input type="number" class="form-control" id="qty-1" name="qty" placeholder="Quantity"
+                      style="font-size: 12px" oninput="oninputdata()" />
+                  </div>
+
+                  <!-- Unit -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Unit
+                    </span>
+                    <input type="text" list="listunitadd-1" class="form-control" id="unit-1" name="unit"
+                      placeholder="Unit" style="font-size: 12px" oninput="oninputdata()" />
+                    <datalist id="listunitadd-1">
+                      <!-- <option value=""> -->
+                      <!-- < var datacolorvarian=datas.colorvariantdata; >
+                                    < for( let i = 0; i < datacolorvarian.length; i++ ) { >
+                                        <option value="<-datacolorvarian[i].colorvariant>">
+                                    < } > -->
+                    </datalist>
+                  </div>
+
+                  <!-- Division -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Division
+                    </span>
+                    <input type="text" class="form-control" list="listdivisiadd-1" id="divisi-1" name="divisi"
+                      placeholder="Division" style="font-size: 12px" oninput="oninputdata()" />
+                    <datalist id="listdivisiadd-1">
+                      <!-- <option value=""> -->
+                      <!-- < var datacolorvarian=datas.colorvariantdata; >
+                                    < for( let i = 0; i < datacolorvarian.length; i++ ) { >
+                                        <option value="<-datacolorvarian[i].colorvariant>">
+                                    < } > -->
+                    </datalist>
+
+
+                  </div>
+
+                  <!-- Price -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      <span class="text-danger">*&nbsp;</span> Price
+                    </span>
+                    <input type="number" class="form-control" id="price-1" name="price" placeholder="Price"
+                      style="font-size: 12px" oninput="oninputdata()" />
+                  </div>
+
+                  <!-- Image Link (instead of actual image) -->
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text"
+                      style="background-color: rgb(226, 221, 221); font-size: 12px; width: 120px;">
+                      Image
+                    </span>
+                    <input type="text" class="form-control" id="image-1" name="image" placeholder="Image URL"
+                      style="font-size: 12px" oninput="oninputdata()" />
+                  </div>
+                </div>
+              </div>
+              <!-- Note -->
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="" id="note-1" name="note" rows="7"></textarea>
+                <label style="font-size: 12px" for="note-1">Note</label>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end d-none">
+              <button type="button" class="removeItem btn btn-danger btn-sm" id="removeItem-1"
+                onclick="removeItem(this)">
+                <i class="bi bi-trash3-fill" style="color: white"></i>&nbsp;Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="d-flex align-items-center justify-content-between w-100" id="addnewitemtombolfooters">
+          <div>
+            <button type="button" class="btn btn-secondary" id="addmore" onclick="additems()">
+              Add More
+            </button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsave()">
+              Save
+            </button>
+
+            <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">
+              Batal
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-end w-100 d-none" id="edititemtombolfooters">
+          <button type="button" class="btn btn-secondary me-3" id="submitsave" onclick="submitsaveedit()">
+            Save
+          </button>
+
+          <button type="button" class="btn btn-light border-secondary-subtle rownama" data-bs-dismiss="modal">
+            Batal
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

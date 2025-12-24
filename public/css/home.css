@@ -1,0 +1,178 @@
+body {
+    font-family: 'Poppins';
+    /*    margin: 25px; */
+    overflow: hidden;
+}
+
+#basepage {
+    padding-left: 30px;
+    padding-right: 30px;
+
+}
+
+#nav-atas {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 0px;
+    /* background-color: black !important;
+    color: white !important; */
+}
+
+/* #nav-atas .navbar-brand {
+    color: white;
+    font-weight: bold;
+} */
+/* 
+#nav-atas .nav-link {
+    color: white;
+}
+
+#nav-atas .nav-link.active {
+    color: black;
+}
+
+#nav-atas .nav-link.disable {
+    color: rgb(143, 143, 143);
+}
+ */
+ .nav-link {
+    color: black;
+}
+/* table */
+.tableFixHead {
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* min-height: 50vh; */
+    /* max-height: 80vh; */
+}
+
+.tableNoFixHead {
+    overflow: visible !important;
+  position: relative;
+  background-color: white;
+}
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+}
+
+.tableFixHead thead th{
+
+    background-color: #DCDCDC;
+    /* rgba(128, 128, 128, 0.342); */
+    color: #3C3C3C;
+    font-weight: bold;
+}
+
+/* Table header ikut sticky */
+.tableNoFixHead thead th {
+  position: sticky;
+  top: 135px; /* sesuaikan dengan tinggi topstickys */
+  background-color: #DCDCDC; /* warna latar belakang tabel header */
+  z-index: 4;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.05);
+    color: #3C3C3C;
+    font-weight: bold;
+}
+/* Just common table stuff. Really. */
+table {
+    border-collapse: collapse;
+
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px 16px;
+}
+
+th {
+    background: white;
+}
+
+input,
+textarea {
+    unicode-bidi: isolate;
+}
+
+.table-hover>tbody>tr:hover>td,
+.table-hover>tbody>tr:hover>th {
+    background-color: #04209a34 !important;
+    color: black !important;
+}
+
+/*  */
+
+.namabarang-elepsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.note-elepsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.trall {
+    /* height: 5vh; */
+    vertical-align: middle;
+
+}
+
+.trstyleaccordion,.tdstylis {
+
+    background-color: #d3d3d3d7!important;
+}
+
+.trstyleaccordion-hide {
+    display: none;
+}
+
+/*  */
+.progress {
+    margin: 5px;
+    height: 6px;
+}
+
+.kedap-kedip {
+  animation: blink 1s steps(2, start) infinite;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.warning-alert {
+  background-color: #ffc107; /* Kuning */
+  color: black
+}
+
+.terlambat-alert {
+  background-color: #dc3545; /* Merah */
+  color: white;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+/*  */
+@media only screen and (max-width: 768px) {
+   
+    .tableFixHead thead th,
+    tr {
+        font-size: 12px !important;
+    }
+
+    #pencariantombol,
+    #pencarianinput {
+        font-size: 12px !important;
+    }
+}

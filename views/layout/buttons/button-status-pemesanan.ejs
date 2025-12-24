@@ -1,0 +1,36 @@
+<div class="container d-flex gap-2 p-3 rounded drag-scroll mb-2 <%-tugassaya=='tugassaya'?'d-none':''%>"
+    name="scrollArea" style="white-space: nowrap;overflow: hidden!important;">
+    <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-sm btn-outline-secondary active" id="tombol_semua"
+            onclick="kliktombolstatus('', this)">Semua (0)</button>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_printpodo"
+            onclick="kliktombolstatus('Print PO-DO', this)">Print PO-DO(0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_kirimbahan"
+            onclick="kliktombolstatus('Pengiriman Bahan', this)">Kirim Bahan (0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_selesaiproduksi"
+            onclick="kliktombolstatus('Selesai Produksi', this)">Selesai Produksi (0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_prosesqc"
+            onclick="kliktombolstatus('Proses QC dan Packing', this)">Proses QC dan Packing (0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_standby"
+            onclick="kliktombolstatus('Standby Pengiriman', this)">Standby Pengiriman (0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_dalam_pengiriman"
+            onclick="kliktombolstatus('Dalam Pengiriman', this)">Dalam Pengiriman (0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_di_batalkan"
+            onclick="kliktombolstatus('Dibatalkan', this)">Dibatalkan (0)</button>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_selesai"
+            onclick="kliktombolstatus('Selesai', this)">Selesai (0)</button>
+
+    </div>
+    <!-- <div class="d-flex align-items-center gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="tombol_dalam_pengiriman" onclick="kliktombolstatus('Dalam Pengiriman', this)">Selesai Produksi (0)</button>
+                        </div> -->
+</div>

@@ -1,0 +1,28 @@
+<!-- 
+{
+    classlist:'',
+    arialabel:'',
+    idelement:'',
+    name:'',
+    onchange:'',
+    values:[
+        {
+            text:'',
+            value:'',
+            selected:false,
+            disabled:false
+        }
+    
+    ]
+
+}
+
+
+-->
+
+
+<select class="form-select form-select-sm <%=classlist%>" aria-label="<%=arialabel%>" <%-idelement!=''?idelement:''%>>
+    <% values.forEach(element => { %>
+        <option value="<%-element.value%>" <%-element.selected==true?'selected':''%> <%-element.disabled==true?'disabled':''%>><%-element.text%></option>
+    <% }) %>
+</select>

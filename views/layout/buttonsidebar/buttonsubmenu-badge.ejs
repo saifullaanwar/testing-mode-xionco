@@ -1,0 +1,22 @@
+
+<!--
+
+    {
+        i:0, //index button
+        activesubmenu:'', //'active' or ''
+        hasLink:true,
+        link:'/url',
+        hasOnclick:false,
+        onclick:'', //'function()'
+        text:'',
+        namebadgenumber:''
+    }
+
+-->
+<% var idx = text.replace(/\s+/g, "")+'-submenu-badge'; %>
+
+<div class="div-detailmenu d-flex align-items-center justify-content-between <%-i!=lastindex?'mb-3':''%> <%-activesubmenu%>"  id="menu-<%-idx%>" <%-hasLink?`onclick="window.open('${link}?sc=menu-${idx}','_self')" style="cursor:pointer;"`:''%>>
+    <a class="a-detailmenu" <%-hasOnclick?`onclick="${onclick}"`:''%>><%-text%></a>  
+    <a class="a-detailmenu-kanan" name="<%-namebadgenumber%>">(0)</a> 
+</div>
+<!--  <%-hasLink?`href="${link}?sc=menu-${idx}"`:''%>  -->

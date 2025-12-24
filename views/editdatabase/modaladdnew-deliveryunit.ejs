@@ -1,0 +1,118 @@
+<div
+  class="modal fade"
+  id="modaladdnew-deliveryunit" 
+  tabindex="-1"
+  aria-labelledby="modaladdnewitemlabel"
+  aria-hidden="true"
+  data-bs-backdrop="static" 
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1
+          class="modal-title fs-5"
+          id="modaladdnewitemlabel"
+          style="font-weight: bold; vertical-align: middle"
+        >
+          Add New Delivery Unit
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onclick="resetModalDelivery()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div id="itemsContainer" class="row mt-2">
+          
+          <div id="item-1" class="partitems border-bottom mb-3 pb-2">
+            <b><p id="judulitem-1" class="mb-2" style="font-size: 13px;">Delivery Unit 1</p></b>
+            <div class="row">
+              <div class="input-group input-group-sm mb-2">
+                <span
+                  class="input-group-text"
+                  style="background-color: #f8f9fa; font-size: 12px; width: 120px;"
+                >
+                  <span class="text-danger">*&nbsp;</span> Delivery Unit
+                </span>
+                <input
+                  type="text"
+                  class="form-control input-delivery-name"
+                  id="deliveryunit-1"
+                  placeholder="Contoh: JNE / Internal Mobil"
+                  style="font-size: 12px"
+                />
+              </div>
+
+              <div class="input-group input-group-sm mb-2">
+                <span
+                  class="input-group-text"
+                  style="background-color: #f8f9fa; font-size: 12px; width: 120px;"
+                >
+                  <span class="text-danger">*&nbsp;</span> Tipe Unit
+                </span>
+                <select
+                  class="form-select input-delivery-type"
+                  id="tipeunit-1"
+                  style="font-size: 12px"
+                >
+                  <option value="">Pilih Tipe</option>
+                  <option value="inhouse">In-House</option>
+                  <option value="thirdparty">Thirdparty</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end d-none div-remove-item" id="divremove-1">
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                onclick="removeItem(1)"
+                style="font-size: 11px;"
+              >
+                <i class="bi bi-trash3-fill"></i>&nbsp;Hapus Baris
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="d-flex align-items-center justify-content-between w-100" id="addnewitemtombolfooters">
+          <div>
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-sm"
+              id="addmore"
+              onclick="additems()"
+            >
+              <i class="bi bi-plus-lg"></i> Add More
+            </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm me-2"
+              id="btn-submitsave"
+              onclick="submitsave()"
+            >
+              <i class="bi bi-save"></i> Save Data
+            </button>
+            <button
+              type="button"
+              class="btn btn-light btn-sm border"
+              data-bs-dismiss="modal"
+              onclick="resetModalDelivery()"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,498 @@
+<%- include('layout/header') %>
+<% var rn=Math.random(); %>
+<link rel="stylesheet" href="/css/abasic.css?v=<%-rn%>">
+<link rel="stylesheet" href="/css/sidebar.css?v=<%-rn%>">
+<link rel="stylesheet" href="/css/finance.css?v=<%=rn %>">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+<style>
+   .btn-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #f8f9fa;         /* background default */
+    border: 1px solid #dee2e6;   /* border default */
+    border-radius: 6px;
+    color: #212529;              /* teks & ikon default */
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;   /* transisi smooth */
+}
+
+.btn-back i,
+.btn-back span {
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover,
+.btn-back:focus {
+    background: #8d8d8d;         /* hover bg */
+    border-color: #8d8d8d;       /* hover border */
+    color: #fff;                 /* teks & ikon jadi putih */
+}
+
+.btn-back:hover i {
+    transform: scale(1.1);       /* ikon sedikit zoom */
+}
+
+    .note-editable {
+        max-height: 300px; /*Summernote Atur tinggi maksimum sesuai kebutuhan Anda */
+        overflow-y: auto;  /* Tambahkan scrollbar vertikal jika kontennya melebihi tinggi maksimum */
+    }
+    /* Gaya kustom untuk tombol mengambang agar lebih mirip dengan versi Tailwind sebelumnya */
+        .floating-button {
+            position: fixed;
+            bottom: 1.5rem; /* setara dengan bottom-6 di Tailwind (1.5 * 16px = 24px) */
+            right: 1.5rem;  /* setara dengan right-6 di Tailwind */
+            z-index: 1050; /* Z-index yang tinggi agar tombol selalu di atas */
+            padding: 6px 8px!important; /* Padding yang disesuaikan */
+            font-size: 16px!important; /* Ukuran font yang disesuaikan */
+            border-radius: 10px; /* Membuat tombol bulat penuh */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Bayangan yang lebih besar */
+            transition: all 0.3s ease-in-out; /* Transisi untuk efek hover */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-button:hover {
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); /* Bayangan yang lebih besar saat hover */
+            transform: translateY(-2px); /* Sedikit naik saat hover */
+        }
+
+        /* Gaya responsif untuk tombol */
+        @media (min-width: 576px) { /* Small devices (landscape phones, 576px and up) */
+            .floating-button {
+                padding: 1rem 1.5rem; /* Padding lebih besar untuk layar yang lebih besar */
+                font-size: 1.25rem; /* Ukuran font lebih besar */
+            }
+        }
+
+        /* Gaya untuk ikon SVG di dalam tombol */
+        .floating-button svg {
+            width: 1.5rem; /* Lebar ikon */
+            height: 1.5rem; /* Tinggi ikon */
+            margin-right: 0.5rem; /* Margin kanan untuk ikon */
+        }
+
+        @media (min-width: 576px) {
+            .floating-button svg {
+                width: 1.75rem; /* Lebar ikon lebih besar */
+                height: 1.75rem; /* Tinggi ikon lebih besar */
+            }
+        }
+</style>
+    </head>
+
+    <body>
+    
+        <%- include('layout/navbar/navbar-atas-pc') %>
+        <%- include('layout/sidebar-universal') %>
+        
+        <!-- % if (roles=='supervisor') { %>
+            %- include('layout/sidebar-supervisor') %>
+        % } else { %>
+            %- include('layout/sidebar-adminweb') %>
+       
+        % } %> -->
+
+        <main class="main-content" id="main-pages">
+            <div class="container-fluid">
+                <input class="form-control form-control-s skeleton skeleton-fullheig" id="loadingskeleton" disabled  style="display: none;">
+                
+                <div id="showmainpage">
+                <div class="d-flex mb-4 gap-2 align-items-center">
+                    <button type="button" id="btn-back" class="btn-back">
+                        <i class="bi bi-arrow-left-circle-fill"></i>
+                        <span>Back</span>
+                    </button>
+                </div>
+
+                    <div class="mb-4 d-flex align-items-center justify-content-between">
+                        <div class="me-3">
+                            <span class="fw-bold fs-4">
+                                <% if (navatasactive.includes('editprodukweb')) { %>
+                                    Edit New Product Website
+                                <% } else { %>
+                                    Add New Product Website
+                                <% } %> </span>
+                        </div>
+                        <!-- <div class="col mb-4">
+                            <button type="button" class="btn btn-light" style="border-color: black!important;float: right;" onclick="klikopenaddnew('platform')">Add New</button>
+                        </div> -->
+                    
+                    </div>
+                    <span class="rownamanobold mb-3">Pilih Tipe Produk</span>
+                    <div class="d-flex align-items-center justify-content-left mb-3">
+                        <button type="button" id="btn-unit" class="btn btn-secondary btn-sm border me-2 w-100" name="tomboltipeproduk" onclick="tomboltipeproduk(this)">No Variant</button>
+                        <button type="button" id="btn-unit" class="btn btn-light btn-sm border me-2 w-100" name="tomboltipeproduk" onclick="tomboltipeproduk(this)">Variant</button>
+                        <!-- <button type="button" id="btn-unit" class="btn btn-light btn-sm border me-2 w-100" name="tomboltipeproduk" onclick="tomboltipeproduk(this)">Variant + Subvariant</button> -->
+                    </div>
+                    <hr>                    
+                    <div id="pagedasar" style="max-height: calc(100vh - 230px)!important;overflow-y: auto!important;overflow-x: hidden!important;">
+                        <!-- no variant -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Nama Produk</span>
+                                    <input type="text" class="form-control" id="produkmainname" name="produkmainname" placeholder="produk tampil di Website" style="font-size: 12px;"  oninput="oninputdata()">
+                                </div>
+                                <!-- webprice -->
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Price Gimik</span>
+                                    <input type="number" class="form-control" id="pricecoret" name="pricecoret" placeholder="0" style="font-size: 12px;"  oninput="oninputdata()" min="0">
+                                </div>
+                                
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Final Price</span>
+                                    <input type="number" class="form-control" id="mainprice" name="mainprice" placeholder="0" style="font-size: 12px;"  oninput="oninputdata()" min="0">
+                                </div>
+                                <!-- end webprice -->
+                                <!-- deskripsi -->
+                                <div class="">
+                                    <label for="deskripsiproduk"><span class="text-danger">*&nbsp;</span> Deskripsi</label>
+                                    <!-- <textarea class="form-control" style="height: 125px;" id="deskripsiproduk" name="deskripsiproduk" oninput="oninputdata()"></textarea> -->
+                                    <form method="post">
+                                        <textarea id="summernote" name="editordata" ></textarea>
+                                    </form>
+                                    
+                                </div>
+                                <!-- end deskripsi -->
+                            </div>
+
+                            <div class="col">
+                                <!-- katagori -->
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Kategori</span>
+                                    <!-- <div class="d-flex align-items-center justify-content-start">
+                                        <div id="list-katagori">
+
+                                        </div>
+                                        <input type="text" class="form-control" id="katagori" name="katagori" placeholder="katagori produk website" style="font-size: 12px;" oninput="oninputdata()" list="datalist-katagori">
+                                        <datalist id="datalist-katagori">
+                                            
+                                        </datalist>
+                                    </div> -->
+                                    <div class="form-control d-flex flex-wrap gap-1" id="katagori-input"  >
+                                        <!-- style="min-height: 50px;" onclick="document.getElementById('katagori').focus()"-->
+                                        <input type="text" class="border-0 flex-grow-1" id="katagori" name="katagori" placeholder="pilih katagori" style="outline: none;" oninput="pilihkategorifix(this)" style="font-size: 12px;" list="datalist-katagori">
+                                        <datalist id="datalist-katagori">
+                                            
+                                        </datalist>
+                                    </div>
+                                    
+                                </div>
+                                <!-- end katagori -->
+
+                                <!-- sml -->
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Kode SML</span>
+                                    <select class="form-select form-select-sm" id="kodesmlnovariant" name="kodesmlnovariant" style="font-size: 12px;" onchange="oninputdata()">
+                                        <option selected disabled value="">Pilih SML</option>
+                                        
+                                        <option>none</option>
+                                        <option>small</option>
+                                        <option>medium</option>
+                                        <option>large</option>
+                                    </select>
+                                    
+                                </div>
+                                <!-- end sml -->
+
+                                <!-- color item terikat di HIGsystem -->
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;">Color HIGSYSTEM</span>
+                                    <input type="text" class="form-control" id="colorhigsistemitem-novariant" name="colorhigsistemitem-novariant" placeholder="Jika produk Upholstery, pilih Color HIGSYSTEM" style="font-size: 12px;"  onblur="oninputdata()" list="datalist-colorhignovariant">
+                                    <datalist id="datalist-colorhignovariant">
+                                        
+                                    </datalist>
+                                </div>
+                                <!-- end color item terikat di HIGsystem -->
+                                
+                                <!-- item terikat di HIGsystem -->
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Item HIGSYSTEM</span>
+                                    <input type="text" class="form-control" id="higsistemitem-novariant" name="higsistemitem-novariant" placeholder="Produk terkait di HIGSYSTEM" style="font-size: 12px;"  onblur="oninputdata()" list="datalist-hignovariant">
+                                    <datalist id="datalist-hignovariant">
+                                        
+                                    </datalist>
+                                </div>
+                                <!-- end item terikat di HIGsystem -->
+                                
+                                <!-- upload foto -->
+                                <div>
+                                    <span class="rownamanobold" style="font-size: small;margin-bottom: 8px;"><span class="text-danger">*&nbsp;</span> Upload foto produk</span>
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <!-- start 1-->
+                                        <div class=" me-3" style="text-align: center;">
+                                            <div class="border rounded-2 d-flex align-items-center justify-content-center" style="width: 90px;height: 90px;">
+                                                <img src="" alt="" style="width: 90px;height: 90px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow1" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                                <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg1" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                                <i class="bi bi-card-image" id="iconupload1" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                            </div>
+                                            <span class="rownamanobold" style="font-size: x-small;text-align: center;">Foto Utama</span>
+                                        </div>
+                                        
+                                        <!-- end 1-->
+                                        <!-- start 2-->
+                                        <div class=" me-3" style="text-align: center;">
+                                            <div class="border rounded-2 d-flex align-items-center justify-content-center" style="width: 90px;height: 90px;">
+                                                <img src="" alt="" style="width: 90px;height: 90px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow2" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                                <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg2" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                                <i class="bi bi-card-image" id="iconupload2" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                            </div>
+                                            <span class="rownamanobold" style="font-size: x-small;text-align: center;">Display Kategori</span>
+                                        </div>
+                                        
+                                        <!-- end 2-->
+                                        <!-- start 3-->
+                                        <div class=" me-3" style="text-align: center;">
+                                            <div class="border rounded-2 d-flex align-items-center justify-content-center" style="width: 90px;height: 90px;">
+                                                <img src="" alt="" style="width: 90px;height: 90px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow3" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                                <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg3" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                                <i class="bi bi-card-image" id="iconupload3" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                            </div>
+                                            <span class="rownamanobold" style="font-size: x-small;text-align: center;">Foto 3</span>
+                                        </div>
+                                        
+                                        <!-- end 3-->
+                                        <!-- start 4-->
+                                        <div class=" me-3" style="text-align: center;">
+                                            <div class="border rounded-2 d-flex align-items-center justify-content-center" style="width: 90px;height: 90px;">
+                                                <img src="" alt="" style="width: 90px;height: 90px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow4" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                                <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg4" name="uploadimg" accept="image/*" onclick="this.value=null;">
+
+                                                <i class="bi bi-card-image" id="iconupload4" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                            </div>
+                                            <span class="rownamanobold" style="font-size: x-small;text-align: center;">Foto 4</span>
+                                        </div>
+                                        
+                                        <!-- end 4-->
+                                        <!-- start 5-->
+                                        <div class=" me-3" style="text-align: center;">
+                                            <div class="border rounded-2 d-flex align-items-center justify-content-center" style="width: 90px;height: 90px;">
+                                                <img src="" alt="" style="width: 90px;height: 90px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow5" name="imguploadshow" onclick="klikuploadimg(this)">
+
+                                                <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg5" name="uploadimg" accept="image/*" onclick="this.value=null;">
+
+                                                <i class="bi bi-card-image" id="iconupload5" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                            </div>
+                                            <span class="rownamanobold" style="font-size: x-small;text-align: center;">Foto 5</span>
+                                        </div>
+                                        
+                                        <!-- end 5-->
+                                    </div>
+                                </div>
+                                <!-- end upload foto -->
+                            </div>
+                            
+
+                            
+                        </div>
+                        <!-- end no variant -->
+
+                        <!-- variant -->
+                        <div class="d-none" id="varintshow-page">
+                            <hr>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <span class="rownamanobold">Variant</span>
+                                <!-- <span class="badge text-bg-secondary" style="cursor: pointer;" onclick="additems()">Add Tipe</span> -->
+                            </div>
+                            <hr>
+                            <!-- tipe variant -->
+                            <div class="input-group input-group-sm mb-3 border border-secondary-subtle rounded" title="Centang jika produk Upholstery">
+                                <span class="input-group-text" style="background-color: rgb(226, 221, 221);font-size: 12px;width: 120px;"><span class="text-danger">*&nbsp;</span> Variant UP</span>
+                                <div class="form-check ms-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="kainklik"  name="kainklik" onclick="kainornoss()">
+                                    <label class="form-check-label" for="kainklik">
+                                        UP
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- end tipe variant -->
+                            <hr>
+                            <div class="mt-4">
+                                <label class="form-label rownamanobold">Nama variant</label>
+                                <div class="form-control d-flex flex-wrap gap-1" id="tag-input-variant" onclick="document.getElementById('tag-text-variant').focus()" style="min-height: 50px;">
+                                    <input type="text" class="border-0 flex-grow-1" id="tag-text-variant" placeholder="Ketik lalu Enter..." style="outline: none;" onkeydown="createbadgevar(this,event)" list="listkains"/>
+                                    <datalist id="listkains">
+                                        
+                                    </datalist>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end variant -->
+                        
+                        <!-- subvariant -->
+                        <div class="d-none" id="subvariantshow-page">
+
+                            <!-- <hr>
+                            <div class="d-flex align-items-center justify-content-start mb-3">
+                                <span class="rownamanobold">Subvariant</span>
+                                
+                            </div> -->
+                            <hr>
+                            <div class="">
+                                <label class="form-label rownamanobold">Nama Subvariant</label>
+                                <div class="form-control d-flex flex-wrap gap-1" id="tag-input" onclick="document.getElementById('tag-text').focus()" style="min-height: 50px;">
+                                    <input type="text" class="border-0 flex-grow-1" id="tag-text" placeholder="Ketik lalu Enter..." style="outline: none;" onkeydown="createbadgesubvar(this,event)"/>
+                                </div>
+                            </div>
+                            <span style="font-size: xx-small;">Kosongkan subvariant jika tidak memiliki subvariant</span>
+                            <br>
+                            <span class="badge text-bg-secondary mt-4" style="cursor: pointer;" onclick="addfixvariant()">Add</span>
+                        </div>
+                        <!-- end subvariant -->
+                        
+                        
+
+                        <!-- input detail variant -->
+                        <div class="tableFixHead d-none mt-3" id="showallvariant"><!--  style="max-height: calc(100vh - 215px)!important;" -->
+                            <table class="table table-striped table-hover" style="width:100%;text-align: center;font-size: 11px;" id="alldattab">
+        
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="text-align: left;vertical-align: middle;">As Main</th>
+
+                                        <th scope="col" style="text-align: left;vertical-align: middle;">Variant</th>
+                                        <th scope="col" style="text-align: left;vertical-align: middle;">Subvariant</th>
+
+                                        <th scope="col" style="text-align: left;vertical-align: middle;" >price gimik</th>
+                                        
+                                        <th scope="col" style="text-align: left;vertical-align: middle;" >final price</th>
+
+                                        <th scope="col" style="text-align: left;vertical-align: middle;" >SML</th>
+
+                                        <th scope="col" style="text-align: left;vertical-align: middle;" >color HIG</th>
+
+                                        <th scope="col" style="text-align: left;vertical-align: middle;" >Item HIG</th>
+                                        
+                                        <th scope="col" style="text-align: left;vertical-align: middle;"  >Hexcode</th>
+
+                                        <th scope="col" style="text-align: left;vertical-align: middle;"  >Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="divhpsdata">
+                                    <tr class="d-none">
+                                        <td style="text-align: center;vertical-align: middle;">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkasmain-1" name="checkasmain">
+                                        </td>
+
+                                        <td style="text-align: left;vertical-align: middle;">
+                                            marah
+                                        </td>
+                                        <td style="text-align: left;vertical-align: middle;">
+                                            120 cm
+                                        </td>
+
+                                        <td style="text-align: left;vertical-align: middle;">
+                                            <input type="text" class="form-control form-select-sm" id="pricevariantcoret-1" name="pricevariantcoret" style="width: 80px!important;text-align: right;">
+                                        </td>
+
+                                        <td style="text-align: left;vertical-align: middle;">
+                                            <input type="text" class="form-control form-select-sm" id="pricevariant-1" name="pricevariant" style="width: 80px!important;text-align: right;">
+                                        </td>
+
+                                        <td style="text-align: center;vertical-align: middle;">
+                                            <select class="form-select form-select-sm" aria-label="Small select example" style="width: 120px!important;">
+                                                <option selected disabled>Pilih SML</option>
+                                                <option>S</option>
+                                                <option>M</option>
+                                                <option>L</option>
+                                            </select>
+                                        </td>
+
+                                        <td style="text-align: left;vertical-align: middle;max-width: 80px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                                            Fabric Red aaaaaaaaaaaaaaasa asas a s
+                                        </td>
+
+                                        <td style="text-align: left;vertical-align: middle;">
+                                            <input type="text" class="form-control form-control-sm" id="varianthig-1" name="varianthig" style="width: 110px!important;text-align: left;" list="datalist_varianthig">
+                                            <datalist id="datalist_varianthig">
+                                        
+                                            </datalist>
+                                        </td>
+                                        
+                                        <td style="text-align: center;vertical-align: middle;">
+                                            <input type="text" class="form-control form-control-sm" id="hexcode-1" name="hexcode" style="width: 90px!important;text-align: left;">
+                                        </td>
+
+                                        <td style="text-align: center;vertical-align: middle;">
+                                            <div class=" me-3" style="text-align: center;">
+                                                <div class="border rounded-2 d-flex align-items-center justify-content-center" style="width: 90px;height: 90px;">
+                                                    <img src="" alt="" style="width: 90px;height: 90px;cursor: pointer;" class="border rounded-2 d-none" id="imguploadshow6" name="imguploadshowxx" onclick="klikuploadimg(this)">
+
+                                                    <input type="file" class="form-control d-none" aria-label="upload img" aria-describedby="upload img" id="uploadimg6" name="uploadimg"  accept="image/*" onclick="this.value=null;">
+
+                                                    <i class="bi bi-card-image" id="iconupload6" name="iconupload" style="cursor: pointer;" onclick="klikuploadimg(this)"></i>
+                                                </div>
+                                                <!-- <span class="rownamanobold" style="font-size: x-small;text-align: left;">Foto Utama</span> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                
+                                    
+                                </tbody>
+                    
+                            </table>
+                        </div>
+
+                        <!-- end input detail variant -->
+                    </div>
+                    
+                    
+                    <div style="text-align: center;display: none;" id="load-more-btn">
+                        <i class="bi bi-caret-down-fill" id="load-more-btn-icon" style="cursor: pointer;" onclick="loadMoreData()"></i>
+                    </div>
+
+                    <!-- Floating Button Container -->
+                    <button class="btn btn-primary floating-button" onclick="savetodatabase()">
+                        <span><i class="bi bi-floppy-fill"></i>&nbsp;&nbsp;SAVE</span>
+                    </button>
+                    <!-- Floating Button Container -->
+                </div>
+            </div>
+        </main>
+    
+    
+    </div>
+   
+    
+    <%- include('layout/nav-loading') %>
+
+        <span id="itemalls" style="display: none;" data-json="<%=JSON.stringify(datas)%>"></span>
+        
+        <%- include('layout/modalunderbuild') %>
+        <%- include('modalviewfotovideo') %>
+        <%- include('layout/footerscript') %>
+        <script src="/js/editdatabase/editdatabase-addproduk-variant.js<%=versionall%>"></script>
+        <script src="/js/editdatabase/editdatabase-addproduk-uploadimg.js<%=versionall%>"></script>
+        
+        <script>
+            function toggleSidebar() {
+                
+                if (document.getElementById('klikhidebar').className=='bi bi-caret-left-fill toggle-btn') {
+                    document.getElementById('klikhidebar').className='bi bi-caret-right-fill toggle-btn';
+                } else {
+                    document.getElementById('klikhidebar').className='bi bi-caret-left-fill toggle-btn';
+                }
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('collapsed');
+            }
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        </script>
+    </body>
+
+    </html>

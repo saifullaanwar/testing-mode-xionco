@@ -1,0 +1,206 @@
+<% 
+// Default values
+const homeopen = navatasactive === 'home' ? 'active' : '';
+const adminopen = navatasactive.includes('adminlist') ? 'active' : '';
+const semuapesanan = navatasactive === 'adminlist-semuapesanan' ? 'active' : '';
+const pesananbermasalah = navatasactive.includes('pesananbermasalah') ? 'active' : '';
+const stockopen = navatasactive.includes('stock') ? 'active' : '';
+const stockproduk = navatasactive === 'stock-produk' ? 'active' : '';
+const stockprodukup = navatasactive === 'stock-produk-up' ? 'active' : '';
+const podo = navatasactive === 'podo' ? 'active' : '';
+const statistik = navatasactive.includes('statistik') ? 'active' : '';
+const daftarrequest = navatasactive.includes('procurement') && !navatasactive.includes('daftarpembelian') ? 'active' : '';
+const requsetbeli = navatasactive.includes('daftarrequest') ? 'active' : '';
+
+// Driver-specific
+const aktivmenu = navatasactive.includes('driver') || navatasactive.includes('pesananbermasalah') ? 'active' : '';
+const aktivchildmenu = navatasactive === 'driver' ? 'active' : '';
+const pesananbermasalahActive = navatasactive === 'driver-masalah-semua' ? 'active' : '';
+%>
+
+<div class="d-flex">
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
+        <div class="px-4 pt-4">
+            <h4 class="logo-text mb-0">
+                <i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i>
+                <span class="logo-text-hide" onclick="toggleSidebar()"> Sembunyikan Menu</span>
+            </h4>
+            <hr style="color: grey;">
+        </div>
+
+        <div id="scrolled" style="height: calc(100vh - 175px); overflow-y: auto;">
+            <div class="col" style="display: flex; flex-direction: column; padding-bottom: 4em;">
+
+                <!-- HEADER: Role Title -->
+                <a class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Role"></i>
+                    <span class="hide-on-collapse">
+                        <% 
+                            const roleTitles = {
+                                'admin head': 'Admin Head',
+                                'admin c10': 'Admin C10',
+                                'admin c5': 'Admin C5',
+                                'admin classy': 'Admin Classy',
+                                'pack-de staff': 'Packing & Delivery',
+                                'driver': 'Driver',
+                                'finance': 'Finance',
+                                'cirende': 'Cirende'
+                            };
+                        %>
+                        <%= roleTitles[roles] || 'User' %>
+                    </span>
+                </a>
+
+                <!-- Tugas Saya -->
+                <!-- Tugas Saya -->
+                <div class="hide-on-collapse-detailmenu px-3">
+                    <hr style="color: grey;">
+                    <div class="row">
+                        <div class="col-8"><span>Tugas Saya</span></div>
+                        <div class="col-3 text-end">
+                            <% if (roles === 'finance') { %>
+                                <span name="totaltugassayaall">0</span>
+                            <% } else { %>
+                                <span name="totaltugassayapesanan">0</span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <hr style="color: grey; margin-bottom: 0;">
+                </div>
+                <br>
+
+                <!-- HOME -->
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-house-fill',
+                    text: 'Home',
+                    activemenudasar: homeopen,
+                    link: `/home/${roles === 'admin c10'||roles === 'admin head' ? 'admin' : roles === 'admin c5' ? 'admc5' : roles === 'admin classy' ? 'admclassy' : roles === 'pack-de staff' ? 'packde' :  roles === 'driver'?'driver':'cirende'}`
+                }) %>
+
+                <!-- TRANSAKSI (Admin + Driver + Pack-DE) -->
+                <% if (['admin c10', 'admin c5', 'admin classy', 'pack-de staff', 'driver'].includes(roles)) { %>
+                    <% 
+                        const transaksiSubmenu = [];
+                        if (['admin c10', 'admin c5', 'admin classy'].includes(roles)) {
+                            if (['admin c10','admin head'].includes(roles)) {
+                                transaksiSubmenu.push({ text: 'Semua Pesanan', activesubmenu: semuapesanan, link: '/adminlist' });
+                                transaksiSubmenu.push({ text: 'Pesanan Bermasalah', activesubmenu: pesananbermasalah, link: '/pesananbermasalah/berlangsung' });
+                            } else if (roles === 'admin c5') {
+                                transaksiSubmenu.push({ text: 'Semua Pesanan', activesubmenu: adminopen, link: '/adminlist/admc5' });
+                            } else if (roles === 'admin classy') {
+                                transaksiSubmenu.push({ text: 'Semua Pesanan', activesubmenu: semuapesanan, link: '/adminlist/classy' });
+                            }
+                        } else if (roles === 'pack-de staff') {
+                            transaksiSubmenu.push({ text: 'Semua Pesanan', activesubmenu: aktivchildmenu, link: '/packde' });
+                        } else if (roles === 'driver') {
+                            transaksiSubmenu.push({ text: 'Semua Pesanan', activesubmenu: aktivchildmenu, link: '/driver' });
+                            transaksiSubmenu.push({ text: 'Pesanan Bermasalah', activesubmenu: pesananbermasalahActive, link: '/pesananbermasalah/berlangsung' });
+                        }
+                    %>
+                    <% if (transaksiSubmenu.length > 0) { %>
+                        <%- include('./buttonsidebar/menuarrow', {
+                            id: 'transaksimenuarrow',
+                            text: 'Transaksi',
+                            icon: 'bi-box-seam-fill',
+                            activemenudasar: adminopen || aktivmenu,
+                            listsubmenu: transaksiSubmenu
+                        }) %>
+                    <% } %>
+                <% } %>
+
+                <!-- STOCK -->
+                <% if (['admin c10','admin head', 'admin c5', 'admin classy'].includes(roles)) { %>
+                    <% 
+                        const stockSubmenu = [];
+                        if (['admin c10','admin head'].includes(roles)) {
+                            stockSubmenu.push({ text: 'Stock Upholstery', activesubmenu: stockprodukup, link: '/stock/produkupholstery' });
+                            stockSubmenu.push({ text: 'Stock C5', activesubmenu: stockproduk, link: '/stock/produk' });
+                        } else if (roles === 'admin c5') {
+                            stockSubmenu.push({ text: 'Stock C5', activesubmenu: stockproduk, link: '/stock/produkc5' });
+                        } else if (roles === 'admin classy') {
+                            stockSubmenu.push({ text: 'Stock Upholstery', activesubmenu: stockprodukup, link: '/stock/produkupholstery' });
+                        }
+                    %>
+                    <% if (stockSubmenu.length > 0) { %>
+                        <%- include('./buttonsidebar/menuarrow', {
+                            id: 'stockmenuarrow',
+                            text: 'Stock',
+                            icon: 'bi-box-seam-fill',
+                            activemenudasar: stockopen,
+                            listsubmenu: stockSubmenu
+                        }) %>
+                    <% } %>
+                <% } %>
+
+                <!-- PRINT (PO/DO) -->
+                <% if (['admin c10','admin head', 'admin classy'].includes(roles)) { %>
+                    <a onclick="menuarrowklik('printmenuarrow')" class="sidebar-link text-decoration-none px-3">
+                        <i class="bi bi-printer me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Print"></i>
+                        <span class="hide-on-collapse">Print</span>
+                        <i id="printmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;"></i>
+                    </a>
+                    <div class="hide-on-collapse-detailmenu col" id="printmenuarrow-extend" style="display: none;">
+                        <div class="div-detailmenu mb-3">
+                            <a href="/podo" target="_blank" class="a-detailmenu">PO/DO</a>
+                        </div>
+                        <% if (['admin c10','admin head'].includes(roles)) { %>
+                        <div class="div-detailmenu">
+                            <a href="/podo/print-fmcg" target="_blank" class="a-detailmenu">PO/DO FMCG</a>
+                        </div>
+                        <% } %>
+                        <br>
+                    </div>
+                <% } %>
+
+                <!-- OPERATIONAL P2.5 -->
+                <% if (['admin c10','admin head', 'admin classy'].includes(roles)) { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id: 'operatingmenuarrow',
+                        text: 'Operational p2.5',
+                        icon: 'bi-patch-check-fill',
+                        activemenudasar: '',
+                        listsubmenu: [
+                            { text: 'Drafting', activesubmenu: '', onclick: 'warningunderbuild()' },
+                            { text: 'Daftar Route', activesubmenu: '', onclick: 'warningunderbuild()' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- FORM: Request Pembelian -->
+                <% if (['admin c10','admin head', 'admin classy', 'pack-de staff','driver','cirende'].includes(roles)) { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id: 'formmenuarrow',
+                        text: 'Form',
+                        icon: 'bi-ui-checks',
+                        activemenudasar: daftarrequest,
+                        listsubmenu: [
+                            { text: 'Request Pembelian', activesubmenu: requsetbeli, link: '/procurement/daftarrequest' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- KPI -->
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-speedometer2',
+                    text: 'Performa Saya (KPI)',
+                    activemenudasar: '',
+                    onclick: 'warningunderbuild()'
+                }) %>
+
+                <!-- SETTINGS -->
+                <%- include('./buttonsidebar/menuarrow', {
+                    id: 'settingmenuarrow',
+                    icon: 'bi-gear-fill',
+                    text: 'Settings',
+                    activemenudasar: '',
+                    listsubmenu: [
+                        { text: 'Logout', activesubmenu: '', onclick: 'logout()' }
+                    ]
+                }) %>
+
+            </div>
+        </div>
+
+        <%- include('versiondiv') %>
+    </nav>
+<!-- </div> -->

@@ -1,0 +1,77 @@
+#akunatas-klik{
+    color: grey;
+    cursor: pointer;
+}
+#akunatas-klik i{
+    font-size: x-large;
+    margin-right: 0.5em;
+}
+#akunatas-klik span{
+    font-size: large;
+}
+
+.card.items{
+    border-radius: 15px!important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+    margin-bottom: 10px!important;
+}
+.card.items:hover{
+    background-color: #69696980;
+    color: white;
+}
+.card.items:hover .rownama,.card.items:hover .roworderdate{
+    color: white;
+    font-weight: bold;
+}
+.rownama span,.roworderdate span{
+    font-size: small;
+}
+.rownama,.roworderdate{
+    color: #777777;
+    font-weight: bold;
+}
+.card.items1{
+    border-radius: 15px!important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+    margin-bottom: 10px!important;
+}
+.card.items1:hover{
+    background-color: #69696980;
+
+}
+.card #header-card-item{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.589)!important;
+    padding-bottom: 8px!important;
+}
+
+#imgcards{
+    border-radius: 10px;
+}
+
+.form-check-input{
+    border-color: blue;
+}
+#load-more-btn-icon:hover{
+    color: blue;
+}
+.selesaibutton:hover{
+    background-color: black!important;
+}
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(204, 204, 204)!important;
+    opacity: 1!important; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(204, 204, 204)!important;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(204, 204, 204)!important;
+}
+
+#filterstatus-select,#filterproduk-select,#filterplatform-select{
+    color: rgb(131, 131, 131)!important;
+}

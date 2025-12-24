@@ -1,0 +1,476 @@
+<%- include('layout/header') %>
+    </head>
+
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="d-flex align-items-center justify-content-left mb-3">
+            <button class="btn btn-primary btn-sm me-4" style="text-align: center;" onclick="printPDF()">Print</button>
+            <button class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="window.close()">X Close</span>
+        </div>
+
+        <div class="a4 border">
+            <!-- atas -->
+            <div class="row" style="margin-top: 0;">
+                <div class="col-6">
+                    <div class="card" style="position: 2px;" id="tinggi-kiri-atas">
+                        <div class="card-body" style="margin: 2px;" id="cardtinggi-kiri-atas">
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col-6">
+                                    <span style="font-weight: bold;margin: 0;padding: 0;font-size: 10px;">DELIVERY ORDER</span>
+                                </div>
+                                <div class="col-6" >
+                                    <!-- <select class="form-select form-select-sm" id="seleknoorder-kiri" style="border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;font-size: 10px;" onchange="ceknshowdata_kiri(this)">
+                                       <option selected disabled>Pilih no order</option> 
+                                        
+                                    </select> -->
+                                    <input class="form-control form-control-sm" list="datalistOptions_seleknoorder-kiri" id="seleknoorder-kiri" placeholder="Pilih no transaksi" style="border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;font-size: 10px;" oninput="ceknshowdata_kiri(this)">
+                                    <datalist id="datalistOptions_seleknoorder-kiri">
+                                    </datalist>
+                                </div>
+                            </div>
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+                            <p style="font-size:8px;color: #3d3d3dd2;font-weight: bold;margin-top: 8px;margin-left: 14px;">SHIPPING DETAILS :</p>
+
+                            <p style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;" id="buyername-kiri">buyer name</p>
+
+                            <p style="font-size:8px;
+                                font-weight:500;
+                                margin-top:0px;
+                                margin-left:14px;
+                                margin-bottom:0;
+                                color:#3d3d3dd2;
+                                white-space: normal;
+                                word-wrap: break-word;
+                                width: 80%;" id="address-kiri" class="text-truncate">alamat</p>
+                            
+                            <p style="font-size:8px;font-weight: 500;margin-top: 0px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;width: 50%;" id="numberphone-kiri">no hp buyer</p>
+
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+                            <p style="font-size:8px;color: #3d3d3dd2;font-weight: bold;margin-top: 8px;margin-left: 14px;">PURCHASE ITEMS :</p>
+
+                            <div class="d-flex justify-content-between">
+                                <div >
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;" id="item-kiri">item</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="qty-kiri">1 UNIT</span>
+                                </div>
+                            </div>
+
+                            
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color: #3d3d3dd2;" id="colorvariant-kiri">variant</p>
+
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;">NOTES : </p>
+
+                            <p style="font-size:8px;
+                                    font-weight:500;
+                                    margin-top:3px;
+                                    margin-left:14px;
+                                    margin-bottom:0;
+                                    color:#3d3d3dd2;
+                                    white-space: normal;
+                                    word-wrap: break-word;" id="notes-kiri"></p>
+
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;font-style: italic;" id="item">RECEIVED BY :</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;font-style: italic;"><span id="platform-kiri"></span><span id="order_date-kiri"></span></span>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="d-flex justify-content-end">
+                                <span style="font-size:6px;font-weight: bold;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;">(NAMA LENGKAP & TANDA TANGAN)</span>
+                            </div>
+                            <hr style="border: 1px dashed black;margin-top: 0;margin-bottom: 0;">
+                            <p style="font-size:6px;font-weight: bold;margin-top: 6px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;text-align: left;font-style: italic;">Saya telah menerima barang dalam kondisi baik dan lengkap; Saya melepaskan segala tuntutan atas kecacatan maupun kekurangan produk kepada pihak PT Halim Inti Gahara di kemudian hari.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 border-start border-dashed border-secondary-subtle" id="tinggi-kanan-atas">
+                    <div class="card">
+                        <div class="card-body" style="height: auto;">
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col-6">
+                                    <span style="font-weight: bold;margin: 0;padding: 0;font-size: 10px;">PRODUCTION NO</span>
+                                </div>
+                                <div class="col-6" >
+                                    <span type="text"  style="color: #3d3d3dd2;border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;background-color: transparent;font-size: 10px;" id="seleknoorder-kanan">-</span>
+                                </div>
+                            </div>
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;font-style: italic; color: #3d3d3dd2;">PRODUCTION ORDER LIST :</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:6px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;font-style: italic;" id="hariini-kanan">01 Januari 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <div >
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;" id="item-kanan">item</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="qty-kanan">UNIT</span>
+                                </div>
+                            </div>
+                            
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;" id="colorvariant-kanan">variant</p>
+
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;">NOTES : </p>
+
+                            <p style="font-size:8px;
+                                font-weight:500;
+                                margin-top:3px;
+                                margin-left:14px;
+                                margin-bottom:0;
+                                color:#3d3d3dd2;
+                                white-space: normal;
+                                word-wrap: break-word;" id="notes-kanan"></p>
+                        </div>
+                    </div>
+                    <hr style="border: 1px dashed;">
+                    <div class="card">
+                        <div class="card-body" style="height: auto;">
+                            <div class="d-flex justify-content-between border-bottom">
+                                <div>
+                                    <span style="font-weight: bold;margin: 0;padding: 0;font-size: 8px;">FABRIC ATTACHMENT</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;margin-left: 0;" id="notransaksi-kanan">no transaksi</span>
+                                </div>
+                            </div>
+                           
+                            <div class="d-flex justify-content-between mt-2">
+                                <div >
+                                    <span style="font-size:8px;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit; color: #3d3d3dd2;" id="item-kanan-bawah">item</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="qty-kanan-bawah">1 UNIT</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <div >
+                                    <span style="font-size:8px;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit; color:#3d3d3dd2;" id="colorvariant-kanan-bawah">variant</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="ukuran-kanan-bawah"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <hr style="border: 1px dashed ;">
+                    <div class="card pb-0">
+                        <div class="card-body pt-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-8 border-end pe-2">
+                                    <div class="d-flex justify-content-between border-bottom">
+                                        <div>
+                                            <span style="font-weight: bold;margin: 0;padding: 0;font-size: 8px;">APPROVAL</span>
+                                        </div>
+                                        <div>
+                                            <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;margin-left: 0;" id="notransaksi-approval">no transaksi</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between mt-2 mb-0">
+                                        <div >
+                                            <span style="font-size:8px;margin-top: 0px;margin-left: 0px;margin-bottom: 0;text-justify: inherit;padding-bottom: 0!important; color: #3d3d3dd2;" id="item-approval">item</span>
+                                        </div>
+                                        <div>
+                                            <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0;padding-bottom: 0!important; color:#3d3d3dd2;" id="qty-approval">1 UNIT</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-0">
+                                        <div >
+                                            <span style="font-size:8px;margin-top: 0px;margin-left: 0px;margin-bottom: 0;text-justify: inherit; color: #3d3d3dd2;" id="colorvariant-approval">variant</span>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-4 ps-2">
+                                    <span style="font-size:6px; color:#3d3d3dd2;float: left;">STAMP OF APPROVAL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- atas -->
+
+            <!-- bawah -->
+             <hr style="margin-top: 4px;margin-bottom: 4px;">
+             
+             <div class="row" style="margin-top: 0;">
+                <div class="col-6">
+                    <div class="card" style="position: 2px;" id="tinggi-kiri-bawah">
+                        <div class="card-body" style="margin: 2px;">
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col-6">
+                                    <span style="font-weight: bold;margin: 0;padding: 0;font-size: 10px;">DELIVERY ORDER</span>
+                                </div>
+                                <div class="col-6" >
+                                    <!-- <select class="form-select form-select-sm" id="seleknoorder-kiri2" style="border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;font-size: 10px;" onchange="ceknshowdata_kiri2(this)">
+                                        <option selected disabled>Pilih no order</option>
+                                        
+                                    </select> -->
+                                    <input class="form-control form-control-sm" list="datalistOptions_seleknoorder-kiri2" id="seleknoorder-kiri2" placeholder="Pilih no transaksi" style="border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;font-size: 10px;" oninput="ceknshowdata_kiri2(this)">
+                                    <datalist id="datalistOptions_seleknoorder-kiri2">
+                                    
+                                    </datalist>
+                                </div>
+                            </div>
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+                            <p style="font-size:8px;color: #3d3d3dd2;font-weight: bold;margin-top: 8px;margin-left: 14px;">SHIPPING DETAILS :</p>
+
+                            <p style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;" id="buyername-kiri2">buyer name</p>
+
+                            <p style="font-size:8px;font-weight: 500;margin-top: 0px;margin-left: 14px;color: #3d3d3dd2;width: 80%;" id="address-kiri2" class="text-truncate">alamat</p>
+                            
+                            <p style="font-size:8px;font-weight: 500;margin-top: 0px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;width: 50%;" id="numberphone-kiri2">no hp buyer</p>
+
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+                            <p style="font-size:8px;color: #3d3d3dd2;font-weight: bold;margin-top: 8px;margin-left: 14px;">PURCHASE ITEMS :</p>
+
+                            <div class="d-flex justify-content-between">
+                                <div >
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;" id="item-kiri2">item</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="qty-kiri2">1 UNIT</span>
+                                </div>
+                            </div>
+
+                            
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color: #3d3d3dd2;" id="colorvariant-kiri2">variant</p>
+
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;">NOTES : </p>
+
+                            <p style="font-size:8px;
+                                    font-weight:500;
+                                    margin-top:3px;
+                                    margin-left:14px;
+                                    margin-bottom:0;
+                                    color:#3d3d3dd2;
+                                    white-space: normal;
+                                    word-wrap: break-word;" id="notes-kiri2"></p>
+
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;font-style: italic;" id="item2">RECEIVED BY :</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;font-style: italic;"><span id="platform-kiri2"></span><span id="order_date-kiri2"></span></span>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="d-flex justify-content-end">
+                                <span style="font-size:6px;font-weight: bold;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;">(NAMA LENGKAP & TANDA TANGAN)</span>
+                            </div>
+                            <hr style="border: 1px dashed black;margin-top: 0;margin-bottom: 0;">
+                            <p style="font-size:6px;font-weight: bold;margin-top: 6px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;text-align: left;font-style: italic;">Saya telah menerima barang dalam kondisi baik dan lengkap; Saya melepaskan segala tuntutan atas kecacatan maupun kekurangan produk kepada pihak PT Halim Inti Gahara di kemudian hari.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 border-start border-dashed border-secondary-subtle" id="tinggi-kanan-bawah">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row d-flex align-items-center justify-content-center">
+                                <div class="col-6">
+                                    <span style="font-weight: bold;margin: 0;padding: 0;font-size: 10px;">PRODUCTION NO</span>
+                                </div>
+                                <div class="col-6" >
+                                    <span type="text" style="color: #3d3d3dd2;border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;background-color: transparent;font-size: 10px;" id="seleknoorder-kanan2" >-</span>
+                                   <!--  <select class="form-select form-select-sm" id="seleknoorder-kanan" style="border-color: transparent;font-weight: bold;margin: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;max-width: max-content;text-align: right;float: right;" onchange="ceknshowdata_kanan(this)">
+                                        <option selected disabled>Pilih no produksi</option> 
+                                         <option value="1">One</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                            <hr style="margin-bottom: 0;">
+                            <div class="row">
+                                <div class="col-3" style="background-color: rgb(92, 92, 92);height: 3px;width: 50px;margin-left: 25px;">
+
+                                </div>
+                                <div class="col-7">
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;font-style: italic; color: #3d3d3dd2;">PRODUCTION ORDER LIST :</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:6px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;font-style: italic;" id="hariini-kanan2">01 Januari 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <div >
+                                    <span style="font-size:8px;font-weight: bold;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit;" id="item-kanan2">item</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="qty-kanan2">UNIT</span>
+                                </div>
+                            </div>
+                            
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;" id="colorvariant-kanan2">variant</p>
+
+                            <p style="font-size:8px;font-weight: 500;margin-top: 10px;margin-left: 14px;margin-bottom: 0; color:#3d3d3dd2;">NOTES : </p>
+
+                            <p style="font-size:8px;
+                                font-weight:500;
+                                margin-top:3px;
+                                margin-left:14px;
+                                margin-bottom:0;
+                                color:#3d3d3dd2;
+                                white-space: normal;
+                                word-wrap: break-word;" id="notes-kanan2"></p>
+                            
+
+                        </div>
+                    </div>
+                    <hr style="border: 1px dashed #3d3d3dd2;">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between border-bottom">
+                                <div>
+                                    <span style="font-weight: bold;margin: 0;padding: 0;font-size: 8px;">FABRIC ATTACHMENT</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;margin-left: 0;" id="notransaksi-kanan2">no transaksi</span>
+                                </div>
+                            </div>
+                           
+                            <div class="d-flex justify-content-between mt-2">
+                                <div >
+                                    <span style="font-size:8px;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit; color: #3d3d3dd2;" id="item-kanan-bawah2">item</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="qty-kanan-bawah2">1 UNIT</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-2">
+                                <div >
+                                    <span style="font-size:8px;margin-top: 0px;margin-left: 14px;margin-bottom: 0;text-justify: inherit; color:#3d3d3dd2;" id="colorvariant-kanan-bawah2">variant</span>
+                                </div>
+                                <div>
+                                    <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;" id="ukuran-kanan-bawah2"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <hr style="border: 1px dashed ;">
+                    <div class="card pb-0">
+                        <div class="card-body pt-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-8 border-end pe-2">
+                                    <div class="d-flex justify-content-between border-bottom">
+                                        <div>
+                                            <span style="font-weight: bold;margin: 0;padding: 0;font-size: 8px;">APPROVAL</span>
+                                        </div>
+                                        <div>
+                                            <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color: #3d3d3dd2;margin-left: 0;" id="notransaksi-approval2">no transaksi</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div >
+                                            <span style="font-size:8px;margin-top: 0px;margin-left: 0px;margin-bottom: 0;text-justify: inherit; color: #3d3d3dd2;" id="item-approval2">item</span>
+                                        </div>
+                                        <div>
+                                            <span style="font-size:8px;font-weight: 500;margin-top: 0px;margin-bottom: 0;margin-right: 0;padding-right: 0; color:#3d3d3dd2;" id="qty-approval2">1 UNIT</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-0">
+                                        <div >
+                                            <span style="font-size:8px;margin-top: 0px;margin-left: 0px;margin-bottom: 0;text-justify: inherit; color: #3d3d3dd2;" id="colorvariant-approval2">variant</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 ps-2">
+                                    <span style="font-size:6px; color: #3d3d3dd2;float: left;">STAMP OF APPROVAL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- bawah -->
+        </div>
+    </div>
+
+    <span id="itemalls" style="display: none;" data-json="<%=JSON.stringify(datas)%>"></span>
+
+    <%- include('layout/footerscript') %>
+</body>
+</html>

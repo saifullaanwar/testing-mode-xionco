@@ -1,0 +1,173 @@
+<% var homeopen=""; var adminopen='';var semuapesanan=''; var stockopen=''; var stockproduk='';var stockprodukup='';var podo='';var statistik='';
+  var daftarrequest = "";
+  var requsetbeli = "";%>
+<% if (navatasactive=='home') { %>
+    <% homeopen='active'; %>
+<% } else if (navatasactive.includes('adminlist')) { %>
+    <% adminopen='active'; %>
+    <% if (navatasactive=='adminlist-semuapesanan') { %>
+        <% semuapesanan='active'; %>
+    <% } %>
+<% } else if (navatasactive.includes('stock')) { %>
+
+    <% stockopen='active'; %>
+    <% if (navatasactive=='stock-produk') { %>
+        <% stockproduk='active'; %>
+    <% } else if (navatasactive=='stock-produk-up') { %>
+        <% stockprodukup='active'; %>
+    <% } %>
+       
+<% } else if (navatasactive=='podo') { %>
+    <% podo='active'; %>
+    
+    <% } else if (navatasactive.includes("procurement") && !navatasactive.includes("daftarpembelian")) { %>
+  <% daftarrequest = "active"; %>
+  <% if (navatasactive.includes("daftarrequest")) { %>
+    <% requsetbeli = "active"; %>
+  <% } %>
+<% } else if (navatasactive.includes('statistik')) { %>
+    <% statistik='active'; %>
+<% }%>
+<div class="d-flex" >
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
+        <div class="px-4 pt-4">
+            <h4 class="logo-text mb-0"><i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i> <span class="logo-text-hide"  onclick="toggleSidebar()"> Sembunyikan Menu</span></h4>
+           <hr style="color: grey;">
+        </div>
+
+        <div class="" id="scrolled" style="height: calc(100vh - 175px);">
+            <div class="col" style="display: flex;flex-direction: column;padding-bottom: 4em;"><!-- display: flex;flex-direction: column; nav flex-column -->
+                <a class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Admin"></i>
+                    <span class="hide-on-collapse">Admin</span>
+                </a>
+                <div class="hide-on-collapse-detailmenu px-3">
+                    <hr style="color: grey;">
+                        <div class="row d-none">
+                            <div class="col-8">
+                                <span>Tugas Mendatang</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span id="tugasmendatang">0</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <span>Tugas Saya</span>
+                            </div>
+                            <div class="col-3" style="text-align: right;">
+                                <span name="totaltugassayapesanan">0</span>
+                            </div>
+                        </div>
+                    <hr style="color: grey;margin-bottom: 0;">
+                </div>
+                <br>
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-house-fill',
+                    text: 'Home',
+                    activemenudasar: homeopen,
+                    link: '/home/admclassy'
+                }) %>
+
+
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'transaksimenuarrow',
+                    text:'Transaksi',
+                    activemenudasar:adminopen,
+                    icon:"bi-box-seam-fill",
+                    listsubmenu:[
+                            {
+                                text:'Semua Pesanan',
+                                activesubmenu:semuapesanan,
+                                link:'/adminlist/classy'
+                            },
+                        ]
+                    }
+                )%>
+
+                
+                <a href="/podo" target="_blank" class="sidebar-link text-decoration-none px-3  <%-podo%>">
+                    <i class="bi bi-receipt-cutoff me-3"  data-bs-toggle="tooltip" data-bs-placement="right" title="PO/DO"></i><span class="hide-on-collapse">PO/DO</span>
+                </a>
+                
+                
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'stockmenuarrow',
+                    text:'Stock',
+                     icon:"bi-box-seam-fill",
+                    activemenudasar:`${stockopen}`,
+                    listsubmenu:[
+                            {
+                                text:'Stock Upholstery',
+                                activesubmenu:stockprodukup,
+                                link:'/stock/produkupholstery',
+                            },
+                        ]
+                    }
+                )%>
+
+                <%- include('./buttonsidebar/menuarrow',
+                    {id:'operatingmenuarrow',
+                    text:'Operational p2.5',
+                    icon:"bi-patch-check-fill",
+                    activemenudasar:"",
+                    listsubmenu:[
+                            {
+                                text:'Drafting',
+                                activesubmenu:"",
+                                onclick:'warningunderbuild()'
+                            },
+                            {
+                                text:'Daftar Route',
+                                activesubmenu:"",
+                                onclick:'warningunderbuild()'
+                            }
+                        ]
+                    }
+                )%>
+
+                <%- include('./buttonsidebar/menuarrow', {
+                    id: 'formmenuarrow',
+                    text: 'Form',
+                    icon: 'bi-ui-checks',
+                    activemenudasar: `${daftarrequest}`,
+                    listsubmenu: [
+                        {
+                            text: 'Request Pembelian',
+                            activesubmenu: requsetbeli,
+                            link: '/procurement/daftarrequest'
+                        }
+                    ]
+                }) %>
+                <a href="/statistik" class="sidebar-link text-decoration-none px-3 <%-statistik%>">
+                    <i class="bi bi-graph-up-arrow me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Statistik" ></i>
+                    <span class="hide-on-collapse">Statistik</span>
+                </a>
+                
+                <%- include('./buttonsidebar/buttonmenu',
+                    {
+                        icon:'bi-speedometer2',
+                        text:'Performa Saya (KPI)',
+                        activemenudasar:'',
+                        onclick:"warningunderbuild()"
+    
+                    }
+                )%>
+                
+                <a onclick="menuarrowklik('settingmenuarrow')"  class="sidebar-link text-decoration-none px-3">
+                    <i class="bi bi-gear-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Settings"></i>
+                    <span class="hide-on-collapse">Settings</span>
+                    <i id="settingmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float: right;" ></i>
+                </a>
+                <div class="hide-on-collapse-detailmenu col" id="settingmenuarrow-extend" style="display: none;">
+                    <div class="div-detailmenu">
+                        <a onclick="logout()" class="a-detailmenu">Logout</a>  
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <%- include('versiondiv') %>
+    </nav>
+

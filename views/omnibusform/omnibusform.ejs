@@ -1,0 +1,78 @@
+<%- include('layout/header') %>
+<% var rn=Math.random(); %>
+<link rel="stylesheet" href="/css/abasic.css?v=<%-rn%>">
+    </head>
+
+    <body>
+        
+        <%- include('layout/nav-atas-mobile') %>
+        <%- include('layout/nav-atas-pc') %>
+        <div class="col d-none d-lg-block" style="margin-left: 30px!important;margin-bottom: 30px!important;" id="judul-page">
+            <span style="font-weight: bold;vertical-align: middle;">Omnibus Form</span>
+            <hr>
+        </div>
+        <div id="mobile-spase-nav">
+            <br><br><br>
+        </div>
+        
+        <div class="col" id="basepage">
+            <span><b>Document type</b> | Jenis Dokumen</span>
+            <hr>
+            <select class="form-select" aria-label="Default select example">
+                <option selected disabled>Pilih jenis dokumen</option>
+                <option>01. Classy | Kirim Sticker dan Bahan Kain</option>
+                <option>02. Classy | Pengambilan Barang Jadi Upholstery</option>
+                <option>03. Classy | Quality Control & Packaging</option>
+                <option>04. Classy | Penerimaan oleh Driver / Naik Mobil</option>
+                <option>05. Classy | Barang diterima Customer</option>
+                <option>06. Classy | Stock In/Out</option>
+                <option>07. Rempoa | Stock In/Out</option>
+                <option>08. Upholstery | Barang Jadi</option>
+                <option>09. All Division | Pengajuan Pemesanan Barang - Emergency Fund</option>
+                <option>10. Administration | Invoice Upload</option>
+                <option>11. Procurement | Status Update</option>
+                <option>12. Administration | 2nd Shift Checklist</option>
+            </select>
+            <hr>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Instruksi
+                      </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p style="font-weight: bold;">
+                                No. Transaction | Nomor Transaksi*
+                            </p>
+                            <b>A. Memiliki Nomor Transaksi Penjualan</b>
+                            <br>
+                            <b style="font-style: italic;">Nomor Transaksi Penjualan</b>
+                            <p>Waijib mengikuti format <b>"[ABC] [tiga angka] [abc]"</b> tanpa spasi</p>
+                            <p>Angka dibawah seratus, dituliskan dengan nol di depannya. 
+                                Dilarang menggabungkan seri abc.</p>
+                            <u>Dilarang menggunakan format selain format di atas.</u>
+                            <p>Contoh yang benar adalah : ( <b>J090a</b> )</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+             
+                <div class="col-lg-6 col-mb-12 col-sm-12">
+                    
+                </div>
+                <div class="col-lg-6 col-mb-12 col-sm-12">
+
+                </div>
+            </div>
+          
+        </div>
+
+        <%- include('layout/nav-bawah-mobile') %>
+        
+        <%- include('layout/footerscript') %>
+    </body>
+
+    </html>

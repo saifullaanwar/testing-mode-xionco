@@ -1,0 +1,381 @@
+<% 
+/* -----------------------------------------------------------------
+   1. VARIABEL ACTIVE (dari navatasactive)
+----------------------------------------------------------------- */
+const homeopen      = navatasactive === 'home' ? 'active' : '';
+const adminopen     = navatasactive.includes('adminlist') ? 'active' : '';
+const semuapesanan  = navatasactive === 'adminlist-semuapesanan' ? 'active' : '';
+const pesananbermasalah = navatasactive.includes('pesananbermasalah') ? 'active' : '';
+const stockopen     = navatasactive.includes('stock') ? 'active' : '';
+const stockproduk   = navatasactive === 'stock-produk' ? 'active' : '';
+const stockprodukup = navatasactive === 'stock-produk-up' ? 'active' : '';
+const podo          = navatasactive === 'podo' ? 'active' : '';
+const statistik     = navatasactive.includes('statistik') ? 'active' : '';
+const daftarrequest = navatasactive.includes('procurement') && !navatasactive.includes('daftarpembelian') ? 'active' : '';
+const requsetbeli   = navatasactive.includes('daftarrequest') ? 'active' : '';
+
+// Driver
+const aktivmenu     = navatasactive.includes('driver') || navatasactive.includes('pesananbermasalah') ? 'active' : '';
+const aktivchildmenu= navatasactive === 'driver' ? 'active' : '';
+const pesananbermasalahActive = navatasactive === 'driver-masalah-semua' ? 'active' : '';
+
+// Supervisor
+const supAdminOpen   = navatasactive === 'supervisor-semuapesanan' ? 'active' : '';
+const supUpstock     = navatasactive === 'supervisor-stock' ? 'active' : '';
+const supForceStatus = navatasactive === 'supervisor-forcestatus' ? 'active' : '';
+const supApprovalKasbon = navatasactive === 'supervisor-approvalkasbon' ? 'active' : '';
+const supDraftPlan   = navatasactive.includes('draftplan') ? 'active' : '';
+const supDaftarItem  = navatasactive.includes('daftarpembelian_item') ? 'active' : '';
+const supPendingPay  = navatasactive.includes('pendingpayment') ? 'active' : '';
+const supDaftarBahan = navatasactive.includes('daftarpembelian_bahan') ? 'active' : '';
+const supBillDue     = navatasactive.includes('bill_due') ? 'active' : '';
+const supBankLimbo   = navatasactive === 'finance-banklimbo' ? 'active' : '';
+const supBankInvestor= navatasactive === 'finance-bankinvestor' ? 'active' : '';
+const supBankGaya    = navatasactive.includes('finance-bankgayahidup') ? 'active' : '';
+const supEditDB      = navatasactive === 'editdatabase' ? 'active' : '';
+const supPemantauan  = navatasactive === 'supervisor-statuspesanan' ? 'active' : '';
+const supRiwayat     = navatasactive === 'supervisor-riwayat' ? 'active' : '';
+const supTerlambat   = navatasactive.includes('terlambat') ? 'active' : '';
+const supAdminWeb    = navatasactive.includes('adminweb') ? 'active' : '';
+
+// Upholstery-specific
+const uphAdminOpen   = navatasactive === 'upholstery' ? 'active' : '';
+const uphUpstock     = navatasactive === 'upholstery-stock' ? 'active' : '';
+const uphFormKasbon  = navatasactive === 'upholstery-formkasbon' ? 'active' : '';
+
+%>
+
+<div class="d-flex">
+    <nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
+        <div class="px-4 pt-4">
+            <h4 class="logo-text mb-0">
+                <i id="klikhidebar" class="bi bi-caret-left-fill toggle-btn" onclick="toggleSidebar()"></i>
+                <span class="logo-text-hide" onclick="toggleSidebar()"> Sembunyikan Menu</span>
+            </h4>
+            <hr style="color: grey;">
+        </div>
+
+        <div id="scrolled" style="height: calc(100vh - 175px); overflow-y: auto;">
+            <div class="col" style="display:flex;flex-direction:column;padding-bottom:4em;">
+
+                <!-- ==================== HEADER (ROLE TITLE) ==================== -->
+                <% if (['admin c10','admin head'].includes(roles)) { %>
+                    <a class="sidebar-link text-decoration-none px-3 d-flex align-items-center">
+                        <div style="font-size:35px;color:gray;">
+                            <i class="bi bi-people-fill me-3" style="font-size:40px;"></i>
+                        </div>
+                        <div class="ms-3" style="line-height:1;">
+                            <div style="font-weight:bold;color:gray;font-size:14px;">Admin</div>
+                            <div style="font-size:13px;color:gray;margin-top:10px;" onclick="loginadminwebs('adminweb')">Login Admin Web</div>
+                        </div>
+                    </a>
+                <% } else { %>
+                    <a class="sidebar-link text-decoration-none px-3">
+                        <i class="bi bi-people-fill me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Role"></i>
+                        <span class="hide-on-collapse">
+                            <% 
+                                const roleTitles = {
+                                    'admin head'      : 'Admin Head',
+                                    'admin c10'       : 'Admin C10',
+                                    'admin c5'        : 'Admin C5',
+                                    'admin classy'    : 'Admin Classy',
+                                    'pack-de staff'   : 'Packing & Delivery',
+                                    'driver'          : 'Driver',
+                                    'finance'         : 'Finance',
+                                    'supervisor'      : 'Supervisor',
+                                    'upholstery'      : 'Upholstery',
+                                    'cirende'         : 'Cirende',
+                                    'woodwork'         : 'Woodwork',
+                                };
+                            %>
+                            <%= roleTitles[roles] || 'User' %>
+                        </span>
+                    </a>
+                <% } %>
+
+                <!-- ==================== TUGAS SAYA ==================== -->
+                <div class="hide-on-collapse-detailmenu px-3">
+                    <hr style="color:grey;">
+                    <div class="row">
+                        <div class="col-8"><span>Tugas Saya</span></div>
+                        <div class="col-3 text-end">
+                            <% if (['finance','supervisor','upholstery'].includes(roles)) { %>
+                                <span name="totaltugassayaall">0</span>
+                            <% } else { %>
+                                <span name="totaltugassayapesanan">0</span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <hr style="color:grey;margin-bottom:0;">
+                </div>
+                <br>
+
+                <!-- ==================== HOME ==================== -->
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon: 'bi-house-fill',
+                    text: 'Home',
+                    activemenudasar: homeopen,
+                    link: `${['admin c10','admin head'].includes(roles) ? '/home/admin' :
+                                 roles === 'admin c5' ? '/home/admc5' :
+                                 roles === 'admin classy' ? '/home/admclassy' :
+                                 roles === 'pack-de staff' ? '/home/packde' :
+                                 roles === 'driver' ? '/home/driver' :
+                                 roles === 'supervisor' ? '/supervisor/produksipesanan' :
+                                roles === 'upholstery' ? '/home/upholstery':
+                                roles === 'cirende' ? '/cirende':'/woodwork'}`
+                }) %>
+
+                <!-- ==================== TRANSAKSI (Admin / Driver / Pack-DE) ==================== -->
+                <% if (['admin c10','admin head','admin c5','admin classy','pack-de staff','driver'].includes(roles)) { %>
+                    <% 
+                        const transaksiSubmenu = [];
+                        if (['admin c10','admin head'].includes(roles)) {
+                            transaksiSubmenu.push({ text:'Semua Pesanan', activesubmenu:semuapesanan, link:'/adminlist' });
+                            transaksiSubmenu.push({ text:'Pesanan Bermasalah', activesubmenu:pesananbermasalah, link:'/pesananbermasalah/berlangsung' });
+                        } else if (roles === 'admin c5') {
+                            transaksiSubmenu.push({ text:'Semua Pesanan', activesubmenu:adminopen, link:'/adminlist/admc5' });
+                        } else if (roles === 'admin classy') {
+                            transaksiSubmenu.push({ text:'Semua Pesanan', activesubmenu:semuapesanan, link:'/adminlist/classy' });
+                        } else if (roles === 'pack-de staff') {
+                            transaksiSubmenu.push({ text:'Semua Pesanan', activesubmenu:aktivchildmenu, link:'/packde' });
+                        } else if (roles === 'driver') {
+                            transaksiSubmenu.push({ text:'Semua Pesanan', activesubmenu:aktivchildmenu, link:'/driver' });
+                            transaksiSubmenu.push({ text:'Pesanan Bermasalah', activesubmenu:pesananbermasalahActive, link:'/pesananbermasalah/berlangsung' });
+                        }
+                    %>
+                    <% if (transaksiSubmenu.length) { %>
+                        <%- include('./buttonsidebar/menuarrow', {
+                            id:'transaksimenuarrow',
+                            text:'Transaksi',
+                            icon:'bi-box-seam-fill',
+                            activemenudasar: adminopen || aktivmenu,
+                            listsubmenu: transaksiSubmenu
+                        }) %>
+                    <% } %>
+                <% } %>
+
+                <!-- PRODUKSI PESANAN (Upholstery) -->
+                <% if (roles === 'upholstery') { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'transaksimenuarrow',
+                        text:'Produksi Pesanan',
+                        icon:'bi-box-seam-fill',
+                        activemenudasar: uphAdminOpen + uphUpstock,
+                        listsubmenu:[
+                            { text:'Produksi Pesanan', activesubmenu:uphAdminOpen, link:'/upholstery', namebadgenumber:'totaltugassayapesanan' },
+                            { text:'Produksi Stock',   activesubmenu:uphUpstock,   link:'/upholstery/produksistock', namebadgenumber:'totaltugassayapesananstock' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- FORM KASBON (Upholstery) -->
+                <% if (roles === 'upholstery') { %>
+                    <%- include('./buttonsidebar/buttonmenu', {
+                        icon:'bi-file-earmark-text-fill',
+                        text:'Form Kasbon',
+                        activemenudasar: uphFormKasbon,
+                        link:'/upholstery/formkasbon'
+                    }) %>
+                <% } %>
+
+                <!-- ==================== SUPERVISOR – TUGAS SAYA ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'tugassayaarrow',
+                        text:'Tugas Saya',
+                        icon:'bi-box-seam-fill',
+                        activemenudasar: supAdminOpen + supUpstock + supForceStatus + supApprovalKasbon,
+                        listsubmenu:[
+                            { text:'Approval Produk',      activesubmenu:supAdminOpen,   link:'/supervisor/produksipesanan',   namebadgenumber:'totaltugassayapesanan' },
+                            { text:'Approval Stock',       activesubmenu:supUpstock,     link:'/supervisor/produksistock',     namebadgenumber:'totaltugassayapesananstock' },
+                            { text:'Approval Forcestatus', activesubmenu:supForceStatus, link:'/supervisor/approvalforcestatus', namebadgenumber:'totaltugassayaforcestatus' },
+                            { text:'Approval Kasbon',      activesubmenu:supApprovalKasbon, link:'/supervisor/approvalkasbon', namebadgenumber:'totaltugassayaapprovalkasbon' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== STOCK ==================== -->
+                <% if (['admin c10','admin head','admin c5','admin classy','supervisor'].includes(roles)) { %>
+                    <% 
+                        const stockSub = [];
+                        if (['admin c10','admin head','supervisor'].includes(roles)) {
+                            stockSub.push({ text:'Stock Upholstery', activesubmenu:stockprodukup, link:'/stock/produkupholstery' });
+                            stockSub.push({ text:'Stock C5',         activesubmenu:stockproduk,   link:'/stock/produkc5' });
+                        } else if (roles === 'admin c5') {
+                            stockSub.push({ text:'Stock C5', activesubmenu:stockproduk, link:'/stock/produkc5' });
+                        } else if (roles === 'admin classy') {
+                            stockSub.push({ text:'Stock Upholstery', activesubmenu:stockprodukup, link:'/stock/produkupholstery' });
+                        }
+                    %>
+                    <% if (stockSub.length) { %>
+                        <%- include('./buttonsidebar/menuarrow', {
+                            id:'stockmenuarrow',
+                            text:'Stock',
+                            icon:'bi-box-seam-fill',
+                            activemenudasar: stockopen,
+                            listsubmenu: stockSub
+                        }) %>
+                    <% } %>
+                <% } %>
+
+                <!-- ==================== PRINT (PO/DO) ==================== -->
+                <% if (['admin c10','admin head','admin classy'].includes(roles)) { %>
+                    <a onclick="menuarrowklik('printmenuarrow')" class="sidebar-link text-decoration-none px-3">
+                        <i class="bi bi-printer me-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Print"></i>
+                        <span class="hide-on-collapse">Print</span>
+                        <i id="printmenuarrow" class="bi bi-caret-down-fill hide-on-collapse" style="float:right;"></i>
+                    </a>
+                    <div class="hide-on-collapse-detailmenu col" id="printmenuarrow-extend" style="display:none;">
+                        <div class="div-detailmenu mb-3"><a href="/podo" target="_blank" class="a-detailmenu">PO/DO</a></div>
+                        <% if (['admin c10','admin head'].includes(roles)) { %>
+                            <div class="div-detailmenu"><a href="/podo/print-fmcg" target="_blank" class="a-detailmenu">PO/DO FMCG</a></div>
+                        <% } %>
+                        <br>
+                    </div>
+                <% } %>
+
+                <!-- ==================== OPERATIONAL P2.5 ==================== -->
+                <% if (['admin c10','admin head','admin classy'].includes(roles)) { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'operatingmenuarrow',
+                        text:'Operational p2.5',
+                        icon:'bi-patch-check-fill',
+                        activemenudasar:'',
+                        listsubmenu:[
+                            { text:'Drafting',      activesubmenu:'', onclick:'warningunderbuild()' },
+                            { text:'Daftar Route',  activesubmenu:'', onclick:'warningunderbuild()' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== DAFTAR PEMBELIAN (Supervisor) ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'daftarpembelianmenuarrow',
+                        text:'Daftar Pembelian',
+                        icon:'bi-ui-checks',
+                        activemenudasar: supDraftPlan + supDaftarItem + supDaftarBahan + supBillDue,
+                        listsubmenu:[
+                            { text:'Draft Plan',        activesubmenu:supDraftPlan,   link:'/procurement/daftarpembelian/input' },
+                            { text:'Approval Item',     activesubmenu:supDaftarItem,  link:'/procurement/daftarpembelian' },
+                            { text:'Pending Payment',   activesubmenu:supPendingPay,  link:'/procurement/pendingpayment' },
+                            { text:'Pembelian Bahan',   activesubmenu:supDaftarBahan, link:'/procurement/daftarpembelian/pembelianbahan' },
+                            { text:'Bill Due',          activesubmenu:supBillDue,     link:'/procurement/bill/due' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== DAFTAR INVOICE (Supervisor) ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'daftarinvoicemenuarrow',
+                        text:'Daftar Invoice',
+                        icon:'bi-person-lines-fill',
+                        activemenudasar: navatasactive.includes('daftarinvoice') ? 'active' : '',
+                        listsubmenu:[
+                            { text:'Invoice Vendor', activesubmenu: navatasactive.includes('daftarinvoice-vendor') ? 'active' : '', link:'/finance/invoicevendor' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== PEMANTAUAN / TERLAMBAT / RIWAYAT (Supervisor) ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/buttonmenu', { icon:'bi-eye-fill',        text:'Pemantauan',   activemenudasar:supPemantauan, link:'/supervisor/statuspesanan' }) %>
+                    <%- include('./buttonsidebar/buttonmenu', { icon:'bi-stopwatch-fill',text:'Terlambat',    activemenudasar:supTerlambat,  link:'/supervisor/dataterlambat' }) %>
+                    <%- include('./buttonsidebar/buttonmenu', { icon:'bi-clock-history', text:'Riwayat',      activemenudasar:supRiwayat,    link:'/supervisor/riwayat' }) %>
+                <% } %>
+
+                <!-- ==================== BANKING (Supervisor) ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'bankingmenuarrow',
+                        text:'Banking',
+                        icon:'bi-bank2',
+                        activemenudasar: supBankLimbo + supBankInvestor + supBankGaya,
+                        listsubmenu:[
+                            { text:'Bank Limbo',   activesubmenu:supBankLimbo,    link:'/finance/banklimbo' },
+                            { text:'Investor',     activesubmenu:supBankInvestor,link:'/finance/investor' },
+                            { text:'Gaya Hidup',   activesubmenu:supBankGaya,     link:'/finance/gayahidup' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== DATABASE (Supervisor) ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/buttonmenu', {
+                        icon:'bi-database-fill-add',
+                        text:'Database',
+                        activemenudasar: supEditDB,
+                        link:'/editdatabase/higproduk'
+                    }) %>
+                <% } %>
+
+                <!-- ==================== ADMIN WEB (Supervisor) ==================== -->
+                <% if (roles === 'supervisor') { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'adminwebmenuarrow',
+                        text:'Admin Web',
+                        icon:'bi-display',
+                        activemenudasar: supAdminWeb,
+                        listsubmenu:[
+                            { text:'Homepage',          activesubmenu: navatasactive.includes('adminweb-homepage') ? supAdminWeb : '', link:'/adminlist/adminweb' },
+                            { text:'Category',          activesubmenu: navatasactive.includes('adminweb-kategori') ? supAdminWeb : '', link:'/adminlist/adminweb/kategori' },
+                            { text:'Product',           activesubmenu: navatasactive.includes('adminweb-product') ? supAdminWeb : '', link:'/adminlist/adminweb/product' },
+                            { text:'Promotion',         activesubmenu: navatasactive.includes('adminweb-promotion') ? supAdminWeb : '', link:'/adminlist/adminweb/promotion' },
+                            { text:'Account',           activesubmenu: navatasactive.includes('adminweb-account') ? supAdminWeb : '', link:'/adminlist/adminweb/account' },
+                            { text:'Transaction',       activesubmenu: navatasactive.includes('adminweb-transaction') ? supAdminWeb : '', link:'/adminlist/adminweb/transaction' },
+                            { text:'Additional Charge', activesubmenu: navatasactive.includes('adminweb-additionalcharge') ? supAdminWeb : '', link:'/adminlist/adminweb/additionalcharge' },
+                            { text:'Reward',            activesubmenu: navatasactive.includes('adminweb-reward') ? supAdminWeb : '', link:'/adminlist/adminweb/reward' },
+                            { text:'UTM',               activesubmenu: navatasactive.includes('adminweb-utm') ? supAdminWeb : '', link:'/adminlist/adminweb/utm' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== FORM (Request Pembelian) ==================== -->
+                <% if (['admin c10','admin head','admin classy','pack-de staff','driver','supervisor','upholstery','cirende','woodwork'].includes(roles)) { %>
+                    <%- include('./buttonsidebar/menuarrow', {
+                        id:'formmenuarrow',
+                        text:'Form',
+                        icon:'bi-ui-checks',
+                        activemenudasar: daftarrequest,
+                        listsubmenu:[
+                            { text:'Request Pembelian', activesubmenu:requsetbeli, link:'/procurement/daftarrequest' }
+                        ]
+                    }) %>
+                <% } %>
+
+                <!-- ==================== STATISTIK ==================== -->
+                <% if (!['pack-de staff','driver','upholstery'].includes(roles)) { %>
+                    <%- include('./buttonsidebar/buttonmenu', {
+                        icon:'bi-graph-up-arrow',
+                        text:'Statistik',
+                        activemenudasar: statistik,
+                        link: roles === 'supervisor' ? '/statistik/platform' : '/statistik'
+                    }) %>
+                <% } %>
+
+                <!-- ==================== KPI ==================== -->
+                <%- include('./buttonsidebar/buttonmenu', {
+                    icon:'bi-speedometer2',
+                    text:'Performa Saya (KPI)',
+                    activemenudasar:'',
+                    onclick:'warningunderbuild()'
+                }) %>
+
+                <!-- ==================== SETTINGS ==================== -->
+                <%- include('./buttonsidebar/menuarrow', {
+                    id:'settingmenuarrow',
+                    icon:'bi-gear-fill',
+                    text:'Settings',
+                    activemenudasar:'',
+                    listsubmenu:[
+                        { text:'Logout', activesubmenu:'', onclick:'logout()' }
+                    ]
+                }) %>
+
+            </div>
+        </div>
+
+        <%- include('versiondiv') %>
+    </nav>
+<!-- </div> -->

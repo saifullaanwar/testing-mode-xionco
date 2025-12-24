@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <%- include('../layout/header') %>
+
+    <% const rn = Math.random(); %>
+    <link rel="stylesheet" href="/css/abasic.css?v=<%= rn %>">
+    <link rel="stylesheet" href="/css/sidebar.css?v=<%= rn %>">
+    <link rel="stylesheet" href="/css/finance.css?v=<%= rn %>">
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <%- include('../layout/navbar/navbar-atas-pc') %>
+
+    <%- include('../layout/sidebar-universal') %>
+
+    <main class="main-content" id="main-pages">
+        <div class="container-fluid">
+            <div id="showmainpage">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold">Delivery Unit Management</h4>
+                    <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#modaladdnew-deliveryunit">
+                        <i class="bi bi-plus-circle"></i> Add New
+                    </button>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="tableNoFixHead">
+                            <table class="table table-striped table-hover mb-0" style="width:100%; text-align:center;">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th style="width:5%;">No</th>
+                                        <th>Delivery Unit</th>
+                                        <th>Tipe</th>
+                                        <th style="width:15%;">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="divhpsdata">
+                                    <tr>
+                                        <td colspan="4" class="py-5">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                            <div class="mt-2">Memuat data... silakan tunggu</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <%- include('../layout/nav-loading') %>
+
+    <%- include('modaladdnew-deliveryunit') %>
+    <%- include('modalsuksessaveadd-database') %>
+
+    <%- include('../layout/modalunderbuild') %>
+    <%- include('../modalviewfotovideo') %>
+
+    <%- include('../layout/footerscript') %>
+
+    <script src="/js/editdatabase/editdatabase-deliveryunit-saveadd.js?v=<%= versionall %>"></script>
+</body>
+</html>

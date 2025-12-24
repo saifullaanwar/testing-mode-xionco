@@ -1,0 +1,20 @@
+<div class="topstickys" <%-hiddensearch=='d-none'?'style=padding-bottom:10px;':''%>>
+    <div class="mb-4 d-flex align-items-center justify-content-between">
+        <div class="me-3">
+            <span class="masterHeader d-block mb-4">Database</span>
+            <input type="text" class="form-control form-control-sm border-black <%-hiddensearch%>" id="pencarian-input"
+                oninput="handleSearchDatabase(this)" placeholder="Cari berdasarkan Product, Code atau Investor"
+                style="width: 500px;">
+        </div>
+        <div>
+            <a type="button" class="btn btn-light" style="border-color: black!important; margin-right: 10px;"
+                href="/editdatabase/logedit">Riwayat Log Edit
+            </a>
+
+            <button type="button" class="btn btn-light" style="border-color: black!important;"
+                onclick="klikopenaddnew('<%-addnew%>')">Add New
+            </button>
+        </div>
+    </div>
+    <%- include('editdatabase/menuatas-editdatabase') %>
+</div>

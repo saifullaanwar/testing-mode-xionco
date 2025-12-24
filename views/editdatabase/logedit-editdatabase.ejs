@@ -1,0 +1,144 @@
+<%- include('layout/header') %>
+    <% var rn=Math.random(); %>
+        <link rel="stylesheet" href="/css/abasic.css?v=<%-rn%>">
+        <link rel="stylesheet" href="/css/sidebar.css?v=<%-rn%>">
+        <link rel="stylesheet" href="/css/finance.css?v=<%=rn %>">
+
+        </head>
+
+        <body>
+
+            <%- include('layout/navbar/navbar-atas-pc') %>
+        <%- include('layout/sidebar-universal') %>
+
+                <!-- % if (roles=='supervisor' ) { %>
+                    %- include('layout/sidebar-supervisor') %>
+                        % } else { %>
+                            %- include('layout/sidebar-finance') %>
+
+                                % } %> -->
+
+                                    <main class="main-content" id="main-pages">
+                                        <div class="container-fluid">
+                                            <input class="form-control form-control-s skeleton skeleton-fullheig"
+                                                id="loadingskeleton" disabled style="display: none;">
+
+                                            <div id="showmainpage">
+                                                <div class="topstickys" style=padding-bottom:10px;>
+                                                    <div class="mb-4 d-flex align-items-center justify-content-between">
+                                                        <div class="me-3">
+                                                            <span class="fw-bold fs-4">Log Database</span>
+                                                        </div>
+                                                        <div>
+                                                            <a type="button" class="btn btn-light" style="border-color: black!important; margin-right: 10px;"
+                                                                href="/editdatabase/logedit">Riwayat Log Edit
+                                                            </a>
+
+                                                            
+                                                        </div>
+                                                    </div>
+                                                        
+                                             
+
+                                                    <%- include('editdatabase/menuatas-editdatabase') %>
+                                                </div>
+                                                
+
+                                                    <!-- <div class="input-group input-group-sm mb-3">
+                                                        <span class="input-group-text" id="searchRequestIcon"
+                                                            style="cursor: pointer;">
+                                                            <i class="bi bi-search"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control"
+                                                            aria-label="search request" aria-describedby="searchRequest"
+                                                            placeholder="Cari berdasarkan Nama Vendor, Tipe Pembayaran   atau Nomor Rekening" id="searchRequest"
+                                                            oninput="handleSearchLog(event)">
+                                                    </div> -->
+
+                                                    <div class="tableNoFixHead-log">
+                                                        <table class="table table-striped table-hover"
+                                                            style="width:100%;text-align: center;font-size: 16px;"
+                                                            id="alldattab">
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col"
+                                                                        style="text-align: center; vertical-align: middle; width: 5%;">
+                                                                        No</th>
+                                                                    <th scope="col"
+                                                                        style="text-align: left; vertical-align: middle; width: 20%;">
+                                                                        Tanggal</th>
+                                                                    <th scope="col"
+                                                                        style="text-align: left; vertical-align: middle; width: 20%;">
+                                                                        Nama Lengkap</th>
+                                                                    <th scope="col"
+                                                                        style="text-align: left; vertical-align: middle; width: 20%;">
+                                                                        Tipe</th>
+                                                                    <th scope="col"
+                                                                        style="text-align: left; vertical-align: middle; width: 20%;">
+                                                                        Tindakan</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody id="divhpsdata">
+                                                                <!-- baris data akan di-inject JS -->
+                                                            </tbody>
+
+                                                            <!-- baris untuk pesan "tidak ditemukan" -->
+                                                            <tbody id="datatidakditemukan" style="display: none;">
+                                                                <tr>
+                                                                    <td colspan="6"
+                                                                        style="text-align: center; font-style: italic; color: #888;">
+                                                                        Data tidak ditemukan
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+
+                                                        </table>
+                                                    </div>
+
+
+                                                    <div style="text-align: center;display: none;" id="load-more-btn">
+                                                        <i class="bi bi-caret-down-fill" id="load-more-btn-icon"
+                                                            style="cursor: pointer;" onclick="loadMoreData()"></i>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </main>
+
+
+                                    </div>
+
+
+                                    <%- include('layout/nav-loading') %>
+
+                                        <!-- <span id="itemalls" style="display: none;" data-json="">
+                                    </span> -->
+                                        <%- include('editdatabase/modaladdnew-vendor') %>
+                                            <%- include('editdatabase/modalsuksessaveadd-database') %>
+                                                
+                                                    <%- include('layout/modalunderbuild') %>
+                                                        <%- include('modalviewfotovideo') %>
+                                                           
+                                                                <%- include('layout/footerscript') %>
+                                                                    <script
+                                                                        src="/js/editdatabase/editdatabase-vendor-saveadd.js?v=<%=versionall%>"></script>
+                                                                    <script>
+                                                                        function toggleSidebar() {
+
+                                                                            if (document.getElementById('klikhidebar').className == 'bi bi-caret-left-fill toggle-btn') {
+                                                                                document.getElementById('klikhidebar').className = 'bi bi-caret-right-fill toggle-btn';
+                                                                            } else {
+                                                                                document.getElementById('klikhidebar').className = 'bi bi-caret-left-fill toggle-btn';
+                                                                            }
+                                                                            const sidebar = document.querySelector('.sidebar');
+                                                                            sidebar.classList.toggle('collapsed');
+                                                                        }
+                                                                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                                                                        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                                                                            return new bootstrap.Tooltip(tooltipTriggerEl)
+                                                                        });
+                                                                    </script>
+        </body>
+
+        </html>
